@@ -2045,3 +2045,137 @@ No template changes were needed — all templates already used `relative_url` co
 ## Deploy URL
 
 https://olivomarco.github.io/gh-aw-hackathon/
+# Bishop — Doc Layout & Challenge Collection Fix
+
+**Date:** 2026-05-28T16:03:34+01:00  
+**Author:** Bishop (Web & Design)  
+**Commit:** `662ee99`  
+**Pages URL:** https://olivomarco.github.io/gh-aw-hackathon/
+
+---
+
+## Bugs Fixed
+
+### Bug 1 — `/docs/getting-started/devcontainer-setup` rendered unstyled
+
+**Root cause:** `docs/getting-started/devcontainer-setup.md` had no frontmatter, so Jekyll used the `default` layout which outputs `{{ content }}` directly into `<main>` without any `.container` wrapper. CSS selectors like `.container > h1` had no target.
+
+**Files changed:**
+- `_layouts/doc.html` — new layout extending `default`; wraps content in `<article class="doc-page"><div class="container">`, includes breadcrumb and `doc-header`
+- `assets/css/style.scss` — appended Section R (`.doc-page`, `.doc-header`, `.doc-body.prose` styles for h1–h4, p, li, a, blockquote, code, pre, table)
+- `docs/getting-started/devcontainer-setup.md` — added frontmatter (`layout: doc`, `title`, `description`)
+- `_config.yml` — added `defaults:` scope for `path: "docs"` → `layout: "doc"` so future docs pages don't need to repeat the layout key
+
+**Verification grep:**
+```
+$ grep -o 'class="doc-page"' _site/docs/getting-started/devcontainer-setup.html
+class="doc-page"
+```
+
+---
+
+### Bug 2 — `/challenges/` showed only Challenge 00; Tracks 1/2/3 were empty
+
+**Root cause:** `_challenges/` only contained `00-setup.md`. The 14 Hudson-authored challenges lived in `challenges/track-N-*/` as raw markdown, not in the Jekyll collection. `challenges.md` iterates `site.challenges | where: "track", track.track_id` and found zero matches.
+
+**Files changed:** 14 new `_challenges/*.md` collection items:
+
+| File | Track | Order |
+|---|---|---|
+| `1-01-morning-briefing.md` | ai-workflows | 110 |
+| `1-02-safe-and-sound.md` | ai-workflows | 120 |
+| `1-03-the-watcher.md` | ai-workflows | 130 |
+| `1-04-label-maker.md` | ai-workflows | 140 |
+| `2-01-triage-bot.md` | safe-outputs | 210 |
+| `2-02-review-buddy.md` | safe-outputs | 220 |
+| `2-03-slash-and-burn.md` | safe-outputs | 230 |
+| `2-04-stale-patrol.md` | safe-outputs | 240 |
+| `2-05-welcome-wagon.md` | safe-outputs | 250 |
+| `3-01-the-relay.md` | mcp-integration | 310 |
+| `3-02-context-engine.md` | mcp-integration | 320 |
+| `3-03-engine-swap.md` | mcp-integration | 330 |
+| `3-04-the-overseer.md` | mcp-integration | 340 |
+| `3-05-ship-it.md` | mcp-integration | 350 |
+
+Each item: frontmatter (title, description, number, order, difficulty, time, track, track_name, tags), ~25-line body (What you'll build, Concepts, Open the challenge links, Prerequisites).
+
+**Verification grep:**
+```
+$ grep -o "Morning Briefing\|Triage Bot\|The Relay" _site/challenges/index.html
+Morning Briefing
+Triage Bot
+The Relay
+```
+
+---
+
+## Page Count
+
+| Before | After |
+|---|---|
+| 46 HTML pages | 60 HTML pages |
+
+(+14 challenge pages, doc layout doesn't add new pages)
+
+---
+
+## Commit SHA
+
+`662ee99` — pushed to `main` 2026-05-28T16:03:34+01:00  
+Pages deploy triggered automatically via `.github/workflows/pages.yml`.
+
+---
+
+QA PASS COMPLETE — 2026-05-28T15:25:41+01:00
+
+DOCUMENTS AUDITED:
+✓ README.md
+✓ CODE_OF_CONDUCT.md
+✓ docs/program/judging-rubric.md
+✓ docs/program/timeline.md
+✓ challenges/track-1-hello-agent/README.md
+✓ challenges/track-2-repo-concierge/README.md
+✓ challenges/track-3-continuous-intelligence/README.md
+✓ coaches/README.md
+
+HUMANIZER PASS:
+- Removed marketing puffery from README hero
+- Cleaned em-dash excess (1 removed, others earned)
+- Struck vague language ("no boilerplate")
+- All docs now favor short sentences, contractions, varied rhythm
+- No AI tells (no "leverage," "robust," "seamless," etc.)
+- No recap phrases or flowery language
+
+FACT-CHECK PASS:
+✓ Challenge counts verified (Track 1: 4, Track 2: 5, Track 3: 5)
+✓ Judging rubric weights sum to 100% (40+20+20+10+10)
+✓ AI engines all four listed and correct
+✓ CODE_OF_CONDUCT is Contributor Covenant v2.1
+✓ All cross-references resolve
+✓ Timeline math verified (8.5 hours available, fully booked)
+
+TIMING CORRECTIONS MADE:
+- Track 3 README: ~150 min → ~105 min (matches actual schedule)
+- README.md table: Track 3 150 → 105 min
+- README.md table: Closing 30 → 15 min
+- Rationale: timeline.md is source of truth; all now aligned
+
+FILES EDITED IN-PLACE:
+- README.md (3 surgical edits)
+- challenges/track-3-continuous-intelligence/README.md (1 edit)
+
+FILES UNCHANGED (already clean):
+- CODE_OF_CONDUCT.md
+- docs/program/judging-rubric.md
+- docs/program/timeline.md
+- challenges/track-1-hello-agent/README.md
+- challenges/track-2-repo-concierge/README.md
+- coaches/README.md
+
+READY FOR:
+- Distribution to participants
+- Print (coach handbook)
+- Website publication
+- Event execution
+
+No outstanding issues.

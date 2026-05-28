@@ -159,3 +159,21 @@ Repository owner/slug in _config.yml: `github/gh-aw-hackathon` — Marco to conf
 
 
 **2026-05-28:** QA pass landed — challenge count 12→14; site styled (baseurl fix deployed, live + responsive)
+
+### 2026-05-28 — Doc Layout + Challenge Collection (Bug Fixes)
+
+**Two live-site bugs fixed in commit `662ee99`.**
+
+**Bug 1 (unstyled /docs page):** Created `_layouts/doc.html` extending `default` — wraps `{{ content }}` in `.doc-page > .container` with breadcrumb and `doc-header`. Added Section R (`.doc-page` / `.doc-body.prose`) to `style.scss` (~80 lines): h1–h4 sizing, link underline draw-in, blockquote accent border, code/pre dark surface, table borders. Added frontmatter to `devcontainer-setup.md`. Added `_config.yml` defaults scope `path: "docs"` → `layout: "doc"` for auto-application to all future docs pages.
+
+**Bug 2 (empty /challenges/ Tracks 1-3):** Created 14 `_challenges/*.md` collection items (Track 1: 4, Track 2: 5, Track 3: 5). Each has correct `track:` frontmatter matching the `_tracks/*.md` track_id values (`ai-workflows`, `safe-outputs`, `mcp-integration`). Descriptions and concept tags extracted from the actual Student README heads. Order uses 1xx/2xx/3xx scheme for stable sort across tracks.
+
+**Lesson:** `_config.yml` `defaults:` scopes by `path:` work for regular files (not just collections) — use `path: "docs"` to auto-apply a layout to an entire directory subtree without repeating `layout:` in every file's frontmatter.
+
+**Page count:** 46 → 60 HTML pages. Build time: 1.357s. Zero errors.
+
+**Commit:** `662ee99` — pushed to `main` 2026-05-28T16:03:34+01:00
+
+---
+
+**2026-05-28 Wave C Complete:** Live-site bug fixes — unstyled docs page (new `_layouts/doc.html` + CSS + `_config.yml` defaults), empty `/challenges/` (14 new collection items). Pages deployed. All challenges visible. Commit `662ee99`.
