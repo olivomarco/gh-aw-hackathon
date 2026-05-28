@@ -1,0 +1,59 @@
+---
+layout: default
+---
+
+<div class="container">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ '/' | relative_url }}">Home</a>
+    <span class="breadcrumb__sep" aria-hidden="true">/</span>
+    <span aria-current="page">{{ page.title }}</span>
+  </nav>
+
+  <header class="track-header">
+    <div class="track-header__badge track-header__badge--{{ page.slug | default: page.name }}">{{ page.badge | default: "Track" }}</div>
+    <h1 class="track-header__title">{{ page.title }}</h1>
+    {% if page.description %}
+    <p class="track-header__desc">{{ page.description }}</p>
+    {% endif %}
+    <div class="track-header__meta">
+      {% if page.difficulty_range %}<span class="badge">{{ page.difficulty_range }}</span>{% endif %}
+      {% if page.challenges_count %}<span class="badge">{{ page.challenges_count }} challenges</span>{% endif %}
+    </div>
+  </header>
+
+  {% if page.learning_objectives %}
+  <section class="track-objectives">
+    <h2>Learning objectives</h2>
+    <ul>
+      {% for obj in page.learning_objectives %}
+      <li>{{ obj }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <section class="track-challenges">
+    <h2>Challenges</h2>
+    {% assign track_challenges = site.challenges | where: "track", page.track_id | sort: "order" %}
+    {% if track_challenges.size > 0 %}
+    <div class="challenge-grid">
+      {% for challenge in track_challenges %}
+        {% include challenge-card.html challenge=challenge %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <p class="empty-state__icon">🚧</p>
+      <p class="empty-state__text">Challenges coming soon — check back shortly.</p>
+    </div>
+    {% endif %}
+  </section>
+
+  {% if content != "" %}
+  <div class="prose">
+    {{ content }}
+  </div>
+  {% endif %}
+
+</div>

@@ -1,0 +1,43 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="container site-footer__inner">
+
+    <div class="site-footer__brand">
+      <a href="{{ '/' | relative_url }}" class="site-footer__logo" aria-label="{{ site.title }} home">
+        <svg class="site-header__logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="6" fill="#7c3aed"/>
+          <text x="5" y="23" font-family="ui-monospace,SFMono-Regular,monospace" font-size="16" font-weight="700" fill="white">aw</text>
+        </svg>
+        <span>{{ site.title }}</span>
+      </a>
+      <p class="site-footer__tagline">{{ site.description }}</p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Footer navigation">
+      <div class="site-footer__nav-group">
+        <h3 class="site-footer__nav-heading">Challenges</h3>
+        <ul role="list">
+          <li><a href="{{ '/tracks/ai-workflows' | relative_url }}">Track 1 — Hello, Agent</a></li>
+          <li><a href="{{ '/tracks/safe-outputs' | relative_url }}">Track 2 — Repo Concierge</a></li>
+          <li><a href="{{ '/tracks/mcp-integration' | relative_url }}">Track 3 — Continuous Intelligence</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__nav-group">
+        <h3 class="site-footer__nav-heading">Resources</h3>
+        <ul role="list">
+          <li><a href="{{ '/docs/getting-started/devcontainer-setup' | relative_url }}">Get Started</a></li>
+          <li><a href="https://github.com/github/gh-aw" rel="noopener noreferrer" target="_blank">gh-aw on GitHub</a></li>
+          <li><a href="https://microsoft.github.io/WhatTheHack/" rel="noopener noreferrer" target="_blank">What The Hack</a></li>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+  <div class="site-footer__bottom">
+    <div class="container">
+      <p class="site-footer__copy">
+        Built with ❤️ using <a href="https://jekyllrb.com" target="_blank" rel="noopener noreferrer">Jekyll</a> 
+        and deployed on <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+      </p>
+    </div>
+  </div>
+</footer>

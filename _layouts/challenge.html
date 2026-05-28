@@ -1,0 +1,105 @@
+---
+layout: default
+---
+
+<article class="challenge-page">
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="{{ '/challenges' | relative_url }}">Challenges</a>
+      {% if page.track %}
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="{{ '/tracks/' | append: page.track | relative_url }}">{{ page.track_name | default: page.track }}</a>
+      {% endif %}
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span aria-current="page">{{ page.title }}</span>
+    </nav>
+
+    <header class="challenge-header">
+      <div class="challenge-header__meta">
+        {% if page.number %}
+        <span class="challenge-number">{{ page.number | prepend: '00' | slice: -2, 2 }}</span>
+        {% endif %}
+
+        {% if page.difficulty %}
+        <span class="badge badge--difficulty badge--{{ page.difficulty | downcase }}">
+          {% case page.difficulty %}
+            {% when 'Beginner' %}🟢 Beginner
+            {% when 'Intermediate' %}🟡 Intermediate
+            {% when 'Advanced' %}🔴 Advanced
+            {% else %}{{ page.difficulty }}
+          {% endcase %}
+        </span>
+        {% endif %}
+
+        {% if page.time %}
+        <span class="badge badge--time">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="badge__icon"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          {{ page.time }}
+        </span>
+        {% endif %}
+
+        {% if page.track %}
+        <span class="badge badge--track badge--track-{{ page.track }}">{{ page.track_name | default: page.track }}</span>
+        {% endif %}
+      </div>
+
+      <h1 class="challenge-header__title">{{ page.title }}</h1>
+
+      {% if page.description %}
+      <p class="challenge-header__desc">{{ page.description }}</p>
+      {% endif %}
+
+      {% if page.tags %}
+      <div class="tags" aria-label="Tags">
+        {% for tag in page.tags %}
+        <span class="tag"><code>{{ tag }}</code></span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </header>
+
+    <div class="challenge-body prose">
+      {{ content }}
+    </div>
+
+    <nav class="challenge-nav" aria-label="Challenge navigation">
+      {% assign sorted = site.challenges | sort: 'order' %}
+      {% assign current_index = nil %}
+      {% for c in sorted %}
+        {% if c.url == page.url %}
+          {% assign current_index = forloop.index0 %}
+        {% endif %}
+      {% endfor %}
+
+      {% if current_index and current_index > 0 %}
+        {% assign prev_index = current_index | minus: 1 %}
+        {% assign prev_challenge = sorted[prev_index] %}
+        <a href="{{ prev_challenge.url | relative_url }}" class="challenge-nav__link challenge-nav__link--prev">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9.25 3.5L4.75 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>
+            <span class="challenge-nav__label">Previous</span>
+            <span class="challenge-nav__title">{{ prev_challenge.title }}</span>
+          </span>
+        </a>
+      {% else %}
+        <span></span>
+      {% endif %}
+
+      {% assign next_index = current_index | plus: 1 %}
+      {% if next_index < sorted.size %}
+        {% assign next_challenge = sorted[next_index] %}
+        <a href="{{ next_challenge.url | relative_url }}" class="challenge-nav__link challenge-nav__link--next">
+          <span>
+            <span class="challenge-nav__label">Next</span>
+            <span class="challenge-nav__title">{{ next_challenge.title }}</span>
+          </span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6.75 3.5L11.25 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      {% endif %}
+    </nav>
+
+  </div>
+</article>

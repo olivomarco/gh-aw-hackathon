@@ -1,0 +1,43 @@
+{% assign c = include.challenge %}
+<a href="{{ c.url | relative_url }}" class="challenge-card{% if c.coming_soon %} challenge-card--coming-soon{% endif %}">
+  <div class="challenge-card__top">
+    <span class="challenge-card__number">{{ c.number | prepend: '00' | slice: -2, 2 | default: '--' }}</span>
+    <span class="challenge-card__badges">
+      {% if c.difficulty %}
+      <span class="badge badge--difficulty badge--{{ c.difficulty | downcase }}">
+        {% case c.difficulty %}
+          {% when 'Beginner' %}🟢
+          {% when 'Intermediate' %}🟡
+          {% when 'Advanced' %}🔴
+          {% else %}⚪
+        {% endcase %}
+        {{ c.difficulty }}
+      </span>
+      {% endif %}
+      {% if c.coming_soon %}<span class="badge badge--coming-soon">Coming soon</span>{% endif %}
+    </span>
+  </div>
+
+  <h3 class="challenge-card__title">{{ c.title }}</h3>
+
+  {% if c.description %}
+  <p class="challenge-card__desc">{{ c.description }}</p>
+  {% endif %}
+
+  <div class="challenge-card__footer">
+    {% if c.time %}
+    <span class="challenge-card__time">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="challenge-card__time-icon"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      {{ c.time }}
+    </span>
+    {% endif %}
+
+    {% if c.tags %}
+    <div class="challenge-card__tags" aria-label="Tags">
+      {% for tag in c.tags limit: 3 %}
+      <span class="tag"><code>{{ tag }}</code></span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</a>

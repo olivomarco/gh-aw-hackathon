@@ -1,0 +1,94 @@
+name: Submit Your Squad's Solution
+description: Submit your squad's completed challenges for judging
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Squad Submission Form
+
+        Thanks for participating in the gh-aw Hackathon! Use this form to submit your squad's completed work. For detailed instructions, see [submission-guide.md](docs/program/submission-guide.md).
+
+  - type: text
+    id: squad_name
+    attributes:
+      label: Squad Name
+      description: Your squad's name (can be creative or straightforward)
+      placeholder: e.g., "Acme Squad", "Workflow Warriors", "The Debuggers"
+    validations:
+      required: true
+
+  - type: textarea
+    id: members
+    attributes:
+      label: Squad Members
+      description: List all squad members by GitHub handle (one per line)
+      placeholder: |
+        @alice
+        @bob
+        @charlie
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: tracks
+    attributes:
+      label: Tracks Attempted
+      description: Which difficulty tracks did your squad work on?
+      options:
+        - label: "Track 1: Foundations"
+        - label: "Track 2: Intermediate"
+        - label: "Track 3: Advanced"
+    validations:
+      required: true
+
+  - type: textarea
+    id: challenges
+    attributes:
+      label: Challenges Completed
+      description: List each challenge your squad completed (one per line). Include a brief 1-line summary of what you built.
+      placeholder: |
+        Challenge 1: Created a workflow to summarize GitHub issues
+        Challenge 2: Built an automated PR reviewer
+        Challenge 3: Designed a custom workflow with error handling
+    validations:
+      required: true
+
+  - type: textarea
+    id: reflection
+    attributes:
+      label: Reflection (max 200 words)
+      description: Tell us what you learned, what was challenging, and what you'd do differently next time. If you used AI tools (ChatGPT, Copilot, etc.), please disclose them here.
+      placeholder: |
+        Our squad focused on understanding workflow syntax and API integration. The most challenging part was debugging the regex pattern for issue filtering—we spent 30 minutes reading docs and testing locally before it clicked. Next time, we'd test regex patterns earlier in the process. We used Copilot to help scaffold the workflow structure, which saved time on boilerplate code.
+    validations:
+      required: true
+
+  - type: input
+    id: demo_link
+    attributes:
+      label: Demo/Recording Link (optional but encouraged)
+      description: Link to a video, screen recording, or screenshot showing your solution in action (e.g., YouTube, Loom, Imgur)
+      placeholder: https://www.youtube.com/watch?v=...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission Checklist
+      description: Please confirm these before submitting
+      options:
+        - label: All team members agree this submission represents our best work
+          required: true
+        - label: We have tested all submitted challenges
+          required: true
+        - label: We have reviewed the Code of Conduct
+          required: true
+        - label: We are disclosing any AI tool usage in the reflection section
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        **Questions?** Check out [submission-guide.md](docs/program/submission-guide.md) or ask in [GitHub Discussions](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions).

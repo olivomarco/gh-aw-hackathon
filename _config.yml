@@ -1,0 +1,94 @@
+title: "gh-aw Hackathon"
+description: "Build AI workflows that move at the speed of thought. A What The Hack event for developers exploring GitHub Actions Workflows with AI."
+# Update these for your Pages deployment:
+#   url: "https://<org-or-user>.github.io"
+#   baseurl: "/<repo-name>"   (empty string if repo name == username.github.io)
+url: ""
+baseurl: ""
+author: "gh-aw Hackathon Team"
+email: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+
+# Plugins (all supported by github-pages gem)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-relative-links
+
+# Jekyll collections
+# Challenge content lives in _challenges/ (Jekyll convention → renders at /challenges/<name>/)
+# Track content lives in _tracks/ (renders at /tracks/<name>/)
+collections:
+  challenges:
+    output: true
+    permalink: /challenges/:name/
+    sort_by: order
+  tracks:
+    output: true
+    permalink: /tracks/:name/
+    sort_by: order
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "challenges"
+    values:
+      layout: "challenge"
+  - scope:
+      path: ""
+      type: "tracks"
+    values:
+      layout: "track"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Theme: none (we use custom layouts in _layouts/)
+theme: ~
+
+# Exclude from build
+# Note: challenges/ contains raw WTH markdown (Student/Coach guides).
+#       Jekyll-rendered challenge pages live in _challenges/ (this collection).
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - .devcontainer/
+  - .squad/
+  - .github/agents/
+  - node_modules/
+  - coaches/
+
+# Include
+include:
+  - _pages
+
+# Feed
+feed:
+  disable_in_development: true
+
+# SEO
+twitter:
+  username: ""
+logo: "/assets/favicon.svg"
+
+# Sass
+sass:
+  style: compressed
+  sass_dir: assets/css

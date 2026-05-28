@@ -37,4 +37,20 @@ Coach/                 # Coach solution guides (not on Pages)
 
 ## Learnings
 
-_No entries yet._
+### 2026-05-28 — Devcontainer Configuration
+
+**What was built:**
+- `.devcontainer/devcontainer.json` — full devcontainer config for gh-aw Hackathon
+- `.devcontainer/postCreate.sh` — idempotent setup script: installs `gh aw` extension, checks auth, prints welcome banner
+- `.devcontainer/README.md` — maintainer technical notes (not participant docs)
+
+**Key decisions:**
+- Base image: `mcr.microsoft.com/devcontainers/universal:2` (pinned major version). Chosen for pre-baked Node/Python/Go runtimes; faster first-run for participants. Fallback is `base:ubuntu-24.04` + features if size is a concern.
+- Dev Container Features used for `gh`, node, python, go — cacheable layer, clean version overrides.
+- `gh aw` extension installed in `postCreate.sh` (not image build) because it requires `gh` auth and releases frequently.
+- `*.lock.yml` mapped to `github-actions` language ID so the GitHub Actions VS Code extension provides syntax support on compiled gh-aw workflows.
+- `remoteUser: codespace` — matches universal image non-root convention.
+
+**Artifacts filed:**
+- Decision: `.squad/decisions/inbox/vasquez-devcontainer.md`
+- Skill: `.squad/skills/devcontainer-gh-aw/SKILL.md`

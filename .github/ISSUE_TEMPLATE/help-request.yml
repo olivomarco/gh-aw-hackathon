@@ -1,0 +1,83 @@
+name: Get Help on a Challenge
+description: Stuck on a challenge? Ask here for guidance.
+labels: ["help-wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Need Help? 🆘
+
+        Use this form to ask for help on a challenge. Your coach and squad-mates are here to support you!
+
+        **Quick check before you post:**
+        - Did you read the challenge README?
+        - What does the error message say?
+        - What have you already tried?
+        - Have other squads asked about this already? Check [Discussions](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions).
+
+  - type: dropdown
+    id: track
+    attributes:
+      label: Which track are you working on?
+      options:
+        - "Track 1: Foundations"
+        - "Track 2: Intermediate"
+        - "Track 3: Advanced"
+        - Other / Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: challenge
+    attributes:
+      label: Challenge Name or Number
+      description: e.g., "Challenge 1: Hello World" or "Challenge 7"
+      placeholder: Challenge 1
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you stuck on?
+      description: Describe the problem clearly. Include any error messages.
+      placeholder: |
+        I'm trying to build a workflow that summarizes GitHub issues, but I keep getting an error:
+        
+        ```
+        Error: Field 'summary' not found in workflow schema
+        ```
+        
+        I've checked the docs and the example, and I don't see what I'm doing wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_tried
+    attributes:
+      label: What have you already tried?
+      description: Tell us about your troubleshooting steps (this helps us give better guidance).
+      placeholder: |
+        - Checked the challenge README and example files
+        - Searched GitHub Discussions for similar issues
+        - Tried restarting my environment
+        - Reviewed the gh-aw syntax docs
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Any other context?
+      description: Code snippets, links to your fork, screenshots, etc. (optional)
+      placeholder: |
+        My fork: https://github.com/username/gh-aw-hackathon
+        Relevant file: https://github.com/username/gh-aw-hackathon/blob/my-branch/workflow.md
+
+  - type: checkboxes
+    id: asked
+    attributes:
+      label: Have you asked for help?
+      options:
+        - label: I've told my coach about this issue
+        - label: My squad and I have discussed it together
