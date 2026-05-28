@@ -1,0 +1,78 @@
+{
+  "name": "gh-aw Hackathon",
+
+  // Universal image ships Node, Python, Go, and common tooling out of the box.
+  // Pinned to major version 2 (not :latest) for reproducible rebuilds.
+  // See .devcontainer/README.md for rationale.
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+
+  // Dev Container Features supplement what the image already provides.
+  // We explicit-pin the gh CLI feature so participants always get a recent,
+  // known-good version rather than whatever the base image vendors.
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    },
+    // node/python/go are already in universal:2 — these features allow
+    // overriding the pinned version without rebuilding the base image.
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "latest"
+    }
+  },
+
+  // postCreate runs once after the container is created (not on every start).
+  // Installs the gh-aw extension and prints a welcome banner.
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+
+  // codespace is the default non-root user in the universal image.
+  "remoteUser": "codespace",
+
+  // Uncomment if a challenge requires a local HTTP server (e.g., webhook testing).
+  // "forwardPorts": [3000, 8080],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Copilot — primary supported gh-aw engine
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        // GitHub Actions / workflow YAML syntax + linting
+        "GitHub.vscode-github-actions",
+        // Markdown editing (challenge files, workflow .md sources)
+        "yzhang.markdown-all-in-one",
+        // Collaborative hacking support
+        "ms-vsliveshare.vsliveshare",
+        // YAML editing (lock files, Actions workflows)
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        // Treat *.lock.yml as GitHub Actions YAML for syntax highlighting
+        "files.associations": {
+          "*.lock.yml": "github-actions",
+          "*.lock.yaml": "github-actions"
+        },
+        // Markdown: enable word wrap for long frontmatter descriptions
+        "[markdown]": {
+          "editor.wordWrap": "on",
+          "editor.formatOnSave": false
+        },
+        // YAML: consistent 2-space indent for workflow files
+        "[yaml]": {
+          "editor.insertSpaces": true,
+          "editor.tabSize": 2,
+          "editor.formatOnSave": true
+        },
+        // GitHub Actions extension: point at the .github/workflows folder
+        "github-actions.workflows.pinned.workflows": [],
+        // Shell: bash as default terminal
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
