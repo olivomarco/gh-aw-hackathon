@@ -233,3 +233,13 @@ In Jekyll/SCSS sites, `.prose a` (specificity 0,1,1) will silently defeat `.btn-
 **Cross-team sync:** Hudson built challenge content. Vasquez unified install commands. Hicks updated program docs.
 
 ---
+
+### 2026-05-28 — Guide Footer Action Bar Bottom Margin
+
+**Problem:** `.guide-footer-actions` had no `margin-bottom`, causing the site footer strip to appear immediately under the "Back to challenge / Student|Coach Guide" buttons on all guide pages. `margin-top: var(--space-12)` (3rem) was already present and adequate for top separation; the `border-top` + `padding-top` were also already in place.
+
+**Fix:** Single CSS property added — `margin-bottom: var(--space-12)` (= 3rem) on `.guide-footer-actions`. No markup changes. No other selectors touched.
+
+**Lesson:** When adding a "top separator" (border + padding-top + margin-top) to a section, always also add a matching `margin-bottom` to guard the bottom boundary — especially important for the last element before a sticky/banded footer.
+
+**Build:** 0 errors (pre-existing Liquid warnings unrelated). Commit: fix(site): add breathing room around guide page action buttons.
