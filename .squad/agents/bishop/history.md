@@ -140,3 +140,20 @@
 **Handoff:** `.squad/decisions/inbox/bishop-qa-pass.md` — full audit report.
 Repository owner/slug in _config.yml: `github/gh-aw-hackathon` — Marco to confirm before deploy.
 
+## Learnings
+
+### 2026-05-28 — baseurl Fix (Pages CSS was 404)
+
+**Problem confirmed by Marco:** Live site at https://olivomarco.github.io/gh-aw-hackathon/ loaded HTML but no CSS. `<link href="/assets/css/style.css">` was resolving at domain root (404); it needed `/gh-aw-hackathon/assets/css/style.css`.
+
+**Root cause:** `_config.yml` had `url: ""` and `baseurl: ""` — placeholder values left from scaffold. Also `github_repo` and `codespaces_url` pointed at `github/gh-aw-hackathon` (wrong owner).
+
+**Fix:** Single-file change to `_config.yml`:
+- `url: "https://olivomarco.github.io"`
+- `baseurl: "/gh-aw-hackathon"`
+- `github_repo` / `codespaces_url` → `olivomarco/gh-aw-hackathon`
+
+**Commit:** `6b0e238` — pushed to `main` 2026-05-28T15:34:35+01:00
+
+**Lesson:** Always set `url` + `baseurl` in `_config.yml` before the first Pages deploy when the repo name ≠ `username.github.io`. Templates using `relative_url` work correctly once baseurl is set — no template changes needed.
+
