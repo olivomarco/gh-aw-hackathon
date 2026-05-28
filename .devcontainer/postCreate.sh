@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # .devcontainer/postCreate.sh
 # Runs once after the devcontainer is created (not on restart).
-# Installs the gh-aw CLI extension and validates the environment.
+# Installs the gh-aw CLI and validates the environment.
 set -euo pipefail
 
 BOLD="\033[1m"
@@ -16,12 +16,12 @@ echo -e "${BOLD}${CYAN}║        gh-aw Hackathon — Dev Environment     ║${R
 echo -e "${BOLD}${CYAN}╚══════════════════════════════════════════════╝${RESET}"
 echo ""
 
-# ── 1. Install gh-aw extension ─────────────────────────────────────────────
-echo -e "${BOLD}[1/3] Installing gh aw extension...${RESET}"
-if gh extension list 2>/dev/null | grep -q "gh-aw"; then
+# ── 1. Install gh-aw CLI ───────────────────────────────────────────────────
+echo -e "${BOLD}[1/3] Installing gh aw CLI...${RESET}"
+if command -v gh-aw >/dev/null 2>&1 || gh aw --version >/dev/null 2>&1; then
   echo -e "      ${GREEN}✓ gh aw already installed — skipping${RESET}"
 else
-  gh extension install github/gh-aw
+  curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
   echo -e "      ${GREEN}✓ gh aw installed${RESET}"
 fi
 

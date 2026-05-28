@@ -60,6 +60,8 @@
 | 14:25 | 85 min | Squads work challenges 3-01 through 3-05 (core challenges only; bonus challenges are stretch goals for fast-moving squads) |
 | 15:50 | 10 min | Final commit deadline warning |
 
+*Squads who finish Track 3 core early may explore Track 4 "Production Patterns" — real workflows from github/gh-aw and githubnext/agentics. Time-permitting only; not required for judging.*
+
 ### Judging (16:00 – 16:45)
 
 | Time | Duration | Activity |

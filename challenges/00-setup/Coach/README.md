@@ -95,8 +95,8 @@ Include the [hello-agent] prefix and our squad's name.
 
 **Coach response:**
 - "Let's check: run `gh auth login`"
-- Then: `gh extension list | grep aw`
-- If not listed: `gh extension install github/gh-aw`
+- Then: `gh aw --version`
+- If not found: `curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash`
 - Reference the [devcontainer setup guide](../../docs/getting-started/devcontainer-setup.md) section on auth
 
 ### Pitfall 3: Overpermissioning

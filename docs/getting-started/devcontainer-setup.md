@@ -10,7 +10,7 @@ Welcome! This guide walks you through setting up your development environment fo
 
 ## Why a DevContainer?
 
-We've pre-configured a complete development environment for you—no installing tools locally, no "works on my machine" headaches. Your devcontainer comes with everything: the `gh` CLI, the `gh aw` extension, Node.js, Python, Go, VS Code extensions (including Copilot), and more. One click (or one command) and you're ready to code.
+We've pre-configured a complete development environment for you—no installing tools locally, no "works on my machine" headaches. Your devcontainer comes with everything: the `gh` CLI, the `gh aw` CLI, Node.js, Python, Go, VS Code extensions (including Copilot), and more. One click (or one command) and you're ready to code.
 
 ## Choose Your Path
 
@@ -49,7 +49,7 @@ For those who prefer working locally. You need: [Docker Desktop](https://www.doc
 | Tool | Why It Matters |
 |------|---|
 | `gh` CLI | Create issues, review PRs, manage repos—all from the command line |
-| `gh aw` extension | Create and run gh-aw workflows (the core tool for this hackathon) |
+| `gh aw` CLI | Create and run gh-aw workflows (the core tool for this hackathon) |
 | Node.js | JavaScript runtime for some gh-aw engines and examples |
 | Python | Many gh-aw examples and tools use Python |
 | Go | Go is supported by gh-aw; some advanced workflows may use it |
@@ -146,12 +146,12 @@ The extension didn't install properly.
 
 **Fix:** Restart VS Code or your terminal. If it persists:
 ```bash
-gh extension list
+gh aw --version
 ```
 
-Should show `gh-aw` in the list. If not, reinstall:
+If that fails, reinstall with the install script:
 ```bash
-gh extension install github/gh-aw
+curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
 ```
 
 ### "failed to authenticate" / "401 Unauthorized"

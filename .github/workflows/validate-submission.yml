@@ -17,11 +17,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install gh aw extension
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install gh aw CLI
         run: |
-          gh extension install github/gh-aw || true
+          curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
           gh aw --version || echo "gh aw installed"
 
       - name: Parse workflow file paths from issue body

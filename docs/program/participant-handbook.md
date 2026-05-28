@@ -170,6 +170,19 @@ We want everyone to participate fully.
 
 ---
 
+## Tracks
+
+**Track 1 — Hello, Agent:** Learn the gh-aw basics by building your first workflow to create a GitHub issue.
+
+**Track 2 — Repo Concierge:** Explore event triggers and slash commands; build workflows that respond to repository activity and user interactions.
+
+**Track 3 — Continuous Intelligence:** Master workflow chaining and Model Context Protocol (MCP) integrations for sophisticated multi-step automation.
+
+**Track 4 — Production Patterns (Stretch / Real-World):**
+If your squad finishes the core challenges in Track 3 with time to spare, jump into Track 4. These are real workflows lifted straight from Peli's Agent Factory in github/gh-aw and githubnext/agentics — battle-tested in production with documented merge rates (one of them, the Daily Doc Updater, has shipped 57 of 59 PRs proposed, 96%). Pick one, run `gh aw add-wizard <url>`, customise it for your repo, and ship.
+
+---
+
 ## Frequently Asked Questions
 
 ### How do we submit our work?
