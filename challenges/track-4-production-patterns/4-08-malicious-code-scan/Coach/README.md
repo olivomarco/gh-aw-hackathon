@@ -1,14 +1,4 @@
----
-title: "Malicious Code Scan — Coach Guide"
-challenge_title: "Malicious Code Scan"
-challenge_slug: "4-08-malicious-code-scan"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "coach"
-layout: guide
----
+# Coach Guide: Challenge 4-08 — Malicious Code Scan
 
 ---
 
@@ -95,4 +85,3 @@ The most important framing: this is a _defence layer_, not a replacement for cod
 The "likely benign vs suspicious" classification step is critical for reducing alert fatigue. Without it, every eval in a test file generates noise. Ask participants: _"If this fires every day with 50 findings, what happens to the team's trust in the tool?"_ Then have them add the likelihood gate.
 
 Participants with security backgrounds often want to add more patterns. Encourage it — but cap at 5-7 patterns per run to keep the prompt focused and the output actionable.
-

@@ -1,14 +1,4 @@
----
-title: "Daily Doc Updater — Student Guide"
-challenge_title: "Daily Doc Updater"
-challenge_slug: "4-03-daily-doc-updater"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "student"
-layout: guide
----
+# Challenge 4-03: Daily Documentation Updater
 
 **Track:** Production Patterns (Advanced 🟣)
 **Estimated time:** 30 minutes
@@ -102,4 +92,3 @@ Source: `githubnext/agentics/workflows/daily-doc-updater.md`
 
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-03-daily-doc-updater/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-03-daily-doc-updater/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
-

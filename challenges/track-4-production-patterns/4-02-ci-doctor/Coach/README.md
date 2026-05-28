@@ -1,14 +1,4 @@
----
-title: "CI Doctor — Coach Guide"
-challenge_title: "CI Doctor"
-challenge_slug: "4-02-ci-doctor"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "coach"
-layout: guide
----
+# Coach Guide: Challenge 4-02 — CI Doctor
 
 ---
 
@@ -90,4 +80,3 @@ The `workflow_run` trigger confuses participants because it's asynchronous and c
 Common mistake: nesting this inside the CI workflow itself (using `on: push`). Redirect: _"The Doctor needs to fire after CI completes, not during. Which trigger lets you react to another workflow's result?"_
 
 Participants who finish early can extend: add a second `workflows:` entry, or add an `if:` condition to only run on `main` branch failures.
-

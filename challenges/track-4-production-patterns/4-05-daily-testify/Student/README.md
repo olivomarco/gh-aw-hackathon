@@ -1,14 +1,4 @@
----
-title: "The Uber Expert (Daily Testify) — Student Guide"
-challenge_title: "The Uber Expert (Daily Testify)"
-challenge_slug: "4-05-daily-testify"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "student"
-layout: guide
----
+# Challenge 4-05: The Uber Expert (Daily Testify)
 
 **Track:** Production Patterns (Advanced 🟣)
 **Estimated time:** 30 minutes
@@ -97,4 +87,3 @@ Source: `github/gh-aw/.github/workflows/daily-testify-uber-super-expert.md`
 
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-05-daily-testify/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-05-daily-testify/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
-

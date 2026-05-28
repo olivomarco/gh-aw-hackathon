@@ -1,14 +1,4 @@
----
-title: "Issue Triage Agent — Student Guide"
-challenge_title: "Issue Triage Agent"
-challenge_slug: "4-01-issue-triage-agent"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "student"
-layout: guide
----
+# Challenge 4-01: Issue Triage Agent
 
 **Track:** Production Patterns (Advanced 🟣)
 **Estimated time:** 30 minutes
@@ -103,4 +93,3 @@ Replace the default allowlist with your repo's actual labels:
 
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-01-issue-triage-agent/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-01-issue-triage-agent/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
-

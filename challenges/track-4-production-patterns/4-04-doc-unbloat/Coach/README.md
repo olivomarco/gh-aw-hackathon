@@ -1,14 +1,4 @@
----
-title: "Documentation Unbloat — Coach Guide"
-challenge_title: "Documentation Unbloat"
-challenge_slug: "4-04-doc-unbloat"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "coach"
-layout: guide
----
+# Coach Guide: Challenge 4-04 — Documentation Unbloat
 
 ---
 
@@ -83,4 +73,3 @@ Participants struggle to articulate "simplify" in a way the model can act on. Th
 The difference between Unbloat and a human editing session is precision + repeatability. A human edits based on feel; the workflow edits based on explicit rules. That's a feature, not a limitation.
 
 Fast squads: have them try combining 4-03 (accuracy) and 4-04 (quality) in sequence — Doc Updater fires first, Unbloat fires second. The chain produces both correct and clean docs.
-

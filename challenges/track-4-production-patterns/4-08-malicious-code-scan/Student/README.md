@@ -1,14 +1,4 @@
----
-title: "Malicious Code Scan — Student Guide"
-challenge_title: "Malicious Code Scan"
-challenge_slug: "4-08-malicious-code-scan"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "student"
-layout: guide
----
+# Challenge 4-08: Malicious Code Scan
 
 **Track:** Production Patterns (Advanced 🟣)
 **Estimated time:** 30 minutes
@@ -105,4 +95,3 @@ Source: `githubnext/agentics/workflows/daily-malicious-code-scan.md`
 
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-08-malicious-code-scan/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-08-malicious-code-scan/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
-

@@ -1,14 +1,4 @@
----
-title: "Daily Doc Updater — Coach Guide"
-challenge_title: "Daily Doc Updater"
-challenge_slug: "4-03-daily-doc-updater"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "coach"
-layout: guide
----
+# Coach Guide: Challenge 4-03 — Daily Documentation Updater
 
 ---
 
@@ -84,4 +74,3 @@ The key elements: `workflow_dispatch` alongside cron (for testing), `contents: w
 The 96% merge rate comes from PR focus. Participants often produce one big PR that rewrites everything. Redirect: _"Would you review and merge a 200-file PR? How small does a PR need to be to get merged in 60 seconds?"_
 
 The "if nothing found, do nothing" instruction is important — without it, the agent may open empty PRs or cosmetic changes just to have output. Ask participants: _"What happens if the agent runs every day but there's nothing to fix?"_
-

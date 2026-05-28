@@ -1,14 +1,4 @@
----
-title: "The Uber Expert (Daily Testify) — Coach Guide"
-challenge_title: "The Uber Expert (Daily Testify)"
-challenge_slug: "4-05-daily-testify"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "coach"
-layout: guide
----
+# Coach Guide: Challenge 4-05 — The Uber Expert (Daily Testify)
 
 ---
 
@@ -88,4 +78,3 @@ The "uber expert" concept is the most transferable lesson in Track 4. Participan
 The causal chain architecture matters: explain that the issue is a _contract_ between the analyst (Testify) and the implementer (Test Improver). If the issue isn't specific enough, the Improver can't act on it. That's why `create-issue` only — the human review gate enforces quality.
 
 If they're building both 4-05 and 4-06: ask them to run Testify first, review the issues, then configure the Improver to consume them.
-

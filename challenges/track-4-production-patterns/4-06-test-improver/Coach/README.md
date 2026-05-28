@@ -1,14 +1,4 @@
----
-title: "Test Improver — Coach Guide"
-challenge_title: "Test Improver"
-challenge_slug: "4-06-test-improver"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "coach"
-layout: guide
----
+# Coach Guide: Challenge 4-06 — The Test Improver
 
 ---
 
@@ -90,4 +80,3 @@ The most revealing moment in this challenge is when participants look at a Testi
 The framework-specificity lesson is practical: a prompt that says "write tests" produces worse output than "write Jest 29 tests using `describe`/`it` with async `await` patterns and `.resolves`/`.rejects` matchers." Have them find the right level of specificity for their own framework.
 
 Fast squads: connect both 4-05 and 4-06 and run the full chain — Testify at 9am, Improver at 10am. Watch one pipeline create and resolve its own test debt.
-

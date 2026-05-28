@@ -1,14 +1,4 @@
----
-title: "Issue Triage Agent — Coach Guide"
-challenge_title: "Issue Triage Agent"
-challenge_slug: "4-01-issue-triage-agent"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "coach"
-layout: guide
----
+# Coach Guide: Challenge 4-01 — Issue Triage Agent
 
 ---
 
@@ -81,4 +71,3 @@ The key elements: explicit allowlist in the body, `add-labels` + `add-comment` i
 The most common failure mode is label hallucination — the agent invents labels that sound reasonable but don't exist in the repo. Socratic prompt: _"What happens if the model suggests a label your repo doesn't have? How would you prevent that?"_ Lead them to the allowlist solution themselves.
 
 The `toolsets: [issues, labels]` is the technical answer; the allowlist in the body is the safety net. Both are needed.
-

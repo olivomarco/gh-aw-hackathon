@@ -1,14 +1,4 @@
----
-title: "Security Compliance — Student Guide"
-challenge_title: "Security Compliance"
-challenge_slug: "4-07-security-compliance"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "student"
-layout: guide
----
+# Challenge 4-07: Security Compliance
 
 **Track:** Production Patterns (Advanced 🟣)
 **Estimated time:** 30 minutes
@@ -100,4 +90,3 @@ Source: `github/gh-aw/.github/workflows/security-compliance.md`
 
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-07-security-compliance/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-07-security-compliance/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
-

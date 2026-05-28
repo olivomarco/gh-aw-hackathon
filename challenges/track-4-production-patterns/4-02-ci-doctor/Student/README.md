@@ -1,14 +1,4 @@
----
-title: "CI Doctor — Student Guide"
-challenge_title: "CI Doctor"
-challenge_slug: "4-02-ci-doctor"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "student"
-layout: guide
----
+# Challenge 4-02: CI Doctor
 
 **Track:** Production Patterns (Advanced 🟣)
 **Estimated time:** 30 minutes
@@ -99,4 +89,3 @@ Source: `githubnext/agentics/workflows/ci-doctor.md`
 
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-02-ci-doctor/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-02-ci-doctor/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
-

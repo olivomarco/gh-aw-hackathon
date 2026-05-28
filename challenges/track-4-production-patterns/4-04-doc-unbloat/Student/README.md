@@ -1,14 +1,4 @@
----
-title: "Documentation Unbloat — Student Guide"
-challenge_title: "Documentation Unbloat"
-challenge_slug: "4-04-doc-unbloat"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "student"
-layout: guide
----
+# Challenge 4-04: Documentation Unbloat
 
 **Track:** Production Patterns (Advanced 🟣)
 **Estimated time:** 30 minutes
@@ -102,4 +92,3 @@ Source: `githubnext/agentics/workflows/unbloat-docs.md`
 
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-04-doc-unbloat/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-04-doc-unbloat/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
-

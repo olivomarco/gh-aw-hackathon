@@ -1,14 +1,4 @@
----
-title: "Test Improver — Student Guide"
-challenge_title: "Test Improver"
-challenge_slug: "4-06-test-improver"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "student"
-layout: guide
----
+# Challenge 4-06: The Test Improver
 
 **Track:** Production Patterns (Advanced 🟣)
 **Estimated time:** 30 minutes
@@ -103,4 +93,3 @@ Source: `githubnext/agentics/workflows/daily-test-improver.md`
 
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-06-test-improver/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
 <a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-4-production-patterns/4-06-test-improver/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
-

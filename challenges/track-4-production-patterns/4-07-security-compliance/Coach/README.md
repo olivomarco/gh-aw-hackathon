@@ -1,14 +1,4 @@
----
-title: "Security Compliance — Coach Guide"
-challenge_title: "Security Compliance"
-challenge_slug: "4-07-security-compliance"
-challenge_track: "production-patterns"
-challenge_track_name: "Production Patterns"
-difficulty: "Advanced"
-time: "30 min"
-guide_type: "coach"
-layout: guide
----
+# Coach Guide: Challenge 4-07 — Security Compliance
 
 ---
 
@@ -96,4 +86,3 @@ The deeper lesson is policy codification. Ask: _"Where does your team's vulnerab
 Participants sometimes want to skip the issue and go straight to auto-PRs that bump the dependency. Redirect: the issue-creation-first pattern is intentional — Dependabot already handles auto-bumping, but SLA tracking and escalation are the gap this workflow fills.
 
 Fast squads: extend the severity routing. Critical issues get `@security-team` mentioned in the body; low severity gets a comment on an existing issue rather than a new one.
-
