@@ -309,3 +309,17 @@ it validates the request and hands off to Copilot to do the actual work.
 - Do not process `/ship-it` from bots.
 
 {{#runtime-import shared/noop-reminder.md}}
+
+# =============================================================================
+# MULTI-REPO EXTENSION (bonus pattern)
+#
+# To target a different repo, add to workflow frontmatter:
+#
+#   tools:
+#     gh-proxy:
+#       repos:
+#         - owner/release-tracking
+#
+# Then in the agent prompt, reference the target repo explicitly.
+# The token must have repo scope for both source and target repos.
+# =============================================================================

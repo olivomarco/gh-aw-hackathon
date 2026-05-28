@@ -5,7 +5,7 @@ badge: "Track 3"
 track_id: "mcp-integration"
 order: 3
 difficulty_range: "🔴 Advanced"
-challenges_count: 5
+challenges_count: 6
 core_challenges: 2
 learning_objectives:
   - "Coordinate multiple workflows in a pipeline"

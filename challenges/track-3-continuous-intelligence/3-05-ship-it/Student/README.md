@@ -146,3 +146,22 @@ Stuck? Here's how to escalate:
 - **"Too much complexity?"** → Build just 2 workflows first (Observer + Triage). Get those working. Then add ChatOps.
 
 Still stuck after 20 minutes? Raise your hand — this is the capstone and coaches expect it to be the hardest.
+
+## 🔗 Extension: Multi-Repo Mode
+
+**What it is:** A gh-aw workflow in one repo can create issues, PRs, or comments in a *different* repo using the `gh-proxy` tool. This is called multi-repo mode.
+
+**When to use it:** Your Ship It factory writes tracking issues to a central `release-tracking` repo while fixes land in your feature repos. Or an org-health workflow in a meta-repo monitors all your team's repos.
+
+**The syntax** — add to your workflow frontmatter:
+```yaml
+tools:
+  gh-proxy:
+    repos:
+      - owner/other-repo    # must be listed explicitly — security allowlist
+      - owner/another-repo  # add each target repo
+```
+
+**Security model:** The workflow's GitHub token must have `repo` scope for each listed repo. Repos not in the list are unreachable. This explicit allowlist is intentional — you can't accidentally write to repos you didn't list.
+
+**Try it:** Extend your Ship It watcher to create a tracking issue in a second repo you own. Change the `repo-memory` write to target `owner/release-tracking` instead of the current repo.

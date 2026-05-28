@@ -5,7 +5,7 @@ badge: "Track 2"
 track_id: "safe-outputs"
 order: 2
 difficulty_range: "🟡 Intermediate"
-challenges_count: 5
+challenges_count: 6
 core_challenges: 3
 learning_objectives:
   - "Trigger workflows from GitHub issue and PR events"
