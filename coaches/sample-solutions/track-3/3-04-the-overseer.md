@@ -26,7 +26,6 @@ safe-outputs:
     # Update existing overseer alerts rather than creating duplicates.
     max: 5
   noop:
-    reason: "All monitored workflows are healthy."
 
 # Claude for The Overseer — its reasoning capability handles the multi-workflow
 # correlation task better than Copilot for this complexity level.
@@ -36,7 +35,6 @@ tools:
   # agentic-workflows MCP is the key tool for this challenge —
   # it gives the agent programmatic access to all workflow run history.
   agentic-workflows:
-    enabled: true
 
   # repo-memory lets The Overseer store health baselines across runs.
   repo-memory:

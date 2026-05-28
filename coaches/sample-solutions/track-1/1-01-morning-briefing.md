@@ -27,7 +27,6 @@ safe-outputs:
     expires: 2d
   noop:
     # Required exit if the repo has no activity to report.
-    reason: "No activity since last briefing — nothing to report."
 
 engine: copilot
 ---

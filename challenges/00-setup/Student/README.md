@@ -76,7 +76,7 @@ Then compile your workflow using `gh aw compile`, run it, and verify the issue a
 3. Run `gh aw compile` to generate the `.lock.yml`
 4. Trigger the workflow manually via the GitHub Actions UI (or use `gh workflow run`)
 5. Watch the logs and verify the issue was created
-6. Celebrate! 🎉
+6. Check the Issues tab — your first agent-created issue should be there
 
 ---
 
@@ -98,4 +98,4 @@ Stuck? Raise a hand for your coach. They're here to guide you — not solve it f
 - **"I compiled it, but it won't run?"** → Check the Actions tab logs for details
 - **"The issue didn't get created?"** → Look at the safe-outputs section of your frontmatter — check indentation and field names
 
-Good luck! You've got this. 🚀
+Raise your hand for your coach if you get stuck.

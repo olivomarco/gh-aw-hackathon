@@ -93,7 +93,7 @@ Trigger: `on: pull_request: types: [opened]`
 
 Job: If PR was created by Copilot and all checks pass, auto-merge. Otherwise, add a "ready-for-review" label.
 
-Output: `safe-outputs: merge-pr` OR `safe-outputs: add-labels`
+Output: `safe-outputs: add-labels`
 
 ---
 
@@ -145,4 +145,4 @@ Stuck? Here's how to escalate:
 - **"Copilot not taking the assignment?"** → Check the `assign-to-agent:` syntax. Should be `safe-outputs: assign-to-agent: target: triggering, allowed: [copilot]`.
 - **"Too much complexity?"** → Build just 2 workflows first (Observer + Triage). Get those working. Then add ChatOps.
 
-Still stuck after 20 minutes? Raise your hand for your coach. This is the capstone—they'll help you cross the finish line. 🚀
+Still stuck after 20 minutes? Raise your hand — this is the capstone and coaches expect it to be the hardest.

@@ -449,5 +449,3 @@ Now categorize the current issue and apply the matching label.
 - **Prompt adaptation matters:** Each engine responds to different instruction styles.
 - **Data-driven decisions:** Use metrics, not hunches.
 - **Production thinking:** Real teams test across engines. You now do too.
-
-Great work! This is how professionals ship agentic workflows. 🚀

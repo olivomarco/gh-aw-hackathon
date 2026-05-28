@@ -70,6 +70,4 @@ If you're blocked for more than **15 minutes**:
 3. **Read the agent logs:** Click your workflow run in the Actions tab and scroll to see what the AI agent actually tried to do.
 4. **Simplify instructions:** If the agent isn't summarizing correctly, give it simpler guidance like "List all issues opened in the last 24 hours" before moving to complex summaries.
 
-Ask your coach! They're here to help you unblock.
-
-Good luck! 🚀
+Ask your coach if you're blocked for more than 15 minutes.

@@ -72,6 +72,4 @@ If you're blocked for more than **15 minutes**:
 4. **Review the commit data:** In the logs, you should see what files changed. If you don't, the path filter may not have matched.
 5. **Add workflow_dispatch:** So you can test without actually committing. Then focus on the logic.
 
-Ask your coach! 🎯
-
-Good luck! 🚀
+Ask your coach.

@@ -40,7 +40,6 @@ safe-outputs:
     title-prefix: "[dep-drift] "
     expires: 3d
   noop:
-    reason: "No dependency changes detected in the past 7 days."
 
 # ENGINE: GitHub Copilot
 # Best for: quick classification, low cost, tightly structured prompts
@@ -49,13 +48,12 @@ engine: copilot
 
 tools:
   bash:
-    allow:
-      - "git log:*"
-      - "git diff:*"
-      - "cat:package.json"
-      - "cat:go.mod"
-      - "cat:requirements.txt"
-      - "grep:*"
+    - "git log:*"
+    - "git diff:*"
+    - "cat:package.json"
+    - "cat:go.mod"
+    - "cat:requirements.txt"
+    - "grep:*"
 ---
 
 ## Goal
@@ -140,7 +138,6 @@ safe-outputs:
     title-prefix: "[dep-drift] "
     expires: 3d
   noop:
-    reason: "No dependency changes detected in the past 7 days."
 
 # ENGINE: Anthropic Claude
 # Best for: nuanced reasoning, long-form analysis, multi-step decision trees
@@ -149,13 +146,12 @@ engine: claude
 
 tools:
   bash:
-    allow:
-      - "git log:*"
-      - "git diff:*"
-      - "cat:package.json"
-      - "cat:go.mod"
-      - "cat:requirements.txt"
-      - "grep:*"
+    - "git log:*"
+    - "git diff:*"
+    - "cat:package.json"
+    - "cat:go.mod"
+    - "cat:requirements.txt"
+    - "grep:*"
 ---
 
 ## Goal
@@ -252,7 +248,6 @@ safe-outputs:
     title-prefix: "[dep-drift] "
     expires: 3d
   noop:
-    reason: "No dependency changes detected in the past 7 days."
 
 # ENGINE: OpenAI Codex
 # Best for: code-specific analysis, parsing structured files, generating code fixes
@@ -261,13 +256,12 @@ engine: codex
 
 tools:
   bash:
-    allow:
-      - "git log:*"
-      - "git diff:*"
-      - "cat:package.json"
-      - "cat:go.mod"
-      - "cat:requirements.txt"
-      - "grep:*"
+    - "git log:*"
+    - "git diff:*"
+    - "cat:package.json"
+    - "cat:go.mod"
+    - "cat:requirements.txt"
+    - "grep:*"
 ---
 
 ## Goal

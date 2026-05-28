@@ -32,7 +32,6 @@ safe-outputs:
     allowed-state-change: closed
     max: 5   # Close at most 5 issues per run to avoid mass-closing accidents.
   noop:
-    reason: "No stale issues found today."
 
 engine: copilot
 

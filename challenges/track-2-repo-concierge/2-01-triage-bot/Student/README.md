@@ -88,4 +88,4 @@ Create a gh-aw workflow named `triage-bot.md` in `.github/workflows/` that:
 - **"Comment is generic/robotic?"** → Rewrite the body to include personality. Try: "Thanks for opening this issue! We've categorized it as a **{category}**..."
 - **"Not sure how to analyze the issue?"** → Write out what you'd look for: "If the title mentions 'broken' or 'crash' it's likely a bug. If it asks 'how do I...' it's a question."
 
-Raise your hand — your coach is here. 🚀
+Raise your hand — your coach is here.

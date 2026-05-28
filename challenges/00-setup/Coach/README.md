@@ -264,4 +264,4 @@ If all these check out and it still doesn't work, escalate to Ripley or check th
 - **Keep momentum:** No squad should spend >20 minutes stuck. Better to give a hint early than watch frustration build.
 - **Set them up for success:** This challenge is meant to make Challenge 01+ feel achievable. You're building confidence, not testing knowledge.
 
-Good luck, and enjoy watching the lightbulbs go on! 💡
+The first lightbulb moment — when the issue appears in the repo — is worth pausing on. Make a deal of it.

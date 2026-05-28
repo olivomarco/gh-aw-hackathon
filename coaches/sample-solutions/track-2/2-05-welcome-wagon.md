@@ -24,7 +24,6 @@ safe-outputs:
       - good-first-issue
   noop:
     # Called for team members/maintainers who don't need a welcome message.
-    reason: "Author is a maintainer or collaborator — welcome message not needed."
 
 engine: copilot
 
@@ -33,7 +32,7 @@ engine: copilot
 checkout: false
 
 # Skip bots entirely — Dependabot, Renovate, etc. don't need a welcome.
-skip-bots: true
+skip-bots: [github-actions, copilot, dependabot, renovate, github-copilot-enterprise]
 
 # Do NOT rate-limit first-time contributor welcome messages.
 # Every new contributor should get exactly one welcome, no matter what.

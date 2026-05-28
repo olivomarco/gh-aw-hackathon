@@ -100,4 +100,4 @@ Create a gh-aw workflow named `slash-commands.md` in `.github/workflows/` that:
 - **"Unauthorized users can trigger the command?"** → Use `min-integrity: approved` in permissions to restrict to repo members
 - **"Summary is missing key points?"** → Instruct the AI to look for specific keywords: "Decisions", "Blockers", "Next Steps"
 
-Ask your coach for guidance! 🚀
+Ask your coach.

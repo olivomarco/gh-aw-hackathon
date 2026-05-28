@@ -322,6 +322,4 @@ If a squad is truly stuck:
 - **The "aha moment":** When the consumer reads the producer's data and creates a report, the squad will get it. That's the win.
 - **Silent failures are the enemy:** The `repo-memory` glob filter is the biggest gotcha—it silently drops files. Point it out explicitly.
 - **Simplicity wins:** A squad that writes 5 JSON fields and reads them correctly is better than one that tries to be fancy and fails. Celebrate the simple wins.
-- **This is the foundation:** Producer-consumer patterns unlock everything ahead—meta-workflows, orchestration, state machines. Build confidence here.
-
-Good luck! 🚀
+- **This is the foundation:** Producer-consumer patterns unlock everything ahead — meta-workflows, orchestration, state machines. Build confidence here.

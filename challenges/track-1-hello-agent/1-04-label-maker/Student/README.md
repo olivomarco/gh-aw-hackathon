@@ -73,6 +73,4 @@ If you're blocked for more than **15 minutes**:
 4. **Test with clear issue content:** Open an issue with an obvious title like "Bug: login broken" so the agent has clear content to classify.
 5. **Simplify the classification:** Start with 2 categories (bug vs feature) before expanding to 5.
 
-Ask your coach! They know this pattern well. 🏷️
-
-Good luck! 🚀
+Ask your coach.

@@ -152,7 +152,7 @@ Keep the logic clear and the issue body concise — just filename and count, no 
 - `workflow_dispatch:` lets them test immediately
 - Body: clear, measurable instructions
 
-**Production-ready reference solution:** See `coaches/sample-solutions/track-1/02-safe-and-sound.md`
+**Production-ready reference solution:** See `coaches/sample-solutions/track-1/1-02-safe-and-sound.md`
 
 ---
 
@@ -213,5 +213,3 @@ If a squad finishes early:
 - **Noop is not failure:** When squads see a successful noop, they start understanding the safety model.
 - **Minimal permissions by default:** This is a habit worth building early. Read-only first; escalate only if needed.
 - **This challenge builds trust:** After Challenge 1-02, squads believe gh-aw can be trusted in production.
-
-Good luck! 🔒

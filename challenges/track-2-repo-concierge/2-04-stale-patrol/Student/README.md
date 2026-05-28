@@ -88,4 +88,4 @@ Create a gh-aw workflow named `stale-patrol.md` in `.github/workflows/` that:
 - **"Workflow runs but doesn't find any stale issues?"** → This is correct if your repo is young! Add a mock: "For testing, assume this issue was last updated on [old date]"
 - **"Permission error when trying to close?"** → Ensure `permissions: issues: write` is set (or safe-outputs handles it)
 
-Ask your coach! 🚀
+Ask your coach.

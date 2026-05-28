@@ -138,7 +138,7 @@ Explain your reasoning in a comment on the issue summarizing why you applied (or
 - Body: clear heuristics with keywords and examples
 - Includes feedback comment so user understands the classification
 
-**Production-ready reference solution:** See `coaches/sample-solutions/track-1/04-label-maker.md`
+**Production-ready reference solution:** See `coaches/sample-solutions/track-1/1-04-label-maker.md`
 
 ---
 
@@ -202,6 +202,4 @@ If a squad finishes early:
 - **Safe-outputs guardrails matter:** The allowlist and noop path make this workflow trustworthy at scale.
 - **Real issues = real learning:** Testing with actual GitHub issues is far better than mocks.
 
-This is the capstone of Track 1. By now, squads should feel ready for Track 2. 🎉
-
-Good luck! 🏷️
+This is the capstone of Track 1. Squads who finish it should feel ready for Track 2.

@@ -24,7 +24,6 @@ safe-outputs:
     labels: [mined-from-discussion, needs-triage, automated]
     expires: 14d
   noop:
-    reason: "No actionable tasks found in recent discussions."
 
 engine: copilot
 

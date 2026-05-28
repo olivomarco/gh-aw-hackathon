@@ -26,7 +26,6 @@ safe-outputs:
   noop:
     # Producer never writes to GitHub UI — it writes only to repo-memory.
     # noop is the ONLY safe-output for a pure data-collection agent.
-    reason: "Daily metrics snapshot written to repo-memory."
 
 engine: copilot
 
@@ -126,7 +125,6 @@ safe-outputs:
     close-older-discussions: true
     category: reports   # Must match an existing Discussion category in your repo.
   noop:
-    reason: "No relay-memory snapshots available yet — run the producer first."
 
 engine: copilot
 

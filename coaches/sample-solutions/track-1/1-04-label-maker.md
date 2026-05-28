@@ -9,6 +9,9 @@ on:
   issues:
     # Fire immediately when an issue is opened.
     types: [opened, reopened]
+    # lock-for-agent prevents two concurrent runs from labelling the same issue twice
+    # on high-traffic repos. Essential best practice for event-driven write workflows.
+    lock-for-agent: true
   schedule:
     # Also run daily to catch any issues that slipped through the event trigger
     # (e.g., created while the workflow was paused or during an outage).
@@ -35,13 +38,9 @@ safe-outputs:
       - wontfix
   add-comment: {}
   noop:
-    reason: "All open issues already have labels — nothing to do."
 
 engine: copilot
 
-# lock-for-agent prevents two concurrent runs from labelling the same issue twice
-# on high-traffic repos. Essential best practice for event-driven write workflows.
-lock-for-agent: true
 ---
 
 ## Goal

@@ -31,19 +31,15 @@ safe-outputs:
     title-prefix: "[watcher] "
     expires: 3d
   noop:
-    reason: "No concerning changes detected in this push."
-
-engine: copilot
 
 tools:
   bash:
     # Allow only safe read-only git commands for diff collection.
-    allow:
-      - "git diff:*"
-      - "git log:*"
-      - "git show:*"
-      - "cat:*"
-      - "grep:*"
+    - "git diff:*"
+    - "git log:*"
+    - "git show:*"
+    - "cat:*"
+    - "grep:*"
 ---
 
 ## Goal

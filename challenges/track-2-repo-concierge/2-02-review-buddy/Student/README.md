@@ -91,4 +91,4 @@ Create a gh-aw workflow named `review-buddy.md` in `.github/workflows/` that:
 - **"Comment is too generic?"** → Rewrite to be specific. Instead of "Good PR", try: "This PR is focused and well-scoped — just 3 files changed with clear intent"
 - **"Not sure what to observe?"** → Look for: file count (small/medium/large), test coverage (tests touched?), description quality (complete or vague?)
 
-Raise your hand! 🚀
+Raise your hand.

@@ -268,4 +268,4 @@ Example output:
 - **Repository conventions matter:** The agent should read your repo's standards, not invent its own.
 - **Specific feedback > generic advice:** Your comment should reference *your* repo, not any repo.
 
-Celebrate when the comment is specific and useful. That's the win. 🚀
+Celebrate when the comment is specific and useful. That's the signal the context injection worked.

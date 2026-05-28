@@ -7,6 +7,9 @@
 on:
   issue_comment:
     types: [created]
+    # lock-for-agent prevents two concurrent slash-command responses on the same
+    # issue if a user posts the command twice quickly.
+    lock-for-agent: true
 
 permissions:
   contents: read
@@ -21,23 +24,22 @@ safe-outputs:
   noop:
     # Called when the comment is not a recognized slash command,
     # or when the command was already processed (idempotency guard).
-    reason: "Comment is not a recognized slash command."
 
 engine: copilot
 
-# lock-for-agent is critical here: prevents two concurrent slash-command
-# responses on the same issue if a user posts the command twice quickly.
-lock-for-agent: true
-
 # Rate-limit: each user may invoke a slash command at most once per 5 minutes.
-# Prevents abuse on public repos.
+# Prevents abuse on public repos. window is in seconds (300 = 5 minutes).
 user-rate-limit:
-  per: 5m
-  max: 1
+  max-runs-per-window: 1
+  window: 300
 
-# Only process comments from repo collaborators and above.
-# Prevents external users from triggering expensive AI operations.
-min-integrity: collaborator
+tools:
+  github:
+    # Only process comments from repo collaborators and above.
+    # Prevents external users from triggering expensive AI operations.
+    min-integrity: collaborator
+    toolsets:
+      - issues
 ---
 
 ## Goal

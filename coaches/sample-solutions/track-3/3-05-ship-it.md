@@ -24,10 +24,6 @@
 #
 # =============================================================================
 
----
----
----
-
 # =============================================================================
 # WORKFLOW 1: ship-it-watcher.md
 # Role: Producer — fires when a PR or issue is labelled "ship-it"
@@ -48,7 +44,6 @@ permissions:
 safe-outputs:
   noop:
     # Watcher only writes to repo-memory — never writes to GitHub UI.
-    reason: "ship-it observation recorded to repo-memory."
 
 engine: copilot
 
@@ -141,7 +136,6 @@ safe-outputs:
     title-prefix: "[ship-it] "
     expires: 7d
   noop:
-    reason: "No unprocessed ship-it items in the queue."
 
 engine: copilot
 
@@ -232,6 +226,8 @@ _Source record: repo-memory/ship-it-queue/{filename}_
 on:
   issue_comment:
     types: [created]
+    # lock-for-agent prevents two /ship-it commands racing on the same issue.
+    lock-for-agent: true
 
 permissions:
   contents: read
@@ -245,13 +241,14 @@ safe-outputs:
     target: triggering
     allowed: [copilot]
   noop:
-    reason: "Comment is not /ship-it or issue is not a ship-it tracking issue."
 
 engine: copilot
 
-# lock-for-agent prevents two /ship-it commands racing on the same issue.
-lock-for-agent: true
-min-integrity: collaborator
+tools:
+  github:
+    min-integrity: collaborator
+    toolsets:
+      - issues
 ---
 
 ## Goal

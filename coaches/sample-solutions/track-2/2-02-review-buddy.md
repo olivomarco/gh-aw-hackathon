@@ -27,7 +27,6 @@ safe-outputs:
       - needs-tests
       - ready-for-human-review
   noop:
-    reason: "PR is too large to review automatically (>2000 lines changed)."
 
 engine: copilot
 

@@ -107,4 +107,4 @@ Stuck? Here's how to escalate:
 - **"Agent gives generic advice, not specific to our repo?"** → You may need to make your CONTRIBUTING.md or ARCHITECTURE.md more explicit. Or your prompt doesn't tell the agent to read them. Try: "Read the CONTRIBUTING.md file first. Then analyze the PR against those rules."
 - **"Toolsets list not working?"** → Verify the toolset names (e.g., `pull_requests`, not `prs`). Reference the docs.
 
-Still stuck after 20 minutes? Raise your hand for your coach. 🚀
+Still stuck after 20 minutes? Raise your hand for your coach.

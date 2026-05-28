@@ -125,4 +125,4 @@ Stuck? Here's how to escalate:
 - **"One engine keeps failing?"** → Check the logs. Add a fallback or adjust the prompt. It's OK if one engine isn't great for your task—that's valuable data!
 - **"How do I run all three fairly?"** → Same input, same trigger time. Run them one after another on the same issue/PR.
 
-Still stuck after 20 minutes? Raise your hand for your coach. 🚀
+Still stuck after 20 minutes? Raise your hand for your coach.

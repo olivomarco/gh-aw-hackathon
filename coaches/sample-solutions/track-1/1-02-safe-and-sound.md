@@ -28,7 +28,6 @@ safe-outputs:
     title-prefix: "[safe-and-sound] "
   noop:
     # Called when dry_run=true OR when there is genuinely nothing to write.
-    reason: "Dry-run mode — no writes performed."
 
 engine: copilot
 ---

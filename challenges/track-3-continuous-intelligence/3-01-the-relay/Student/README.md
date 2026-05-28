@@ -111,4 +111,4 @@ Stuck? Here's how to escalate:
 - **"Consumer can't read the files?"** → Verify the `file-glob` pattern matches. Run `echo metrics/**/*.json` to test the glob locally.
 - **"I'm not sure how to compute the trend?"** → Read the last N files, compare the first value to the last value. If latest > first, it's "up". Simple as that.
 
-Still stuck after 20 minutes? Raise your hand for your coach. 🚀
+Still stuck after 20 minutes? Raise your hand for your coach.

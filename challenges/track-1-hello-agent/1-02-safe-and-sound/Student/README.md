@@ -70,6 +70,4 @@ If you're blocked for more than **15 minutes**:
 4. **Simplify your conditions:** Start with a trivial condition like "count the number of files in the repo. If >10, create issue. Else noop."
 5. **Test the noop path first:** It's easier to verify that `noop` works than to verify issue creation. Once noop succeeds, flip the condition to test issue creation.
 
-Ask your coach! They know this pattern inside-out. 🎯
-
-Good luck! 🚀
+Ask your coach.

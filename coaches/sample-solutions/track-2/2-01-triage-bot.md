@@ -7,6 +7,8 @@
 on:
   issues:
     types: [opened, reopened]
+    # lock-for-agent prevents two triage runs from racing on the same issue.
+    lock-for-agent: true
   workflow_dispatch:
 
 permissions:
@@ -37,16 +39,17 @@ safe-outputs:
       - wontfix
   add-comment: {}
   noop:
-    reason: "Issue does not meet triage criteria."
 
 engine: copilot
 
-# Prevents two triage runs from racing on the same issue.
-lock-for-agent: true
-
-# Only process issues from verified contributors (not anonymous spammers).
-# Set to 'none' if this is a public repo that needs to triage external contributors.
-min-integrity: collaborator
+tools:
+  github:
+    # Only process issues from verified contributors (not anonymous spammers).
+    # Set to 'none' if this is a public repo that needs to triage external contributors.
+    min-integrity: collaborator
+    toolsets:
+      - issues
+      - labels
 ---
 
 ## Goal

@@ -110,4 +110,4 @@ Stuck? Here's how to escalate:
 - **"How do I detect unexpected spikes?"** → Compare latest run tokens to average of previous 5 runs. If >2× average, flag it.
 - **"The issue is too long?"** → Use a table instead of prose. Tables are compact and scannable.
 
-Still stuck after 20 minutes? Raise your hand for your coach. 🚀
+Still stuck after 20 minutes? Raise your hand for your coach.

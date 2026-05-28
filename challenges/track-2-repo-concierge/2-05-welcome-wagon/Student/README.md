@@ -88,4 +88,4 @@ Create a gh-aw workflow named `welcome-wagon.md` in `.github/workflows/` that:
 - **"Workflow posts a comment even for existing contributors?"** → Add a check in the body: "If `author_association` is not `NONE`, do nothing"
 - **"How do I test this if I'm the repo owner?"** → Create a second test account (or use a friend's GitHub account) and have them open a PR
 
-Ask your coach! 🚀
+Ask your coach.

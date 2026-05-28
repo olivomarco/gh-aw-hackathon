@@ -131,7 +131,7 @@ Keep the comment brief and friendly — it's for the committer to see inline.
 - `workflow_dispatch:` for testing
 - Body: clear, measurable conditions based on file count
 
-**Production-ready reference solution:** See `coaches/sample-solutions/track-1/03-the-watcher.md`
+**Production-ready reference solution:** See `coaches/sample-solutions/track-1/1-03-the-watcher.md`
 
 ---
 
@@ -193,6 +193,4 @@ If a squad finishes early:
 - **Event-driven workflows are real automation:** Once this works, squads unlock reactive automation at scale.
 - **Path filters are the tricky part:** Spend time debugging them if needed; understanding glob patterns is a valuable skill.
 - **Safe-outputs is consistent:** Same model as Challenge 1-02: declare intent, multiple paths, noop as escape hatch.
-- **Real git operations test everything:** When they make a real commit and see the workflow run, that's a huge motivational moment.
-
-Good luck! ⚡
+- **Real git operations test everything:** When they make a real commit and see the workflow run, that's a strong motivational moment.

@@ -142,7 +142,7 @@ Keep the summary concise — 5-7 sentences total.
 - Body: clear, structured instructions with specific counts to gather and format
 - `engines: [copilot]` — free, reliable default
 
-**Production-ready reference solution:** See `coaches/sample-solutions/track-1/01-morning-briefing.md`
+**Production-ready reference solution:** See `coaches/sample-solutions/track-1/1-01-morning-briefing.md`
 
 ---
 
@@ -206,6 +206,4 @@ If a squad finishes early:
 - **Scheduled workflows are foundational:** Once this works, squads understand the heartbeat of automation.
 - **Tool queries are AI's superpower:** The GitHub tool frees them from API calls; the agent synthesizes meaning.
 - **Test manually first:** Don't let them wait for cron; use `workflow_dispatch` to iterate faster.
-- **Celebrate first automation:** When the morning briefing issue appears, that's huge — they just built recurring automation with natural language.
-
-Good luck! 💡
+- **Celebrate first automation:** When the morning briefing issue appears, that's the win — they just built recurring automation with natural language.
