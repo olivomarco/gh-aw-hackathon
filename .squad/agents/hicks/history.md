@@ -50,3 +50,18 @@
 
 **2026-05-28 Wave A Content Landed:** 28 challenge docs + polished site ready for QA. Next: verify sample solution compilation, challenge sidebar frontmatter parsing, coach portal access.
 
+---
+
+## 2026-05-28 QA Pass Complete
+
+**Final audit of participant operational docs + GitHub issue templates:**
+
+- **Track naming critical fix:** Submission guide & issue templates were using "Foundations/Intermediate/Advanced" — corrected to match timeline.md: "Hello, Agent/Repo Concierge/Continuous Intelligence"
+- **Broken reference fixed:** Bug reporting link in handbook was pointing to non-existent section
+- **Tone humanized:** Removed smarmy closings from handbook, submission guide, coach handbook. Adjusted help-request template tone.
+- **All fact-checks passed:** Cross-references verified, consistency checked, no fabricated dates
+
+**Status:** All docs cleared for participant launch. Report in `.squad/decisions/inbox/hicks-qa-pass.md`.
+
+
+**2026-05-28:** QA pass landed — track names corrected; smarmy closings removed; broken bug-report reference fixed

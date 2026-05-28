@@ -66,3 +66,5 @@ Completed PART A (humanizer) and PART B (fact-check) on all program-level docs.
 
 **Result:** All docs clean, consistent with timeline.md, ready for distribution.
 
+
+**2026-05-28:** QA pass landed — program-level docs humanized + timing corrected (Track 3: 150→105 min)

@@ -96,3 +96,41 @@ Coach/                 # Coach solution guides (not on Pages)
 
 **2026-05-28 Wave A Complete:** 14 production-quality sample workflows delivered (Track 1-3). Pending: gh aw compile validation before event.
 
+### 2026-05-28 — QA Pass (all 14 sample solutions)
+
+**What was done:**
+- Technical fact-check pass on all 14 workflow files + README against fetched real gh-aw source files
+- Fetched 6 canonical real workflows from GitHub: `issue-triage-agent.md`, `breaking-change-checker.md`, `ai-moderator.md`, `metrics-collector.md`, `audit-workflows.md`, `workflow-generator.md`, and `q.md` (githubnext/agentics)
+- All 14 files received at least one fix; README received light humaniser + structural improvements
+
+**7 bug categories found and fixed:**
+
+| Bug | Fixed syntax |
+|-----|-------------|
+| `tools: bash: allow: [list]` | `tools: bash: [list]` — list goes directly under bash, no `allow:` key |
+| `user-rate-limit: per: / max:` | `max-runs-per-window: N` + `window: <seconds>` |
+| `lock-for-agent: true` at top level | Must nest under the specific event in `on:` e.g. `on: issues: lock-for-agent: true` |
+| `agentic-workflows: enabled: true` | `agentic-workflows:` (empty — no sub-keys) |
+| `skip-bots: true` | `skip-bots: [github-actions, copilot, dependabot, renovate, github-copilot-enterprise]` |
+| `min-integrity:` at top level | Must be under `tools: github: min-integrity:` |
+| `noop: reason: "..."` sub-key | `noop:` only — the `reason:` sub-key is not a real field |
+
+**Most surprising finding:** `lock-for-agent: true` silently does nothing at top level. It only takes effect when nested under the specific event trigger in the `on:` block. This was confirmed by `ai-moderator.md` which explicitly puts `lock-for-agent: true` under `on: issues:` and `on: issue_comment:` separately.
+
+**Fields still unverified (kept with flag):**
+- `safe-outputs: update-issue: allowed-state-change: closed` (2-04) — real workflows use `status:/body:` but not `allowed-state-change:`. May compile; may error. Marco to test.
+- `tools: cache-memory: true` (3-02) — real `ai-moderator.md` uses a full object. Boolean shorthand not confirmed. Marco to test.
+
+**Intentional teaching pattern confirmed:** `permissions: issues: read` combined with `create-issue` safe-outputs is correct. The safe-outputs mechanism uses a separate privileged path independent of the workflow token. Confirmed by `issue-triage-agent.md` which uses `issues: read` with `add-labels` safe-output.
+
+**Multi-file structure note:** The triple `---` separator between workflow sections in a file is safe *between* workflows but creates an empty-frontmatter ambiguity when placed *before* the first workflow. Fixed in 3-05. Pattern: always open directly with frontmatter on the first workflow; use separators only between workflows.
+
+**Artifacts filed:**
+- Decision: `.squad/decisions/inbox/vasquez-qa-pass.md` — full per-workflow verdict, all verified fields, compile checklist
+
+---
+
+**2026-05-28 Wave B Complete:** QA pass done — all 14 workflows corrected, README updated, QA report filed.
+
+
+**2026-05-28:** QA pass landed — 7 schema bug categories fixed across all 14 sample workflows; 2 fields flagged for Marco verification

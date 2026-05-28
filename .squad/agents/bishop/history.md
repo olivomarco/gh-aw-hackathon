@@ -157,3 +157,5 @@ Repository owner/slug in _config.yml: `github/gh-aw-hackathon` — Marco to conf
 
 **Lesson:** Always set `url` + `baseurl` in `_config.yml` before the first Pages deploy when the repo name ≠ `username.github.io`. Templates using `relative_url` work correctly once baseurl is set — no template changes needed.
 
+
+**2026-05-28:** QA pass landed — challenge count 12→14; site styled (baseurl fix deployed, live + responsive)

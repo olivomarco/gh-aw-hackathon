@@ -82,3 +82,26 @@ Authored 10 docs (Student + Coach) for Track 3 challenges (3-01 through 3-05 cap
 ---
 
 **2026-05-28 Wave A Complete:** All 28 challenge docs authored. Complementary sample solutions delivered by Vasquez (14 workflows). Site polished by Bishop (hero animation, timelines, sidebars, OG image). Ready for event coaching.
+
+---
+
+**2026-05-28 QA Pass Complete:** Full humanizer + fact-check pass across all 30 challenge docs (00-setup, track-1 through track-3, Student + Coach).
+
+**Humanizer fixes:**
+- 24 smarmy closers removed (rocket emojis, "Good luck!", "You've got this.")
+- Superlative phrasing toned down in coach files ("huge motivational moment" → factual)
+- 1 Celebration Script section removed from 3-05 Coach (wrong register for a reference doc)
+- "Ask your coach! They know this pattern inside-out. 🎯" collapsed to "Ask your coach." throughout
+
+**Fact-check fixes:**
+- 4 broken Track 1 sample solution paths corrected (`01-*.md` → `1-01-*.md`)
+- 1 invalid safe-output type removed: `merge-pr` (not in dossier) → `add-labels` in 3-05 Student
+
+**TODOs surfaced (see hudson-qa-pass.md):**
+- `engines:` vs `engine:` field name — needs Vasquez or docs confirmation
+- `toolsets: [commits]` in 1-03 Coach — not in dossier, unverified
+- `add-comment` on push events (1-03) — semantic validity unverified
+- Blog post URLs in challenge docs — likely invented, review before event
+- `add-labels: allowlist:` vs `labels:` inconsistency — Student docs may mislead, should standardize
+
+**2026-05-28:** QA pass landed — 30 challenge docs humanized; 4 broken sample paths + 1 hallucinated safe-output fixed
