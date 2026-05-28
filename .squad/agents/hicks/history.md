@@ -151,3 +151,32 @@
 - vasquez-6 (Sprint 3): Sample solutions 2-06, 3-06, 3-05 multi-repo extension
 
 **Action:** 5 commits staged for Sprint 2 + 3 curriculum + housekeeping.
+
+### 2026-05-28 — Install Command Directive & Track 4 Documentation (hicks-4)
+
+**Captured canonical install directive:**
+- Created `.squad/decisions/inbox/hicks-install-command-directive.md` to document the canonical gh-aw install command: `curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash`
+- Rationale: Install script is the supported entry point (NOT `gh extension install github/gh-aw`).
+- Scope: All install instructions everywhere in repo (excluding `_site/` build output and `.squad/`).
+- Vasquez updating .devcontainer, validate-submission.yml, devcontainer-setup.md, and Challenge 00 Coach README in parallel.
+
+**Updated participant-facing documentation:**
+1. **Participant Handbook** (`docs/program/participant-handbook.md`):
+   - Added "## Tracks" section with brief descriptions of Tracks 1–3.
+   - Added Track 4 description: "Production Patterns (Stretch / Real-World)" — real workflows from github/gh-aw and githubnext/agentics with documented 96% merge rate example.
+   - Positioned before FAQ section for natural flow.
+
+2. **Timeline** (`docs/program/timeline.md`):
+   - Added italicized note after Track 3 deadline warning: "Squads who finish Track 3 core early may explore Track 4 'Production Patterns'... Time-permitting only; not required for judging."
+   - Positioned between deadline warning and Judging block.
+
+3. **Challenge 00 (Setup)**:
+   - Verified: No explicit `gh aw` install commands in `_challenges/00-setup.md` or `challenges/00-setup/Student/README.md`.
+   - Both files reference DevContainer setup (pre-installed) or verification steps only. No changes required.
+
+**Quality notes:**
+- Participant handbook now clearly signals that Track 4 is optional stretch work, not required for core participation.
+- Tone consistent with existing participant-first messaging (practical, warm, inclusive).
+- Install directive decision logged for cross-team coordination (Vasquez updating supporting infrastructure).
+
+**Status:** All tasks complete. Three docs updated; one decision captured; Challenge 00 verified as no-change.

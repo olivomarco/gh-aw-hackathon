@@ -187,3 +187,18 @@ In Jekyll/SCSS sites, `.prose a` (specificity 0,1,1) will silently defeat `.btn-
 
 **2026-05-28 Team Update (Audit Wave 2):** All agents completed curriculum + content + ops gap audits. 5 inbox decisions merged into `.squad/decisions.md`; gap report delivered to Marco. 26 items catalogued across 4 severity tiers (critical blockers, production patterns, catalog gaps, journey edge cases). Inbox now empty.
 
+
+### 2026-05-28 — Student & Coach Guide Jekyll Pages
+
+**Problem:** Challenge cards linked to GitHub blob URLs (`github.com/.../blob/main/.../README.md`), sending participants off-site to unstyled raw markdown.
+
+**Solution (Option A — new collections):**
+- Added `student_guides` + `coach_guides` collections to `_config.yml` with permalink `/challenges/:name/student/` and `/challenges/:name/coach/`
+- Created `_layouts/guide.html`: breadcrumb (Home → Challenges → Track → Challenge → Guide type), badge row (difficulty/time/track/guide-type), top action bar (Back + Switch to other guide + All challenges), prose body, footer action bar
+- Created `_student_guides/<slug>.md` and `_coach_guides/<slug>.md` for all 24 challenges: 16 existing (Tracks 1–3) with README content inlined; 8 Track 4 as TBD placeholders linking to GitHub
+- Updated all 24 `_challenges/*.md` cards to replace external GitHub hrefs with `{{ '/challenges/<slug>/student/' | relative_url }}`
+- Added Section O to `style.scss`: guide page, header, action bars, guide-type badges
+
+**Key lesson:** Use `{{ }}` output tags (not `{% %}`) for Liquid filter expressions in HTML attributes. Also: always read actual `_challenges/` file names vs spec slugs — Track 4 had two slug discrepancies (`4-04-doc-unbloat` not `4-04-unbloat-docs`; `4-05-daily-testify` not `4-05-uber-expert-testify`).
+
+**Build result:** 118 HTML pages, 0 errors, 1.85s. Commit `00032c3`.

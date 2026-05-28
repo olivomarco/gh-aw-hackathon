@@ -52,3 +52,24 @@ Coach/                 # Coach solution guides (not on Pages)
 
 **Action:** 5 commits staged for Sprint 2 + 3 curriculum + housekeeping.
 
+## 2026-05-28 Sprint 3 — Install Fix + Track 4 Samples (vasquez-7)
+
+**Task A: Install command sweep**
+- Replaced all `gh extension install github/gh-aw` references with `curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash` across:
+  - `.devcontainer/postCreate.sh` — also updated detection check from `gh extension list | grep -q "gh-aw"` to `command -v gh-aw || gh aw --version`; updated header comment
+  - `.github/workflows/validate-submission.yml` — removed `|| true` fallback (curl script handles its own errors); removed `GH_TOKEN` env var (no longer needed for install)
+  - `docs/getting-started/devcontainer-setup.md` — updated troubleshooting section + "What's Pre-Installed" table + intro sentence to say "CLI" not "extension"
+  - `challenges/00-setup/Coach/README.md` — updated Pitfall 2 recovery steps
+
+**Task B: Track 4 sample solutions**
+- Created `/coaches/sample-solutions/track-4/` with 8 complete gh-aw workflows + README index
+- Sample files: 4-01 through 4-08 covering triage, CI doctor, doc updater, unbloat, testify causal chain, test improver, security SLA, malicious code scan
+- All samples follow the 2-05-welcome-wagon.md header comment format with source URL, compile cost, run cost
+- Simplified from production originals: no `min-integrity`, no exotic flags, 30-min comprehension target
+
+**Learnings:**
+- `command -v gh-aw` is the right idiom for standalone CLI detection (not `gh extension list`)
+- Causal chain pattern (4-05) is a key teaching moment: audit workflow creates issues only; a second workflow implements
+- The `create-pr` vs `create-issue` safe-output choice encodes human-review expectations — make this explicit in samples
+- `checkout: false` is always worth noting when a workflow only needs API data (no repo code)
+
