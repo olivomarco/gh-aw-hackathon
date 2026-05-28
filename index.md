@@ -35,7 +35,7 @@ title: Home
           Build workflows that respond intelligently to repository activity.
         </p>
         <div class="track-card__challenges">
-          <span class="track-card__count">4 challenges</span>
+          <span class="track-card__count">5 challenges</span>
           <span class="track-card__difficulty">🟡 Intermediate</span>
         </div>
         <span class="track-card__cta">Explore track →</span>
@@ -50,7 +50,7 @@ title: Home
           The hardest challenges — for participants who want to push the limits.
         </p>
         <div class="track-card__challenges">
-          <span class="track-card__count">4 challenges</span>
+          <span class="track-card__count">5 challenges</span>
           <span class="track-card__difficulty">🔴 Advanced</span>
         </div>
         <span class="track-card__cta">Explore track →</span>

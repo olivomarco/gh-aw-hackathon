@@ -121,3 +121,22 @@
 
 **2026-05-28 Wave A Complete:** Visual polish milestone — hero animation, timelines, sidebars, OG image. Jekyll build verified (47 pages, 1.38s).
 
+## 2026-05-28 — QA Pass (Bishop)
+
+**Copy & Template Audit:** Humanizer + fact-check pass across all user-facing copy.
+
+**Issues resolved:**
+- Challenge count: "Twelve" → "14" (hero.html, og-image.svg, index.md)
+- Track card counts: 4/4/4 → 4/5/5 (index.md); matched actual challenge split
+- Footer badge: "Made with gh-aw" → "Built for gh-aw" (clarifies Jekyll tool, gh-aw subject)
+- Codespaces URL fallback: Marked TBD with `?repo=TBD` comment
+
+**Verification:**
+- All internal links verified live (`/challenges`, `/tracks/{id}`, `/docs/*`)
+- Jekyll build: ✅ 46 HTML pages, 0 errors (1.513s)
+- Track names match decisions.md
+- OG image stats & headline synced with hero copy
+
+**Handoff:** `.squad/decisions/inbox/bishop-qa-pass.md` — full audit report.
+Repository owner/slug in _config.yml: `github/gh-aw-hackathon` — Marco to confirm before deploy.
+

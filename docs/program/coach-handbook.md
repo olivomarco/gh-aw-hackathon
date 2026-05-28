@@ -267,4 +267,4 @@ Some coaches also participate in judging. If that's you:
 - **About coaching approach?** Chat with other coaches. We're all learning.
 - **Need to escalate?** Reach out to an organiser (contact at kickoff).
 
-You've got this. Your squad is lucky to have you. 🚀
+Your squad is in good hands. Thank you for being here.

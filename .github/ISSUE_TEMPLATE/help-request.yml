@@ -5,24 +5,24 @@ body:
   - type: markdown
     attributes:
       value: |
-        # Need Help? 🆘
+        # Help Needed
 
-        Use this form to ask for help on a challenge. Your coach and squad-mates are here to support you!
+        Use this form to ask for guidance on a challenge. Your coach and squad are here to help.
 
-        **Quick check before you post:**
+        **Before you post:**
         - Did you read the challenge README?
         - What does the error message say?
         - What have you already tried?
-        - Have other squads asked about this already? Check [Discussions](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions).
+        - Have other squads asked about this? Check [Discussions](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions).
 
   - type: dropdown
     id: track
     attributes:
       label: Which track are you working on?
       options:
-        - "Track 1: Foundations"
-        - "Track 2: Intermediate"
-        - "Track 3: Advanced"
+        - "Track 1: Hello, Agent"
+        - "Track 2: Repo Concierge"
+        - "Track 3: Continuous Intelligence"
         - Other / Not sure
     validations:
       required: true

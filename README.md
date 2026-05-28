@@ -1,14 +1,14 @@
 # 🚀 Agentic Workflows Hackathon
 
-**Build AI-powered automation with nothing but Markdown.**
+**Write Markdown. Compile to GitHub Actions. Build automation.**
 
-Write natural language workflows that compile to GitHub Actions — no YAML wrestling, no boilerplate. Just describe what your agent should do, and ship it. Triage issues, review PRs, generate reports, orchestrate multi-step pipelines — all with `gh-aw` and the AI engine of your choice.
+Natural language workflows eliminate YAML overhead. Describe what your agent should do and ship it. Triage issues, review PRs, generate reports, orchestrate pipelines with `gh-aw` and your AI engine of choice.
 
 ---
 
 ## What You'll Build
 
-Participants create **agentic workflows** — Markdown files that describe automation in plain English and compile to production-ready GitHub Actions. You'll work with:
+Participants create **agentic workflows** as Markdown files that describe automation in plain English and compile to production-ready GitHub Actions. You'll work with:
 
 - **Scheduled agents** — workflows that run on cron and report back
 - **Event-driven responders** — react to issues, PRs, comments, and pushes
@@ -32,13 +32,13 @@ Participants create **agentic workflows** — Markdown files that describe autom
 | Block | Duration | Activity |
 |-------|----------|----------|
 | Opening | 45 min | Welcome, format brief, squad formation, environment setup |
-| Track 1 | 90 min | "Hello, Agent" — first workflows |
+| Track 1 | 90 min | Hello, Agent — first workflows |
 | Break | 15 min | |
-| Track 2 | 120 min | "Repo Concierge" — event-driven automation |
+| Track 2 | 120 min | Repo Concierge — event-driven automation |
 | Lunch | 45 min | |
-| Track 3 | 150 min | "Continuous Intelligence" — multi-workflow systems |
+| Track 3 | 105 min | Continuous Intelligence — multi-workflow systems |
 | Judging | 45 min | Squad demos + scoring |
-| Closing | 30 min | Awards, retro, wrap |
+| Closing | 15 min | Awards, retro, wrap |
 
 > See [docs/program/timeline.md](docs/program/timeline.md) for the full run-of-show.
 

@@ -27,4 +27,4 @@
 
 ## Time Budget
 
-~150 minutes. This track is intentionally ambitious. Completing 2-3 challenges is excellent.
+~105 minutes. This track is intentionally ambitious. Completing 2-3 challenges is excellent.

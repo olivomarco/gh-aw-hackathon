@@ -53,3 +53,16 @@
 
 **2026-05-28 Wave A Content Landed:** 14 challenges authored + 14 sample solutions + polished site. Track leadership on schedule. Ready for event prep (legal, coaching, QA).
 
+---
+
+## 2026-05-28 QA Pass — Program Documentation
+
+Completed PART A (humanizer) and PART B (fact-check) on all program-level docs.
+
+**Issues resolved:**
+- README.md: Removed marketing puffery from hero, em-dashes cleaned up, timing corrected (Track 3: 150 → 105 min, Closing: 30 → 15 min)
+- Track 3 README: Updated time budget to match actual schedule (150 → 105 min)
+- Verified judging rubric weights (100%), challenge counts, all cross-references, CODE_OF_CONDUCT version
+
+**Result:** All docs clean, consistent with timeline.md, ready for distribution.
+

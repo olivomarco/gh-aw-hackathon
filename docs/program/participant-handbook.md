@@ -84,7 +84,7 @@ The timeline page is your source of truth for all times and deadlines.
 - Need your coach? @ mention them in Discord or raise a GitHub issue with the `help-wanted` label.
 
 ### Bug Reports
-- Found a bug in a challenge? [Submit a bug report here](./submission-guide.md#reporting-issues).
+- Found a bug in a challenge? Report it in Discord or file a GitHub issue with the `bug` label. Include what you tried, what you expected, and what happened instead. Thanks for helping us improve!
 
 ---
 
@@ -238,4 +238,4 @@ You're in a team. Here's how to be a great teammate:
 - **Question about rules/submission?** This handbook, timeline.md, or ask a coach.
 - **Code of conduct concern?** Talk to any organiser. We take this seriously.
 
-Good luck! We can't wait to see what you build. 🚀
+We're looking forward to seeing what you build and what you learn along the way.

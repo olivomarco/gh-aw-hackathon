@@ -36,9 +36,9 @@ body:
       label: Tracks Attempted
       description: Which difficulty tracks did your squad work on?
       options:
-        - label: "Track 1: Foundations"
-        - label: "Track 2: Intermediate"
-        - label: "Track 3: Advanced"
+        - label: "Track 1: Hello, Agent"
+        - label: "Track 2: Repo Concierge"
+        - label: "Track 3: Continuous Intelligence"
     validations:
       required: true
 

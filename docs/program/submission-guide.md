@@ -54,9 +54,9 @@ Squad Name: [Your squad name here]
 Members: [List GitHub handles: @handle1, @handle2, @handle3]
 
 Track(s) Attempted:
-- [ ] Track 1: Foundations
-- [ ] Track 2: Intermediate
-- [ ] Track 3: Advanced
+- [ ] Track 1: Hello, Agent
+- [ ] Track 2: Repo Concierge
+- [ ] Track 3: Continuous Intelligence
 
 Challenges Completed:
 - [ ] Challenge 1: [Brief description of what you built]
@@ -90,10 +90,10 @@ List everyone on your squad using GitHub handles. This is how judges know who to
 - Make sure handles match your GitHub accounts.
 
 ### Track(s) Attempted
-Which difficulty track(s) did you work on?
-- **Track 1: Foundations** — Learn the basics of gh-aw syntax and simple workflows.
-- **Track 2: Intermediate** — Build multi-step workflows with API integration.
-- **Track 3: Advanced** — Design complex workflows with error handling and custom logic.
+Which track(s) did you work on?
+- **Track 1: Hello, Agent** — Learn the basics of gh-aw syntax and simple workflows.
+- **Track 2: Repo Concierge** — Build multi-step workflows for repository automation.
+- **Track 3: Continuous Intelligence** — Design complex workflows with error handling and system coordination.
 
 You can work on multiple tracks if you want. Just note which ones.
 
@@ -201,4 +201,4 @@ Submit what you have. Judges care about what you completed and what you learned 
 - **About your specific submission?** Ask your coach.
 - **Found a bug in a challenge?** Report it with details so we can help other squads.
 
-Good luck! We're excited to see what you submit. 🚀
+Submit with confidence. We're here to help.
