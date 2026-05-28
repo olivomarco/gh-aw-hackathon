@@ -1842,6 +1842,34 @@ details[open] .coach-notes__toggle-icon { transform: rotate(90deg); }
 .btn--primary:hover { transform: translateY(-2px); }
 
 /* --------------------------------------------------------------------------
+   N1. Prose-inside-button overrides
+   .prose a (specificity 0,1,1) overrides .btn--primary color: white (0,1,0).
+   Restore each variant's intended text color and kill the underline draw-in
+   gradient — use background-image:none so background-color is preserved.
+   -------------------------------------------------------------------------- */
+.prose a.btn {
+  text-decoration: none;
+}
+.prose a.btn,
+.prose a.btn:hover {
+  background-image: none;
+}
+.prose a.btn--primary,
+.prose a.btn--primary:hover {
+  color: #fff;
+}
+.prose a.btn--secondary,
+.prose a.btn--secondary:hover {
+  color: var(--text);
+}
+.prose a.btn--ghost {
+  color: var(--text-muted);
+}
+.prose a.btn--ghost:hover {
+  color: var(--text);
+}
+
+/* --------------------------------------------------------------------------
    N. Footer polish — team credit & badge
    -------------------------------------------------------------------------- */
 .site-footer__squad-credit {
