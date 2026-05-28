@@ -1,0 +1,24 @@
+{
+  "universe_usage_history": [
+    {
+      "universe": "Alien",
+      "used_at": "2026-05-28T14:26:03Z",
+      "project": "gh-aw-hackathon"
+    }
+  ],
+  "assignment_cast_snapshots": {
+    "gh-aw-hackathon-initial": {
+      "assignment_id": "gh-aw-hackathon-initial",
+      "universe": "Alien",
+      "cast_at": "2026-05-28T14:26:03Z",
+      "requested_by": "Marco Olivo",
+      "agents": [
+        { "name": "ripley", "role": "Lead" },
+        { "name": "hudson", "role": "DevRel" },
+        { "name": "vasquez", "role": "Workflow Engineer" },
+        { "name": "hicks", "role": "Events & QA" },
+        { "name": "bishop", "role": "Web & Design" }
+      ]
+    }
+  }
+}
