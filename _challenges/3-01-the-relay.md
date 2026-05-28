@@ -27,8 +27,8 @@ Two coordinated workflows: a **daily producer** that collects issue metrics and 
 
 ## Open the challenge
 
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-3-continuous-intelligence/3-01-the-relay/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-3-continuous-intelligence/3-01-the-relay/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
+<a href="{{ '/challenges/3-01-the-relay/student/' | relative_url }}" class="btn btn--primary">📘 Student Guide</a>
+<a href="{{ '/challenges/3-01-the-relay/coach/' | relative_url }}" class="btn btn--ghost">🎓 Coach Guide</a>
 
 ## Prerequisites
 

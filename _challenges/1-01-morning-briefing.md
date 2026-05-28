@@ -27,8 +27,8 @@ A cron-triggered workflow that fires at 9 AM every weekday, reads recent issues 
 
 ## Open the challenge
 
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-1-hello-agent/1-01-morning-briefing/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-1-hello-agent/1-01-morning-briefing/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
+<a href="{{ '/challenges/1-01-morning-briefing/student/' | relative_url }}" class="btn btn--primary">📘 Student Guide</a>
+<a href="{{ '/challenges/1-01-morning-briefing/coach/' | relative_url }}" class="btn btn--ghost">🎓 Coach Guide</a>
 
 ## Prerequisites
 

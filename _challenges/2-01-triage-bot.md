@@ -27,8 +27,8 @@ A workflow triggered by `on: issues: types: [opened]` that analyzes the issue ti
 
 ## Open the challenge
 
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-2-repo-concierge/2-01-triage-bot/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-2-repo-concierge/2-01-triage-bot/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
+<a href="{{ '/challenges/2-01-triage-bot/student/' | relative_url }}" class="btn btn--primary">📘 Student Guide</a>
+<a href="{{ '/challenges/2-01-triage-bot/coach/' | relative_url }}" class="btn btn--ghost">🎓 Coach Guide</a>
 
 ## Prerequisites
 

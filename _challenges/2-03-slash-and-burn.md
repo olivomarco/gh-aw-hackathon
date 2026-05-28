@@ -27,8 +27,8 @@ A workflow triggered by `on: issue_comment: types: [created]` that parses the co
 
 ## Open the challenge
 
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-2-repo-concierge/2-03-slash-and-burn/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-2-repo-concierge/2-03-slash-and-burn/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
+<a href="{{ '/challenges/2-03-slash-and-burn/student/' | relative_url }}" class="btn btn--primary">📘 Student Guide</a>
+<a href="{{ '/challenges/2-03-slash-and-burn/coach/' | relative_url }}" class="btn btn--ghost">🎓 Coach Guide</a>
 
 ## Prerequisites
 

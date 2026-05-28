@@ -27,8 +27,8 @@ A weekly workflow that uses the `agentic-workflows` MCP tool to pull 7 days of r
 
 ## Open the challenge
 
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-3-continuous-intelligence/3-04-the-overseer/Student/README.md" class="btn btn--primary">📘 Student Guide</a>
-<a href="https://github.com/olivomarco/gh-aw-hackathon/blob/main/challenges/track-3-continuous-intelligence/3-04-the-overseer/Coach/README.md" class="btn btn--ghost">🎓 Coach Guide</a>
+<a href="{{ '/challenges/3-04-the-overseer/student/' | relative_url }}" class="btn btn--primary">📘 Student Guide</a>
+<a href="{{ '/challenges/3-04-the-overseer/coach/' | relative_url }}" class="btn btn--ghost">🎓 Coach Guide</a>
 
 ## Prerequisites
 

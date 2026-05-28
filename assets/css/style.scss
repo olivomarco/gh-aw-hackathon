@@ -2062,3 +2062,98 @@ details[open] .coach-notes__toggle-icon { transform: rotate(90deg); }
   font-weight: 600;
 }
 .doc-body.prose td { color: var(--text-muted); }
+
+/* --------------------------------------------------------------------------
+   O. Guide Pages (Student / Coach)
+   _layouts/guide.html — student_guides + coach_guides collections
+   -------------------------------------------------------------------------- */
+
+.guide-page { padding: var(--space-8) 0 var(--space-16); }
+
+.guide-header {
+  margin-bottom: var(--space-6);
+}
+
+.guide-header .challenge-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.guide-header__title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin: 0 0 var(--space-1);
+}
+
+.guide-header__subtitle {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Guide type badge */
+.badge--guide-student {
+  background: rgba(31, 142, 196, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(31, 142, 196, 0.3);
+}
+
+.badge--guide-coach {
+  background: rgba(46, 160, 67, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(46, 160, 67, 0.3);
+}
+
+/* Guide action bar (top) */
+.guide-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Guide body prose */
+.guide-body.prose {
+  max-width: 72ch;
+}
+
+/* Guide footer action bar */
+.guide-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+}
+
+/* Prose overrides for btn inside .guide-actions and .guide-footer-actions
+   (not inside .prose, so no specificity issue — just ensure hover states) */
+.guide-actions .btn:hover,
+.guide-footer-actions .btn:hover {
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .guide-actions,
+  .guide-footer-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .guide-actions .btn,
+  .guide-footer-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

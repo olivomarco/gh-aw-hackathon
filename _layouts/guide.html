@@ -1,0 +1,98 @@
+---
+layout: default
+---
+
+<article class="guide-page">
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="{{ '/challenges' | relative_url }}">Challenges</a>
+      {% if page.challenge_track %}
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="{{ '/tracks/' | append: page.challenge_track | relative_url }}">{{ page.challenge_track_name | default: page.challenge_track }}</a>
+      {% endif %}
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="{{ '/challenges/' | append: page.challenge_slug | append: '/' | relative_url }}">{{ page.challenge_title }}</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span aria-current="page">{% if page.guide_type == 'student' %}Student Guide{% else %}Coach Guide{% endif %}</span>
+    </nav>
+
+    <header class="guide-header">
+      <div class="challenge-header__meta">
+        {% if page.difficulty %}
+        <span class="badge badge--difficulty badge--{{ page.difficulty | downcase }}">
+          {% case page.difficulty %}
+            {% when 'Beginner' %}🟢 Beginner
+            {% when 'Intermediate' %}🟡 Intermediate
+            {% when 'Advanced' %}🔴 Advanced
+            {% else %}{{ page.difficulty }}
+          {% endcase %}
+        </span>
+        {% endif %}
+
+        {% if page.time %}
+        <span class="badge badge--time">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="badge__icon"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          {{ page.time }}
+        </span>
+        {% endif %}
+
+        {% if page.challenge_track %}
+        <span class="badge badge--track badge--track-{{ page.challenge_track }}">{{ page.challenge_track_name | default: page.challenge_track }}</span>
+        {% endif %}
+
+        <span class="badge badge--guide-type badge--guide-{{ page.guide_type }}">
+          {% if page.guide_type == 'student' %}📘 Student Guide{% else %}🎓 Coach Guide{% endif %}
+        </span>
+      </div>
+
+      <h1 class="guide-header__title">{{ page.challenge_title }}</h1>
+      <p class="guide-header__subtitle">{% if page.guide_type == 'student' %}Student Guide{% else %}Coach Guide{% endif %}</p>
+    </header>
+
+    <div class="guide-actions">
+      <a href="{{ '/challenges/' | append: page.challenge_slug | append: '/' | relative_url }}" class="btn btn--secondary btn--sm">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="btn__icon"><path d="M9.25 3.5L4.75 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to challenge
+      </a>
+
+      {% if page.guide_type == 'student' %}
+      <a href="{{ '/challenges/' | append: page.challenge_slug | append: '/coach/' | relative_url }}" class="btn btn--ghost btn--sm">
+        🎓 Switch to Coach Guide
+      </a>
+      {% else %}
+      <a href="{{ '/challenges/' | append: page.challenge_slug | append: '/student/' | relative_url }}" class="btn btn--ghost btn--sm">
+        📘 Switch to Student Guide
+      </a>
+      {% endif %}
+
+      <a href="{{ '/challenges' | relative_url }}" class="btn btn--ghost btn--sm">
+        ← All challenges
+      </a>
+    </div>
+
+    <div class="guide-body prose">
+      {{ content }}
+    </div>
+
+    <div class="guide-footer-actions">
+      <a href="{{ '/challenges/' | append: page.challenge_slug | append: '/' | relative_url }}" class="btn btn--secondary">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="btn__icon"><path d="M9.25 3.5L4.75 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to {{ page.challenge_title }}
+      </a>
+
+      {% if page.guide_type == 'student' %}
+      <a href="{{ '/challenges/' | append: page.challenge_slug | append: '/coach/' | relative_url }}" class="btn btn--ghost">
+        🎓 Coach Guide
+      </a>
+      {% else %}
+      <a href="{{ '/challenges/' | append: page.challenge_slug | append: '/student/' | relative_url }}" class="btn btn--ghost">
+        📘 Student Guide
+      </a>
+      {% endif %}
+    </div>
+
+  </div>
+</article>

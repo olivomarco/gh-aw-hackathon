@@ -37,6 +37,12 @@ collections:
     output: true
     permalink: /tracks/:name/
     sort_by: order
+  student_guides:
+    output: true
+    permalink: /challenges/:name/student/
+  coach_guides:
+    output: true
+    permalink: /challenges/:name/coach/
 
 # Default front matter
 defaults:
@@ -50,6 +56,16 @@ defaults:
       type: "tracks"
     values:
       layout: "track"
+  - scope:
+      path: ""
+      type: "student_guides"
+    values:
+      layout: "guide"
+  - scope:
+      path: ""
+      type: "coach_guides"
+    values:
+      layout: "guide"
   - scope:
       path: ""
       type: "pages"
