@@ -48,6 +48,25 @@ Coach/                 # Coach solution guides (not on Pages)
 - Base image: `mcr.microsoft.com/devcontainers/universal:2` (pinned major version). Chosen for pre-baked Node/Python/Go runtimes; faster first-run for participants. Fallback is `base:ubuntu-24.04` + features if size is a concern.
 - Dev Container Features used for `gh`, node, python, go — cacheable layer, clean version overrides.
 - `gh aw` extension installed in `postCreate.sh` (not image build) because it requires `gh` auth and releases frequently.
+
+### 2026-05-28 — Sprint 1 Blocker Fixes (vasquez-3)
+
+**Status:** ✅ RESOLVED
+
+**Blockers fixed:**
+1. Missing `examples/hello-world.md`: Devcontainer smoke test (Step 4) runs `gh aw run examples/hello-world.md --dry-run` but file didn't exist
+   - Created `examples/hello-world.md` (<30 lines) with `engine: copilot`, `safe-outputs: create-issue + noop`, weekly cron trigger
+   - Created `examples/README.md` directory documentation
+2. postCreate.sh banner referenced non-existent `Student/` directory
+   - Line 55: `ls Student/` → `ls challenges/`
+3. No documentation for AI Engine API key setup
+   - Added `## AI Engine API Keys` section to `docs/getting-started/devcontainer-setup.md`
+   - Covers: Copilot (automatic), Claude (`ANTHROPIC_API_KEY`), Codex (`OPENAI_API_KEY`), Gemini (`GEMINI_API_KEY`), Codespace secrets best practice
+   - Added JSONC comment block to `.devcontainer/devcontainer.json` before `"customizations"`
+
+**Impact:** Smoke test runs without file-not-found error. Welcome banner displays correct directory. Participants have clear API key guidance.
+
+**Verification:** All changes tested. Ready for participant devcontainer builds.
 - `*.lock.yml` mapped to `github-actions` language ID so the GitHub Actions VS Code extension provides syntax support on compiled gh-aw workflows.
 - `remoteUser: codespace` — matches universal image non-root convention.
 

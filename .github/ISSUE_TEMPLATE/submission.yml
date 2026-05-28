@@ -55,6 +55,25 @@ body:
       required: true
 
   - type: textarea
+    id: workflow_files
+    attributes:
+      label: Workflow File(s)
+      description: "List the path(s) to your workflow .md file(s) in this repository (one per line)"
+      placeholder: |
+        challenges/track-1-hello-agent/1-01-morning-briefing/solution.md
+        challenges/track-2-repo-concierge/2-01-triage-bot/solution.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: actions_runs
+    attributes:
+      label: GitHub Actions Run Link(s) (optional but encouraged)
+      description: "Paste link(s) to GitHub Actions run(s) showing your workflow executing (one per line). Found at: your-repo/actions"
+      placeholder: |
+        https://github.com/your-org/your-repo/actions/runs/1234567890
+
+  - type: textarea
     id: reflection
     attributes:
       label: Reflection (max 200 words)

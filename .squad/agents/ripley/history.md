@@ -49,6 +49,23 @@
 
 ## 2026-05-28: Kickoff milestone commit — Program structure + site scaffold + Challenge 00 + participant docs (merged into decisions.md)
 
+### 2026-05-28 — Sprint 1 Blocker Fixes (ripley-2)
+
+**Status:** ✅ RESOLVED
+
+**Blockers fixed:**
+1. Challenge counts: Track 2 & 3 declared 4 but have 5 challenges each
+   - `_tracks/safe-outputs.md`: `challenges_count: 4` → `5`
+   - `_tracks/mcp-integration.md`: `challenges_count: 4` → `5`
+2. Repo URLs: `your-org/gh-aw-challenges` placeholder in devcontainer guide
+   - `docs/getting-started/devcontainer-setup.md`: Fixed 3 instances → `olivomarco/gh-aw-hackathon`
+3. Challenge 00 placeholder: Setup challenge had "This is a placeholder" text
+   - `_challenges/00-setup.md`: Replaced with real setup instructions (objectives, 4 steps, success criteria)
+
+**Impact:** Track metadata accurate for Jekyll site. Participants get correct repo URLs. Challenge 00 launch-ready.
+
+**Verification:** All fixes verified. Ready for coach distribution and live launch.
+
 ---
 
 **2026-05-28 Wave A Content Landed:** 14 challenges authored + 14 sample solutions + polished site. Track leadership on schedule. Ready for event prep (legal, coaching, QA).

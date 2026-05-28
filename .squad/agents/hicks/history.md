@@ -46,6 +46,30 @@
 
 ## 2026-05-28: Kickoff milestone commit — Participant handbook + submission guide + coach handbook + issue templates complete (merged into decisions.md)
 
+### 2026-05-28 — Sprint 1 Blocker Fixes (hicks-2)
+
+**Status:** ✅ RESOLVED
+
+**Blockers fixed:**
+1. `YOUR_ORG` placeholders across 5 participant-facing files — replaced with `olivomarco`
+   - `docs/program/participant-handbook.md`: 3 instances (lines 75, 129, 191 — GitHub Discussions links)
+   - `docs/program/submission-guide.md`: 2 instances (Discussions link + deadline section)
+   - `.github/ISSUE_TEMPLATE/submission.yml`: 1 instance (Questions section)
+   - `.github/ISSUE_TEMPLATE/config.yml`: 3 instances (All contact links)
+   - `.github/ISSUE_TEMPLATE/help-request.yml`: 1 instance (Discussions reference)
+   - **Note:** Intentionally preserved `YOUR_ORG/YOUR_REPO` in `challenges/track-2-repo-concierge/2-05-welcome-wagon/Student/README.md` — this is a template placeholder for participants to fill in during hackathon
+2. Discord channel timing unclear (Line 80)
+   - Before: "(TBD — link will be shared at registration)"
+   - After: "(share the link on the day — Discord invite posted in #announcements)"
+3. Submission deadline marked TBD (Lines 176, 160)
+   - Before: "Deadline: {TBD: see timeline.md}"
+   - After: "Deadline: **16:00** on hackathon day (see timeline.md)"
+   - Sourced from timeline.md "Pencils down. Push final commits." at 16:00 in Track 3 block
+
+**Impact:** All GitHub org references point to correct repo. Discord and deadline messaging clear to participants. Participant-facing docs ready for launch.
+
+**Verification:** No remaining `YOUR_ORG` placeholders. All deadlines explicit (16:00).
+
 ---
 
 **2026-05-28 Wave A Content Landed:** 28 challenge docs + polished site ready for QA. Next: verify sample solution compilation, challenge sidebar frontmatter parsing, coach portal access.
@@ -88,3 +112,29 @@
 
 **Status:** All placeholders replaced, participant docs now ready for launch.
 
+
+## 2026-05-28 Sprint-2: MC Kickoff, Completion Awards, Workflow Evidence
+
+**Fix 1 - MC Kickoff Script:**
+- Created `/docs/program/mc-kickoff-script.md` — 400+ word spoken script in "cue card" format for MC during opening block (09:00–09:30).
+- Covers Welcome & Format Briefing (09:00–09:15): welcome, hackathon theme intro (gh-aw workflows + natural language Markdown), WTH format explanation (3 tracks, squads, challenge progression), judging criteria brief, coach introductions (placeholder for names), help channels (Discord, Discussions, raise hand).
+- Includes 2-minute "What are gh-aw workflows?" plain English explanation for MC to read aloud — uses clear metaphors (job description vs. low-level instructions).
+- Covers Squad Formation (09:15–09:30): self-selection guidance, squad naming, immediate Codespace open (critical timing cue).
+- Includes timing cues [PAUSE], [APPLAUSE CUE], [SHOW SLIDE] for MC flow control.
+- Energetic, participant-first tone; practical and actionable throughout.
+
+**Fix 2 - Completion Awards Section:**
+- Added new `## Completion Awards` section to `docs/program/judging-rubric.md` before Questions section.
+- Recognizes squads that complete ≥1 core challenge per attempted track.
+- Frames completion awards as equally prestigious as competitive awards — removes stigma of "not winning."
+- Suggests Certificate of Completion or badge system (design TBD).
+- Emphasizes "Finishing one challenge > starting three and shipping nothing."
+- Makes clear: NOT competing for winners ≠ going home empty-handed.
+
+**Fix 3 - Workflow Evidence Fields in Submission Template:**
+- Added two new textarea fields to `.github/ISSUE_TEMPLATE/submission.yml` after `challenges` field and before `reflection` field.
+- **Field A: Workflow File(s)** — required, accepts space-separated or line-separated paths to solution.md files (e.g., `challenges/track-1-hello-agent/1-01-morning-briefing/solution.md`).
+- **Field B: Actions Run Link(s)** — optional but encouraged, accepts GitHub Actions run URLs for evidence of workflow execution.
+- Both fields positioned to make judging verification instant — judges can click links and see working workflows.
+
+**Status:** All three Sprint-2 HIGH items fixed and ready for launch. Participant submission and judging process now has full evidence trail.
