@@ -5,6 +5,7 @@ number: 3
 order: 330
 difficulty: "Advanced"
 time: "30 min"
+tier: "bonus"
 track: "mcp-integration"
 track_name: "Continuous Intelligence"
 tags:

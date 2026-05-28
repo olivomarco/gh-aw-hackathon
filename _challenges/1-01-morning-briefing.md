@@ -5,6 +5,7 @@ number: 1
 order: 110
 difficulty: "Beginner"
 time: "30 min"
+tier: "core"
 track: "ai-workflows"
 track_name: "Hello, Agent"
 tags:

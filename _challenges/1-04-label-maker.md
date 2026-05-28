@@ -5,6 +5,7 @@ number: 4
 order: 140
 difficulty: "Beginner"
 time: "30 min"
+tier: "bonus"
 track: "ai-workflows"
 track_name: "Hello, Agent"
 tags:

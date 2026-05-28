@@ -89,3 +89,28 @@ When squads have equal total scores:
 5. Special awards announced last
 
 **Judges:** Minimum 3. Mix of organizers and external guests. No judge scores their own coached squad.
+
+---
+
+## Completion Awards
+
+Every squad that completes at least one core challenge in any track receives a **Certificate of Completion**—recognition that you built something real, learned new skills, and shipped working automation.
+
+### Why This Matters
+
+Not everyone will compete for Track or Overall Winner honors—and that's perfect. Some squads will focus on depth in one track, others will explore multiple tracks, and some will hit a wall and still walk away with a working solution and hard-won lessons.
+
+**Completing one challenge means:**
+- Your workflow passes the success criteria
+- You debugged, iterated, and shipped
+- You proved you can take an idea from brief to deployed automation
+- You learned something the judges value as much as winning
+
+### How It Works
+
+- **Earned automatically.** Once judging begins, we count completed challenges per squad.
+- **Announced alongside winners.** Completion awards are announced last, with as much fanfare as competitive awards.
+- **Certificate design.** Badge or certificate format (to be determined), downloadable and shareable on LinkedIn.
+- **Inclusive.** There's no limit—as many squads as complete challenges get recognized.
+
+**Remember:** Finishing one challenge > starting three and shipping nothing. Quality completion beats a race.

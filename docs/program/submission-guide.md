@@ -157,7 +157,7 @@ After you submit:
 
 ## Submission Deadline
 
-**{TBD: see [timeline.md](timeline.md) for the exact deadline and time zone.**
+**16:00 on hackathon day** (see [timeline.md](timeline.md) for the full schedule)
 
 - Submissions received **before** the deadline are eligible for judging.
 - Submissions received **after** the deadline may be reviewed but not scored (at judges' discretion).
@@ -197,7 +197,7 @@ Submit what you have. Judges care about what you completed and what you learned 
 
 ## Questions?
 
-- **About submission format?** Check this guide or ask in [GitHub Discussions](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions).
+- **About submission format?** Check this guide or ask in [GitHub Discussions](https://github.com/olivomarco/gh-aw-hackathon/discussions).
 - **About your specific submission?** Ask your coach.
 - **Found a bug in a challenge?** Report it with details so we can help other squads.
 

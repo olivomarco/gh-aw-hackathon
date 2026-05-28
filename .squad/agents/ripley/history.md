@@ -71,3 +71,40 @@ Completed PART A (humanizer) and PART B (fact-check) on all program-level docs.
 
 **2026-05-28 Team Update (Audit Wave 2):** All agents completed curriculum + content + ops gap audits. 5 inbox decisions merged into `.squad/decisions.md`; gap report delivered to Marco. 26 items catalogued across 4 severity tiers (critical blockers, production patterns, catalog gaps, journey edge cases). Inbox now empty.
 
+## 2026-05-28 — Sprint 1 Blocker Fixes
+
+**Fix 1: Challenge Counts**
+- Updated `challenges_count: 4` → `5` in `_tracks/safe-outputs.md` (Track 2 has challenges 2-01 through 2-05)
+- Updated `challenges_count: 4` → `5` in `_tracks/mcp-integration.md` (Track 3 has challenges 3-01 through 3-05)
+- Verified Track 1 unchanged: still 4 challenges (1-01 through 1-04) ✓
+
+**Fix 2: Repo URLs**
+- Updated all `your-org/gh-aw-challenges` references to `olivomarco/gh-aw-hackathon` in `docs/getting-started/devcontainer-setup.md`
+- Updated Path B (local) clone URL: `https://github.com/your-org/gh-aw-hackathon.git` → `https://github.com/olivomarco/gh-aw-hackathon.git`
+- All three clone/fork code blocks now point to correct repo ✓
+
+**Fix 3: Challenge 00 Placeholder**
+- Replaced placeholder content in `_challenges/00-setup.md` with real setup instructions
+- Added Step 1–4 walkthrough: environment setup, gh auth, gh-aw verification, repo cloning
+- Expanded objectives and success criteria to match actual participant workflow
+- Condensed ~200 words inline, kept Jekyll frontmatter intact ✓
+
+**Status:** All 3 blockers resolved. No pre-existing issues encountered.
+
+## 2026-05-28 — Time-Budget Reconciliation (Sprint 2)
+
+**Problem:** Challenge frontmatter declared 435 min total, but timeline allocated only 265 min working time. This was a structural mismatch, not a content problem.
+
+**Fix (WTH-aligned):** Marked challenges as "core" vs "bonus/extension" within each track rather than shortening individual challenge times. Rationale: WTH teams select challenges to work on, they don't complete all of them. Core challenges are completable within track time; bonus are stretch goals.
+
+**Tier assignments:**
+- Track 1 (80 min working): 2 core (1-01, 1-02), 2 bonus (1-03, 1-04)
+- Track 2 (100 min working): 3 core (2-01, 2-02, 2-03), 2 bonus (2-04, 2-05)
+- Track 3 (85 min working): 2 core (3-01, 3-02), 2 bonus (3-03, 3-04), 1 extension (3-05)
+
+**Changes:**
+- Added `tier: "core"`, `tier: "bonus"`, or `tier: "extension"` to all 14 challenge frontmatters
+- Added `core_challenges: N` to each `_tracks/*.md` file
+- Updated `docs/program/timeline.md` with parenthetical on each track: "(core challenges only; bonus challenges are stretch goals for fast-moving squads)"
+
+**Result:** Program now accurately reflects WTH format constraints. Coaches can confidently guide squads to complete core challenges within budget and celebrate early finishers who tackle bonuses.

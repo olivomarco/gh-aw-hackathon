@@ -37,6 +37,37 @@ You are a **guide**, not a solver. Your job is to ask the right questions, point
 - You **may** nominate squads for special awards
 - See [Judging Rubric](../docs/program/judging-rubric.md) for full criteria
 
+## Demonstrating Workflows to Squads
+
+Use this sequence to unblock squads that have never used `gh aw` before. Takes ~3 min.
+
+**Adding a remote workflow:**
+```bash
+# Add a workflow from GitHub directly
+gh aw add https://github.com/github/gh-aw/blob/main/examples/issue-summary.md
+
+# Or from the examples in this repo
+gh aw add examples/hello-world.md
+```
+
+**Running a workflow:**
+```bash
+gh aw run examples/hello-world.md
+gh aw run examples/hello-world.md --dry-run  # safe to demo, no side effects
+```
+
+**Checking workflow status:**
+```bash
+gh aw logs            # show recent runs
+gh aw audit workflow.md  # show compiled + sandboxed version
+```
+
+**Typical coach demo sequence** (3 min):
+1. `gh aw add examples/hello-world.md` — adds the workflow
+2. `gh aw audit examples/hello-world.md` — shows what it will do before running
+3. `gh aw run examples/hello-world.md --dry-run` — demonstrates execution
+4. Show the created issue in the GitHub web UI
+
 ## Resources
 
 - [Challenge Overview (README)](../README.md)

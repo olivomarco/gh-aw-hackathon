@@ -72,12 +72,12 @@ The timeline page is your source of truth for all times and deadlines.
 
 ### Q&A & Help: GitHub Discussions
 - **Purpose:** Ask questions, share insights, help other squads.
-- **Channel:** [Discussions in this repo](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions)
+- **Channel:** [Discussions in this repo](https://github.com/olivomarco/gh-aw-hackathon/discussions)
 - **Async-friendly:** Great for questions that don't need real-time answers.
 
 ### Real-Time Chat: Discord (or Teams)
 - **Purpose:** Live conversations, quick troubleshooting, social energy.
-- **Channel:** (TBD — link will be shared at registration)
+- **Channel:** (share the link on the day — Discord invite posted in #announcements)
 - **Hint:** Coaches monitor this heavily during the event day.
 
 ### Your Coach: Direct Mention
@@ -126,7 +126,7 @@ Feeling stuck? Here's when and how to get support:
 - Reread the challenge description.
 - Check the challenge's `README.md` and example files.
 - Look at the error message — what does it actually say?
-- Search [GitHub Discussions](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions) (someone else may have hit this).
+- Search [GitHub Discussions](https://github.com/olivomarco/gh-aw-hackathon/discussions) (someone else may have hit this).
 
 ### Stuck for 15+ minutes?
 - **Discord:** @ mention your coach in the real-time chat.
@@ -173,7 +173,7 @@ We want everyone to participate fully.
 ## Frequently Asked Questions
 
 ### How do we submit our work?
-See [submission-guide.md](submission-guide.md). TL;DR: One submission per squad, via GitHub PR or issue. Deadline: {TBD: see timeline.md}
+See [submission-guide.md](submission-guide.md). TL;DR: One submission per squad, via GitHub PR or issue. Deadline: **16:00** on hackathon day (see [timeline.md](timeline.md) for the full schedule)
 
 ### Can we submit multiple solutions?
 One submission per squad. But you can list multiple completed challenges **within** that one submission.
@@ -188,7 +188,7 @@ No. Complete what you can. You'll be judged on what you submit, not on speed or 
 Yes, but you **must disclose it**. If you use ChatGPT, Copilot, or any other AI tool, mention it in your submission reflection. See [CODE_OF_CONDUCT.md](../../CODE_OF_CONDUCT.md) for details on attribution.
 
 ### What if I have a question that's not here?
-Great! Post it in [GitHub Discussions](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions) (async) or ask in Discord (real-time). Coaches and other participants are usually happy to help.
+Great! Post it in [GitHub Discussions](https://github.com/olivomarco/gh-aw-hackathon/discussions) (async) or ask in Discord (real-time). Coaches and other participants are usually happy to help.
 
 ### Can I use libraries or external tools?
 It depends on the challenge. Check the challenge README for any constraints. When in doubt, ask your coach.

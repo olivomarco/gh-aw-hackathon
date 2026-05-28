@@ -1,11 +1,11 @@
 blank: false
 contact_links:
   - name: Join GitHub Discussions
-    url: https://github.com/YOUR_ORG/gh-aw-hackathon/discussions
+    url: https://github.com/olivomarco/gh-aw-hackathon/discussions
     about: "Have a general question? Ask here for async discussion with coaches and fellow participants."
   - name: Read the Participant Handbook
-    url: https://github.com/YOUR_ORG/gh-aw-hackathon/blob/main/docs/program/participant-handbook.md
+    url: https://github.com/olivomarco/gh-aw-hackathon/blob/main/docs/program/participant-handbook.md
     about: "Most common questions are answered here. Check before posting!"
   - name: See the Submission Guide
-    url: https://github.com/YOUR_ORG/gh-aw-hackathon/blob/main/docs/program/submission-guide.md
+    url: https://github.com/olivomarco/gh-aw-hackathon/blob/main/docs/program/submission-guide.md
     about: "Ready to submit? Start here."

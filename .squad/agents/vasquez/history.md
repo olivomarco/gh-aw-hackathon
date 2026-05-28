@@ -137,3 +137,33 @@ Coach/                 # Coach solution guides (not on Pages)
 
 **2026-05-28 Team Update (Audit Wave 2):** All agents completed curriculum + content + ops gap audits. 5 inbox decisions merged into `.squad/decisions.md`; gap report delivered to Marco. 26 items catalogued across 4 severity tiers (critical blockers, production patterns, catalog gaps, journey edge cases). Inbox now empty.
 
+### 2026-05-28 — Sprint 1 Blockers Fixed
+
+**What was fixed:**
+
+1. **`examples/hello-world.md` created** — minimal smoke-test workflow (under 30 lines). Triggers on weekly cron + `workflow_dispatch`. Uses `engine: copilot`, `safe-outputs: create-issue + noop`, `permissions: issues: write`. Also created `examples/README.md`. Devcontainer smoke test (`gh aw run examples/hello-world.md --dry-run`) should now resolve.
+
+2. **`postCreate.sh` banner fixed** — `ls Student/` → `ls challenges/`. `Student/` never existed; `challenges/` is the real directory with track subdirectories.
+
+3. **AI engine API key docs added** — New `## AI Engine API Keys` section in `docs/getting-started/devcontainer-setup.md` documenting `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY` and Codespace secrets best practice. Added matching comment block to `.devcontainer/devcontainer.json` before `"customizations"`.
+
+**Key learnings:**
+- The `examples/` directory is referenced in the participant doc (`devcontainer-setup.md` step 4) but didn't exist — always create directories before publishing docs that reference them.
+- `devcontainer.json` is JSONC (JSON with comments) — the `// comment` syntax is valid and used throughout the file.
+- Codespace secrets are the correct persistence mechanism for API keys; terminal exports are session-scoped only.
+
+### 2026-05-28 — Sprint 2 Fixes
+
+**What was built:**
+
+1. **`.github/workflows/validate-submission.yml`** — GitHub Actions workflow that fires on `issues: [opened, edited]` filtered by the `submission` label. Parses issue body for `challenges/**/*.md` file paths, runs `gh aw compile --validate` (with fallback to `gh aw compile`) on each, posts ✅/❌ comments, adds `needs-fix` label on failure, and posts a reminder if no workflow files are found.
+
+2. **`coaches/README.md` — `## Demonstrating Workflows to Squads` section** added before Resources. Covers `gh aw add`, `gh aw run --dry-run`, `gh aw logs`, `gh aw audit`, and the canonical 3-min live demo sequence for Day 1 coach unblocking.
+
+**Key decisions:**
+- `gh aw compile --validate` may not exist — workflow tries it first, falls back to `gh aw compile` and checks exit code. Practical over ideal.
+- Workflow file paths are extracted with `grep -oP 'challenges/[^\s]+\.md'` — simple, no jq dependency.
+- `needs-fix` label is auto-created (`gh label create ... 2>/dev/null || true`) so the workflow doesn't fail on first use.
+- Pipe (`|`) used as separator in `GITHUB_OUTPUT` to avoid multiline encoding issues.
+- `gh aw add` demo sequence placed in coaches README (not participant docs) — coaches need it for live unblocking, participants shouldn't be pointed there directly.
+

@@ -13,7 +13,7 @@ body:
         - Did you read the challenge README?
         - What does the error message say?
         - What have you already tried?
-        - Have other squads asked about this? Check [Discussions](https://github.com/YOUR_ORG/gh-aw-hackathon/discussions).
+        - Have other squads asked about this? Check [Discussions](https://github.com/olivomarco/gh-aw-hackathon/discussions).
 
   - type: dropdown
     id: track

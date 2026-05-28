@@ -37,7 +37,7 @@
 | Time | Duration | Activity |
 |------|----------|----------|
 | 09:45 | 5 min | Track 1 kickoff — coach introduces concepts |
-| 09:50 | 80 min | Squads work challenges 1-01 through 1-04 |
+| 09:50 | 80 min | Squads work challenges 1-01 through 1-04 (core challenges only; bonus challenges are stretch goals for fast-moving squads) |
 | 11:10 | 5 min | Quick share: one squad demos their best workflow |
 
 ### Break (11:15 – 11:30)
@@ -47,7 +47,7 @@
 | Time | Duration | Activity |
 |------|----------|----------|
 | 11:30 | 10 min | Track 2 kickoff — coach demo: event triggers & slash commands |
-| 11:40 | 100 min | Squads work challenges 2-01 through 2-05 |
+| 11:40 | 100 min | Squads work challenges 2-01 through 2-05 (core challenges only; bonus challenges are stretch goals for fast-moving squads) |
 | 13:20 | 10 min | Coach check-in: common blockers, pattern sharing |
 
 ### Lunch (13:30 – 14:15)
@@ -57,7 +57,7 @@
 | Time | Duration | Activity |
 |------|----------|----------|
 | 14:15 | 10 min | Track 3 kickoff — coach demo: workflow chaining & MCP |
-| 14:25 | 85 min | Squads work challenges 3-01 through 3-05 |
+| 14:25 | 85 min | Squads work challenges 3-01 through 3-05 (core challenges only; bonus challenges are stretch goals for fast-moving squads) |
 | 15:50 | 10 min | Final commit deadline warning |
 
 ### Judging (16:00 – 16:45)

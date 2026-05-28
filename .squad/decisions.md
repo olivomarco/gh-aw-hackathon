@@ -2,6 +2,244 @@
 
 ## Active Decisions
 
+# Hicks: Sprint-1 Blockers Resolved
+
+**Date:** 2026-05-28  
+**Resolved by:** Hicks (Events & QA)  
+**Status:** ✅ Complete
+
+---
+
+## Summary
+
+Fixed 3 critical Sprint-1 blockers preventing participant-facing docs from going live:
+1. **Org placeholder replacement** — All `YOUR_ORG` → `olivomarco` across 5 files
+2. **Discord channel clarity** — Improved messaging on Discord invite timing
+3. **Submission deadline** — Filled TBD with actual deadline from timeline.md
+
+---
+
+## Blocker 1: Replace ALL YOUR_ORG Placeholders
+
+### Files Updated
+
+| File | Instances | Change |
+|------|-----------|--------|
+| `docs/program/participant-handbook.md` | 3 | Lines 75, 129, 191: GitHub Discussions links |
+| `docs/program/submission-guide.md` | 2 | Discussions link + deadline section |
+| `.github/ISSUE_TEMPLATE/submission.yml` | 1 | Questions section |
+| `.github/ISSUE_TEMPLATE/config.yml` | 3 | All contact links |
+| `.github/ISSUE_TEMPLATE/help-request.yml` | 1 | Discussions reference |
+
+**Pattern:** All instances of `https://github.com/YOUR_ORG/gh-aw-hackathon` → `https://github.com/olivomarco/gh-aw-hackathon`
+
+### Important Note
+Intentionally **preserved** `YOUR_ORG/YOUR_REPO` in `challenges/track-2-repo-concierge/2-05-welcome-wagon/Student/README.md` — this is a template placeholder for participants to fill in during the hackathon, not an org reference.
+
+---
+
+## Blocker 2: Discord Channel Clarity
+
+**File:** `docs/program/participant-handbook.md` (Line 80)
+
+**Before:**
+```
+**Channel:** (TBD — link will be shared at registration)
+```
+
+**After:**
+```
+**Channel:** (share the link on the day — Discord invite posted in #announcements)
+```
+
+**Rationale:** Clearer guidance for participants on when/where they'll receive the Discord invite. References #announcements as a discoverable channel.
+
+---
+
+## Blocker 3: Submission Deadline
+
+### File 1: `docs/program/participant-handbook.md` (Line 176)
+
+**Before:**
+```
+Deadline: {TBD: see timeline.md}
+```
+
+**After:**
+```
+Deadline: **16:00** on hackathon day (see [timeline.md](timeline.md) for the full schedule)
+```
+
+### File 2: `docs/program/submission-guide.md` (Line 160)
+
+**Before:**
+```
+**{TBD: see [timeline.md](timeline.md) for the exact deadline and time zone.**
+```
+
+**After:**
+```
+**16:00 on hackathon day** (see [timeline.md](timeline.md) for the full schedule)
+```
+
+**Rationale:** Deadline sourced from `timeline.md` which specifies "Pencils down. Push final commits." at 16:00 in the Track 3 block (14:15 – 16:00). Consistent formatting across both docs.
+
+---
+
+## Verification
+
+✅ No remaining `YOUR_ORG` placeholders in:
+- `docs/program/participant-handbook.md`
+- `docs/program/submission-guide.md`
+- `.github/ISSUE_TEMPLATE/submission.yml`
+- `.github/ISSUE_TEMPLATE/config.yml`
+- `.github/ISSUE_TEMPLATE/help-request.yml`
+
+✅ Discord channel messaging updated with clearer timing guidance.
+
+✅ Submission deadline now explicit (`16:00`) across all docs.
+
+---
+
+## Impact
+
+**Status:** Participant-facing docs now ready for launch. No TBD placeholders remain. All org references point to correct GitHub repo (`olivomarco/gh-aw-hackathon`).
+
+**Next:** Bishop's site build + Ripley's timeline verification before opening registration.
+
+---
+
+# Sprint 1 Blocker Fixes
+
+**Date:** 2026-05-28  
+**Owner:** Ripley (Lead)  
+**Status:** ✅ RESOLVED
+
+---
+
+## Problem Statement
+
+Three blocking issues preventing Sprint 1 launch:
+
+1. **Challenge counts mismatch:** Track 2 & 3 declared 4 challenges but have 5
+2. **Repo URLs:** Getting-started guide referenced `your-org/gh-aw-challenges` (placeholder)
+3. **Challenge 00 placeholder:** Setup challenge had "This is a placeholder" text
+
+---
+
+## Decision & Actions
+
+### Fix 1: Challenge Counts (RESOLVED)
+
+**Changed:**
+- `_tracks/safe-outputs.md`: `challenges_count: 4` → `5`
+- `_tracks/mcp-integration.md`: `challenges_count: 4` → `5`
+
+**Rationale:** Track metadata must reflect actual challenge count (2-01 through 2-05, 3-01 through 3-05 = 5 each). Track 1 left unchanged (correctly shows 4).
+
+**Verification:**
+```
+$ grep challenges_count _tracks/*.md
+ai-workflows.md:challenges_count: 4 ✓
+safe-outputs.md:challenges_count: 5 ✓
+mcp-integration.md:challenges_count: 5 ✓
+```
+
+---
+
+### Fix 2: Repo URLs (RESOLVED)
+
+**Changed:**
+- Path B (local): `https://github.com/your-org/gh-aw-hackathon.git` → `https://github.com/olivomarco/gh-aw-hackathon.git`
+- Step 3 (clone): `https://github.com/your-org/gh-aw-challenges.git` → `https://github.com/olivomarco/gh-aw-hackathon.git`
+- Step 3 (fork): `https://github.com/your-org/gh-aw-challenges` → `https://github.com/olivomarco/gh-aw-hackathon`
+
+**Rationale:** Real repo is `olivomarco/gh-aw-hackathon`, not `your-org/gh-aw-challenges`. Participants need correct URLs for cloning/forking.
+
+**Files updated:**
+- `docs/getting-started/devcontainer-setup.md` (all 3 occurrences)
+
+---
+
+### Fix 3: Challenge 00 Content (RESOLVED)
+
+**Changed:** Replaced placeholder ("This is a placeholder...") with real setup instructions
+
+**New content:**
+- Objectives: environment setup, auth, gh-aw verification, repo clone/fork
+- Step 1–4 walkthrough (condensed from devcontainer-setup.md)
+- Success criteria: `gh aw --version`, `--dry-run` smoke test, generated YAML visible
+- Jekyll frontmatter preserved
+
+**Rationale:** Challenge 00 is the first-touch content for participants on the live site. Placeholder was unacceptable for launch. Content sourced from canonical `docs/getting-started/devcontainer-setup.md`.
+
+---
+
+## Impact
+
+- ✅ Track metadata now accurate for Jekyll site
+- ✅ Participants get correct repo URLs (no dead links, no wrong repos)
+- ✅ Challenge 00 is launch-ready (real, actionable instructions)
+- ✅ No other challenges or docs affected
+
+---
+
+## Verification
+
+All fixes verified before commit:
+- Track files show correct counts
+- No `your-org` references remain in devcontainer guide
+- Challenge 00 contains real setup steps, no placeholder text
+
+**Ready for:**
+- Coach distribution
+- Participant beta (if planned)
+- Live launch
+
+
+---
+
+# Decision: Sprint 1 Blocker Fixes
+
+**Date:** 2026-05-28  
+**Author:** Vasquez (Workflow Engineer)  
+**Status:** Done
+
+## Context
+
+Three blockers were identified in the Sprint 1 QA pass that would prevent participants from completing devcontainer setup successfully.
+
+## Decisions
+
+### 1. Created `examples/hello-world.md`
+
+The devcontainer smoke test in `docs/getting-started/devcontainer-setup.md` (step 4) runs `gh aw run examples/hello-world.md --dry-run`, but the file did not exist. Created `examples/hello-world.md` as a minimal workflow (<30 lines) using `engine: copilot`, `safe-outputs: create-issue + noop`, and a weekly cron trigger. Also created `examples/README.md` to document the directory.
+
+**Rationale:** A smoke test that references a non-existent file is a hard blocker for every participant on hackathon day.
+
+### 2. Fixed `postCreate.sh` banner — `Student/` → `challenges/`
+
+The welcome banner instructed participants to `ls Student/`, a directory that does not exist. The correct directory is `challenges/` (with track subdirectories).
+
+**Rationale:** Confusing error on first run; damages participant confidence immediately.
+
+### 3. Added AI Engine API Key documentation
+
+Added `## AI Engine API Keys` section to `docs/getting-started/devcontainer-setup.md` between the "What's Pre-Installed?" table and "First Steps After Container Starts". Section covers Copilot (automatic), Claude (`ANTHROPIC_API_KEY`), Codex (`OPENAI_API_KEY`), Gemini (`GEMINI_API_KEY`), and the Codespace secrets best practice. Added matching JSONC comment block to `.devcontainer/devcontainer.json` before `"customizations"`.
+
+**Rationale:** Without this doc, participants using non-Copilot engines (Claude, Codex, Gemini) will get cryptic failures with no guidance on what environment variable to set.
+
+## Files Changed
+
+- `examples/hello-world.md` — created
+- `examples/README.md` — created
+- `.devcontainer/postCreate.sh` — line 55: `ls Student/` → `ls challenges/`
+- `docs/getting-started/devcontainer-setup.md` — new `## AI Engine API Keys` section added
+- `.devcontainer/devcontainer.json` — JSONC comment block added before `"customizations"`
+
+
+---
+
 ### Decision: devcontainer configuration for gh-aw Hackathon
 
 **Author:** Vasquez  
@@ -37,6 +275,8 @@ Participants need a reproducible development environment to run and develop gh-a
 - `.devcontainer/README.md`
 
 ---
+
+
 
 ### Decision: Hackathon Program Design
 
@@ -141,6 +381,8 @@ We need a complete program structure for the gh-aw hackathon: format, tracks, ch
 
 ---
 
+
+
 ### Decision: Bishop — Site Scaffold
 
 **Author:** Bishop (Web & Design)  
@@ -242,6 +484,8 @@ Scaffold the GitHub Pages site for the gh-aw Hackathon. Goal: "very cool" — cl
 
 ---
 
+
+
 ### Decision: Challenge 00 — Setup & Hello, Agent
 
 **Date:** 2026-05-28  
@@ -336,6 +580,8 @@ Both files include:
 - No hardcoded solutions in student file (coach file only)
 
 ---
+
+
 
 ### Decision: Participant Journey Documents & Submission Process
 

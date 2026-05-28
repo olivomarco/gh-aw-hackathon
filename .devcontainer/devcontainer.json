@@ -36,6 +36,10 @@
   // Uncomment if a challenge requires a local HTTP server (e.g., webhook testing).
   // "forwardPorts": [3000, 8080],
 
+  // AI Engine API keys — set as GitHub Codespace secrets at github.com/settings/codespaces
+  // to make them available automatically in every Codespace you create.
+  // Supported: ANTHROPIC_API_KEY (Claude), OPENAI_API_KEY (Codex), GEMINI_API_KEY (Gemini)
+  // GitHub Copilot is configured automatically if your account has a Copilot subscription.
   "customizations": {
     "vscode": {
       "extensions": [

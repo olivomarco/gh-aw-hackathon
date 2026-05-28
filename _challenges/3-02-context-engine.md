@@ -5,6 +5,7 @@ number: 2
 order: 320
 difficulty: "Advanced"
 time: "30 min"
+tier: "core"
 track: "mcp-integration"
 track_name: "Continuous Intelligence"
 tags:

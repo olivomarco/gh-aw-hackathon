@@ -32,6 +32,8 @@ safe-outputs:
     expires: 3d
   noop:
 
+engine: copilot
+
 tools:
   bash:
     # Allow only safe read-only git commands for diff collection.

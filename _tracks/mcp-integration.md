@@ -5,7 +5,8 @@ badge: "Track 3"
 track_id: "mcp-integration"
 order: 3
 difficulty_range: "🔴 Advanced"
-challenges_count: 4
+challenges_count: 5
+core_challenges: 2
 learning_objectives:
   - "Coordinate multiple workflows in a pipeline"
   - "Connect MCP tools to gh-aw workflows"

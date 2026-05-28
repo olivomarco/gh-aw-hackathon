@@ -5,6 +5,7 @@ number: 1
 order: 210
 difficulty: "Intermediate"
 time: "30 min"
+tier: "core"
 track: "safe-outputs"
 track_name: "Repo Concierge"
 tags:

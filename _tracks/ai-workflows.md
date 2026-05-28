@@ -6,6 +6,7 @@ track_id: "ai-workflows"
 order: 1
 difficulty_range: "🟢 Beginner"
 challenges_count: 4
+core_challenges: 2
 learning_objectives:
   - "Write and compile a gh-aw workflow from scratch"
   - "Schedule AI workflows with cron triggers"

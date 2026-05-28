@@ -68,3 +68,23 @@
 
 **2026-05-28 Team Update (Audit Wave 2):** All agents completed curriculum + content + ops gap audits. 5 inbox decisions merged into `.squad/decisions.md`; gap report delivered to Marco. 26 items catalogued across 4 severity tiers (critical blockers, production patterns, catalog gaps, journey edge cases). Inbox now empty.
 
+## 2026-05-28 Sprint-1 Blockers Fixed
+
+**Blocker 1 - Org placeholder replacement:**
+- Replaced ALL `YOUR_ORG` → `olivomarco` across:
+  - `docs/program/participant-handbook.md` (3 instances: Discord Discussions links on lines 75, 129, 191)
+  - `docs/program/submission-guide.md` (1 instance in Discussions link + 1 in deadline section)
+  - `.github/ISSUE_TEMPLATE/submission.yml` (1 instance)
+  - `.github/ISSUE_TEMPLATE/config.yml` (3 instances across contact links)
+  - `.github/ISSUE_TEMPLATE/help-request.yml` (1 instance)
+- Intentionally preserved `YOUR_ORG/YOUR_REPO` in `challenges/track-2-repo-concierge/2-05-welcome-wagon/Student/README.md` — this is a template placeholder for participants to fill in.
+
+**Blocker 2 - Discord channel clarity:**
+- Line 80 (participant-handbook.md): Changed `(TBD — link will be shared at registration)` → `(share the link on the day — Discord invite posted in #announcements)` for clearer communication.
+
+**Blocker 3 - Submission deadline:**
+- Line 176 (participant-handbook.md): Replaced `{TBD: see timeline.md}` with `**16:00** on hackathon day (see [timeline.md](timeline.md) for the full schedule)` based on timeline.md "Pencils down. Push final commits." at 16:00.
+- Line 160 (submission-guide.md): Replaced `{TBD: see [timeline.md](timeline.md) for the exact deadline and time zone.` with `**16:00 on hackathon day** (see [timeline.md](timeline.md) for the full schedule)` for consistency.
+
+**Status:** All placeholders replaced, participant docs now ready for launch.
+

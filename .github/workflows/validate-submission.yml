@@ -1,0 +1,126 @@
+name: Validate Submission
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  validate:
+    if: contains(github.event.issue.labels.*.name, 'submission')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install gh aw extension
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh extension install github/gh-aw || true
+          gh aw --version || echo "gh aw installed"
+
+      - name: Parse workflow file paths from issue body
+        id: parse
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          # Extract lines matching challenges/**/*.md pattern
+          WORKFLOW_FILES=$(echo "$ISSUE_BODY" | grep -oP 'challenges/[^\s]+\.md' | sort -u || true)
+
+          if [ -z "$WORKFLOW_FILES" ]; then
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            # Store as newline-separated, percent-encode newlines for output
+            ENCODED=$(echo "$WORKFLOW_FILES" | tr '\n' '|')
+            echo "files=$ENCODED" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post reminder — no workflow files found
+        if: steps.parse.outputs.found == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" \
+            --repo "$REPO" \
+            --body "⚠️ No workflow files found in your submission. Please add the paths to your .md files in the 'Workflow File(s)' field."
+
+      - name: Validate workflow files
+        if: steps.parse.outputs.found == 'true'
+        id: validate
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+          FILES_ENCODED: ${{ steps.parse.outputs.files }}
+        run: |
+          ALL_PASSED=true
+          ERROR_OUTPUT=""
+
+          # Restore newlines from pipe separator
+          FILES=$(echo "$FILES_ENCODED" | tr '|' '\n')
+
+          while IFS= read -r WORKFLOW_FILE; do
+            [ -z "$WORKFLOW_FILE" ] && continue
+
+            echo "Validating: $WORKFLOW_FILE"
+
+            if [ ! -f "$WORKFLOW_FILE" ]; then
+              ALL_PASSED=false
+              ERROR_OUTPUT="${ERROR_OUTPUT}\n❌ \`${WORKFLOW_FILE}\`: File not found in repository."
+              continue
+            fi
+
+            # Run gh aw compile; fall back gracefully if subcommand differs
+            if gh aw compile --validate "$WORKFLOW_FILE" > compile_out.txt 2>&1; then
+              echo "  ✅ $WORKFLOW_FILE passed"
+            elif gh aw compile "$WORKFLOW_FILE" >> compile_out.txt 2>&1; then
+              echo "  ✅ $WORKFLOW_FILE compiled (no --validate flag needed)"
+            else
+              ALL_PASSED=false
+              COMPILE_ERR=$(cat compile_out.txt)
+              ERROR_OUTPUT="${ERROR_OUTPUT}\n❌ \`${WORKFLOW_FILE}\`:\n\`\`\`\n${COMPILE_ERR}\n\`\`\`"
+            fi
+          done <<< "$FILES"
+
+          if [ "$ALL_PASSED" = "true" ]; then
+            echo "passed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "passed=false" >> "$GITHUB_OUTPUT"
+            # Write errors to file to avoid shell quoting issues
+            printf "%b" "$ERROR_OUTPUT" > validation_errors.txt
+          fi
+
+      - name: Post success comment
+        if: steps.parse.outputs.found == 'true' && steps.validate.outputs.passed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" \
+            --repo "$REPO" \
+            --body "✅ Workflow files validated successfully."
+
+      - name: Post failure comment and add label
+        if: steps.parse.outputs.found == 'true' && steps.validate.outputs.passed == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          ERRORS=$(cat validation_errors.txt)
+          gh issue comment "$ISSUE_NUMBER" \
+            --repo "$REPO" \
+            --body "$(printf "❌ Workflow validation failed. Please fix the issues below and edit your submission.\n\n%s" "$ERRORS")"
+
+          # Add needs-fix label (create it if absent)
+          gh label create needs-fix --color=D93F0B --description="Submission needs fixes" --repo "$REPO" 2>/dev/null || true
+          gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "needs-fix"

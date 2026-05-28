@@ -52,7 +52,7 @@ echo -e "      go      : $(go version 2>/dev/null | awk '{print $3}' || echo 'no
 echo ""
 echo -e "${BOLD}${GREEN}Ready! Next steps:${RESET}"
 echo -e "  1. Authenticate if needed:  ${CYAN}gh auth login${RESET}"
-echo -e "  2. Browse challenges:       ${CYAN}ls Student/${RESET}"
+echo -e "  2. Browse challenges:       ${CYAN}ls challenges/${RESET}"
 echo -e "  3. Run a workflow:          ${CYAN}gh aw run <workflow.md>${RESET}"
 echo -e "  4. View logs:               ${CYAN}gh aw logs${RESET}"
 echo -e "  5. Audit a workflow:        ${CYAN}gh aw audit <workflow.md>${RESET}"

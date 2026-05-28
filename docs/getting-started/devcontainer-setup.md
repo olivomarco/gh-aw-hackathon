@@ -29,7 +29,7 @@ For those who prefer working locally. You need: [Docker Desktop](https://www.doc
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-org/gh-aw-hackathon.git
+   git clone https://github.com/olivomarco/gh-aw-hackathon.git
    cd gh-aw-hackathon
    ```
 
@@ -56,6 +56,35 @@ For those who prefer working locally. You need: [Docker Desktop](https://www.doc
 | VS Code Copilot extension | AI-powered code suggestions right in your editor |
 | Git | Version control (you'll commit and push your work) |
 | curl, jq | Useful CLI tools for API testing and JSON wrangling |
+
+## AI Engine API Keys
+
+gh-aw workflows declare their engine in frontmatter (`engine: copilot`, `engine: claude`, etc.). Each engine requires the appropriate credentials to be present at runtime.
+
+| Engine | Env var | Notes |
+|--------|---------|-------|
+| **Copilot** | _(none required)_ | Configured automatically inside GitHub Codespaces if your account has an active Copilot subscription |
+| **Claude** (Anthropic) | `ANTHROPIC_API_KEY` | Obtain at [console.anthropic.com](https://console.anthropic.com) |
+| **Codex / OpenAI** | `OPENAI_API_KEY` | Obtain at [platform.openai.com](https://platform.openai.com) |
+| **Gemini** | `GEMINI_API_KEY` | Obtain at [aistudio.google.com](https://aistudio.google.com) |
+
+### Setting keys — two options
+
+**Option A: GitHub Codespace Secrets** *(recommended — persists across sessions)*
+
+Go to **[github.com/settings/codespaces](https://github.com/settings/codespaces)** → **New secret**, add the variable name and value, then grant access to this repository. The key will be injected automatically every time you open a Codespace.
+
+**Option B: Export in terminal** *(session-scoped only — lost on container restart)*
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+export OPENAI_API_KEY=sk-...
+export GEMINI_API_KEY=...
+```
+
+> **Best practice:** Use Codespace secrets (Option A). Terminal exports vanish when the container restarts; secrets persist forever.
+
+If a workflow's required API key is missing, `gh aw run` will exit with a clear error message naming the missing variable — no silent failures.
 
 ## First Steps After Container Starts
 
@@ -89,14 +118,14 @@ You should see a version number (e.g., `gh-aw version 1.0.0`).
 
 If you haven't already:
 ```bash
-git clone https://github.com/your-org/gh-aw-challenges.git
-cd gh-aw-challenges
+git clone https://github.com/olivomarco/gh-aw-hackathon.git
+cd gh-aw-hackathon
 ```
 
 Or if you prefer to fork first (recommended for keeping your work organized):
 ```bash
-gh repo fork https://github.com/your-org/gh-aw-challenges --clone
-cd gh-aw-challenges
+gh repo fork https://github.com/olivomarco/gh-aw-hackathon --clone
+cd gh-aw-hackathon
 ```
 
 ### 4. Run the Smoke Test
