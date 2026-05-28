@@ -73,3 +73,20 @@ Coach/                 # Coach solution guides (not on Pages)
 - The `create-pr` vs `create-issue` safe-output choice encodes human-review expectations — make this explicit in samples
 - `checkout: false` is always worth noting when a workflow only needs API data (no repo code)
 
+
+---
+
+## Wave E Completion — 2026-05-28
+
+**Delivered:**
+- Canonical install command fix (4 files updated: .devcontainer/postCreate.sh, validate-submission.yml, devcontainer-setup.md, Challenge 00 Coach README)
+- Detection idiom updated: `gh extension list` → `command -v gh-aw`
+- Track 4 sample solutions (9 files: 8 challenge walkthroughs + README)
+
+**Install standardization:** All `gh aw` setup instructions now route through `curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash`. Single source of truth for entry point.
+
+**Coach sample solutions:** Follow Track 2 pattern (header block + YAML + Markdown body). 30-minute comprehension target. No min-integrity fields or exotic flags — standard `engine: copilot` throughout.
+
+**Cross-team sync:** Hudson built challenges; Bishop created Jekyll infrastructure; Hicks updated program docs.
+
+---

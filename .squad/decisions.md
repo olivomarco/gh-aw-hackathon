@@ -3142,3 +3142,218 @@ that finish early have a clear next step; it's skippable for squads that don't.
 3. **`imports:` path resolution:** Is `./lib/repo-stats-helper.md` resolved relative to the
    workflow file's directory at compile time? Or relative to repo root? The sample assumes
    file-relative. Marco should confirm with `gh aw compile`.
+
+---
+
+# Wave E — Track 4, Install Fix & Jekyll Guides
+
+## Decision: Track 4 — Production Patterns Created
+
+**Author:** Hudson (DevRel)
+**Date:** 2026-05-28
+**Status:** Complete
+
+### Summary
+
+Created Track 4 "Production Patterns" — 8 challenges (1 track metadata + 8 Jekyll cards + 16 Student/Coach guides = 25 files total).
+
+### What Was Built
+
+#### Track Metadata
+- `_tracks/production-patterns.md` — badge "Track 4", order 4, difficulty_range "🟣 Real-World", 8 challenges, 2 core
+
+#### Challenges
+
+| ID | Title | Tier | Source | Stat |
+|----|-------|------|--------|------|
+| 4-01 | Issue Triage Agent | core | github/gh-aw | "hello world" of agentic workflows |
+| 4-02 | CI Doctor | core | githubnext/agentics | 69% merge rate (9/13) |
+| 4-03 | Daily Doc Updater | bonus | githubnext/agentics | 96% merge rate (57/59) |
+| 4-04 | Documentation Unbloat | bonus | githubnext/agentics | 85% merge rate (88/103) |
+| 4-05 | The Uber Expert (Daily Testify) | bonus | github/gh-aw | 100% causal chain merge rate (13/13 actioned) |
+| 4-06 | The Test Improver | bonus | githubnext/agentics | Causal chain consumer |
+| 4-07 | Security Compliance | bonus | github/gh-aw | SLA-tracking pattern |
+| 4-08 | Malicious Code Scan | bonus | githubnext/agentics | Supply-chain defence |
+
+#### Format Decisions
+
+- All challenges use `difficulty: Advanced`, `time: 30 min`, `track: production-patterns`
+- Student guides: Background + stat → What it does → What you'll do → Customize → Success criteria → Hints (collapsible `<details>`)
+- Coach guides: What it teaches → Expected solution shape (code block) → Common blockers table → How to verify → Coaching notes
+- Install command throughout: `curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash`
+- Workflow acquisition: `gh aw add-wizard <url>` (not `gh aw add`, not copy-paste)
+
+#### Patterns Introduced
+
+1. **`workflow_run` trigger** — 4-02 (fires on another workflow's completion)
+2. **Uber expert persona** — 4-05 (deep domain knowledge in prompt body)
+3. **Causal chain** — 4-05 + 4-06 (producer creates issues, consumer acts on them)
+4. **Security-as-code** — 4-07, 4-08 (policy encoded as executable workflow)
+5. **Doc drift detection** — 4-03, 4-04 (scheduled accuracy + quality review)
+
+#### No Breaking Changes
+
+Track 4 files are entirely additive. No existing challenge files were modified.
+
+---
+
+## Decision: Canonical Install Command (Vasquez Wave E)
+
+**Author:** Vasquez (vasquez-7)
+**Date:** 2026-05-28
+**Status:** Complete
+
+### Install Command Adoption
+
+**Canonical command:**
+```bash
+curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
+```
+
+Replaces all occurrences of `gh extension install github/gh-aw` across the repo.
+`gh-aw` is a standalone CLI installed via script, not a `gh` extension.
+
+#### Files Changed
+- `.devcontainer/postCreate.sh`
+- `.github/workflows/validate-submission.yml`
+- `docs/getting-started/devcontainer-setup.md`
+- `challenges/00-setup/Coach/README.md`
+
+#### Detection Idiom Update
+
+Changed from: `gh extension list 2>/dev/null | grep -q "gh-aw"`
+Changed to: `command -v gh-aw >/dev/null 2>&1 || gh aw --version >/dev/null 2>&1`
+
+### Track 4 Sample Solutions
+
+**Created:** `/coaches/sample-solutions/track-4/` (9 files)
+
+| File | Pattern | Source |
+|------|---------|--------|
+| 4-01-issue-triage-agent.md | Event-driven label + comment | github/gh-aw |
+| 4-02-ci-doctor.md | Failure investigation + issue | githubnext/agentics |
+| 4-03-daily-doc-updater.md | Scheduled drift fix + PR | githubnext/agentics |
+| 4-04-unbloat-docs.md | Weekly editorial PR | githubnext/agentics |
+| 4-05-uber-expert-testify.md | Causal chain audit (issues only) | github/gh-aw |
+| 4-06-test-improver.md | Coverage gap + incremental PR | githubnext/agentics |
+| 4-07-security-compliance.md | SLA enforcement + escalation | github/gh-aw |
+| 4-08-malicious-code-scan.md | Recent-commit semantic review | githubnext/agentics |
+| README.md | Index with source URLs + pattern guide | N/A |
+
+**Format:** Follows existing `coaches/sample-solutions/track-2/` pattern — header comment block with `###### Challenge`, `###### Source`, `###### Estimated compile cost`, then YAML frontmatter between `---` fences, then Markdown body.
+
+**Simplifications applied:**
+- No `min-integrity` fields
+- No exotic engine flags
+- Standard `engine: copilot` throughout
+- Body structured as: Goal → Steps → Output format → Constraints → noop-reminder import
+- 30-minute comprehension target
+
+---
+
+## Decision: Student & Coach Guides as Jekyll Pages
+
+**Date:** 2026-05-28  
+**Author:** Bishop (Web & Design)  
+**Status:** Implemented — commit `00032c3`
+
+### Problem
+
+Challenge cards (`_challenges/*.md`) linked participant clicks off the GitHub Pages site to raw GitHub markdown (`github.com/.../blob/main/.../Student/README.md`). Participants left the styled site and landed on GitHub's raw markdown renderer — no navigation, no branding, no context.
+
+### Solution
+
+**Option A: Jekyll collections** — two new collections (`student_guides`, `coach_guides`) render each challenge's README as a first-class styled page on the site.
+
+Rejected alternative: adding front matter directly to `challenges/*/Student/README.md` files (pollutes raw GitHub markdown view used by coaches/students browsing the repo directly).
+
+### Implementation
+
+#### New collections in `_config.yml`
+```yaml
+student_guides:
+  output: true
+  permalink: /challenges/:name/student/
+coach_guides:
+  output: true
+  permalink: /challenges/:name/coach/
+```
+
+#### New layout: `_layouts/guide.html`
+- Extends `default`
+- Breadcrumb: Home / Challenges / [Track] / [Challenge Title] / Student|Coach Guide
+- Badge row: difficulty + time + track + guide-type pill
+- Top action bar: "← Back to challenge", "Switch to Coach/Student Guide", "← All challenges"
+- `.guide-body.prose` — renders the README content
+- Footer action bar: "← Back to [title]" + "Switch" button
+
+#### Collection files
+- `_student_guides/<slug>.md` — front matter with `challenge_title`, `challenge_slug`, `challenge_track`, `difficulty`, `time`, `guide_type: student`; body = README.md content inlined
+- `_coach_guides/<slug>.md` — same structure, `guide_type: coach`
+- 16 existing challenges (Tracks 1–3): content copied from `challenges/track-X-*/slug/{Student,Coach}/README.md`
+- 8 Track 4 challenges: TBD placeholders with GitHub fallback link (Hudson completing READMEs in parallel)
+
+#### Updated challenge cards
+All 24 `_challenges/*.md` button hrefs changed from absolute GitHub URLs to:
+```html
+<a href="{{ '/challenges/2-05-welcome-wagon/student/' | relative_url }}" class="btn btn--primary">📘 Student Guide</a>
+<a href="{{ '/challenges/2-05-welcome-wagon/coach/' | relative_url }}" class="btn btn--ghost">🎓 Coach Guide</a>
+```
+
+#### CSS additions (`assets/css/style.scss` Section O)
+- `.guide-page`, `.guide-header`, `.guide-header__title`, `.guide-header__subtitle`
+- `.guide-actions`, `.guide-footer-actions` — flex row with wrap; column on mobile ≤600px
+- `.badge--guide-student` — blue tint; `.badge--guide-coach` — green tint
+
+### Build results
+
+- **118 HTML pages** (up from ~60 before Track 4 + guides)
+- **0 build errors**; 2 Liquid warnings from pre-existing `{{ github.* }}` in `3-06-ground-truth` README (not introduced by this change)
+- Build time: 1.85s
+
+### Constraints preserved
+
+- ✅ `challenges/*/Student/README.md` files unchanged (still valid raw GitHub markdown)
+- ✅ All URLs use `relative_url` filter — respects `baseurl: "/gh-aw-hackathon"`
+- ✅ Layout consistent with `_layouts/challenge.html` patterns (same breadcrumb, badge, prose classes)
+- ✅ `.btn` system used throughout; `.prose a.btn` overrides in CSS prevent color conflicts
+
+---
+
+## Decision: Track 4 Guide Content Wired
+
+**Date:** 2026-05-28  
+**Author:** Bishop (Web & Design)  
+**Status:** Done
+
+### Summary
+
+All 16 Track 4 Jekyll guide files (8 student + 8 coach) have been updated from "Content coming soon" placeholders to real content sourced from Hudson's completed READMEs at `challenges/track-4-production-patterns/<slug>/Student|Coach/README.md`.
+
+#### Files Updated
+
+**Student guides:** `_student_guides/4-01` through `4-08`  
+**Coach guides:** `_coach_guides/4-01` through `4-08`
+
+#### Approach
+
+- Front matter in each guide file left intact
+- Leading H1 stripped from each README body (duplicates the Jekyll `title:` field)
+- Jekyll build passes: 0 errors, ~1.93s build time
+
+---
+
+## Directive: Participant Handbook & Timeline Track 4 Additions
+
+**Date:** 2026-05-28  
+**Author:** Hicks (hicks-4)
+**Status:** Complete
+
+### Summary
+
+Captured install-command directive and updated program documentation.
+
+#### Updates
+
+- **participant-handbook.md:** Added Track 4 "Production Patterns" section describing the 8 production workflows and their stats
+- **timeline.md:** Added Track 4 note after Track 3 deadline warning, clarifying challenge release and submission window

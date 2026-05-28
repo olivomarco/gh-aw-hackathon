@@ -146,3 +146,59 @@ Created 2 new bonus challenges (6 files total) covering production-grade concept
 
 **Action:** 5 commits staged for Sprint 2 + 3 curriculum + housekeeping.
 
+
+## Wave B — Track 4: Production Patterns (2026-05-28)
+
+Created Track 4 "Production Patterns" — 8 challenges based on battle-tested production workflows from `github/gh-aw` and `githubnext/agentics`.
+
+### Files Created
+
+**Track metadata:**
+- `_tracks/production-patterns.md`
+
+**Jekyll cards (8):**
+- `_challenges/4-01-issue-triage-agent.md` (core)
+- `_challenges/4-02-ci-doctor.md` (core)
+- `_challenges/4-03-daily-doc-updater.md` (bonus)
+- `_challenges/4-04-doc-unbloat.md` (bonus)
+- `_challenges/4-05-daily-testify.md` (bonus)
+- `_challenges/4-06-test-improver.md` (bonus)
+- `_challenges/4-07-security-compliance.md` (bonus)
+- `_challenges/4-08-malicious-code-scan.md` (bonus)
+
+**Student + Coach guides (16 files):**
+- All under `challenges/track-4-production-patterns/4-0X-<slug>/{Student,Coach}/README.md`
+
+### Key Patterns Introduced in Track 4
+
+- **`workflow_run` trigger** (4-02): reacting to another workflow's outcome — the most complex trigger in the set
+- **`gh aw add-wizard <url>`** used consistently (not `gh aw add`) for pulling production workflows
+- **Causal chain pattern** (4-05 + 4-06): one workflow creates issues, another acts on them — the 100% causal merge rate comes from the human-review gate between the two
+- **Uber expert persona** (4-05): embedding deep domain knowledge directly in the prompt body
+- **Install command**: `curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash` (not deprecated `gh extension install`)
+- **Merge-rate stats** as social proof: 96% (Doc Updater), 85% (Unbloat), 69% (CI Doctor), 100% causal chain (Testify)
+- **Security-as-code** framing (4-07, 4-08): policy encoded in workflow files alongside infrastructure
+
+### Design Decisions
+
+- Challenges are ALL `difficulty: Advanced` — this is the "Real-World" tier
+- 4-01 and 4-02 are `tier: core`; the rest are `tier: bonus`
+- Student guides follow the Background → What it does → What you'll do → Customize → Success criteria → Hints structure (~400 words)
+- Coach guides are brief and tactical (~200-250 words): expected solution shape + common blocker table + verification steps
+- Every challenge uses `gh aw add-wizard <url>` to pull the production workflow as starting point — no copy-paste, real workflow provenance
+
+---
+
+## Wave E Completion — 2026-05-28
+
+**Delivered:** Track 4 "Production Patterns" challenge suite (25 files total)
+
+**Integration:** Bishop-4/5 wired 8 challenges into Jekyll site as styled guide pages. Student/Coach links now route through site instead of raw GitHub markdown.
+
+**Merge-rate stats captured:** 69% (CI Doctor), 96% (Doc Updater), 85% (Unbloat), 100% causal chain (Testify).
+
+**Forward impact:** Participants now have battle-tested production workflows as starting point via `gh aw add-wizard`. Tracks 1-3 taught foundations; Track 4 is graduation to real patterns.
+
+**Cross-team sync:** Vasquez unified install command. Hicks updated participant handbook with Track 4 stats. Bishop created Jekyll infrastructure for guide pages.
+
+---

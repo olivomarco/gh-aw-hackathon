@@ -202,3 +202,34 @@ In Jekyll/SCSS sites, `.prose a` (specificity 0,1,1) will silently defeat `.btn-
 **Key lesson:** Use `{{ }}` output tags (not `{% %}`) for Liquid filter expressions in HTML attributes. Also: always read actual `_challenges/` file names vs spec slugs — Track 4 had two slug discrepancies (`4-04-doc-unbloat` not `4-04-unbloat-docs`; `4-05-daily-testify` not `4-05-uber-expert-testify`).
 
 **Build result:** 118 HTML pages, 0 errors, 1.85s. Commit `00032c3`.
+
+### 2026-05-28 — Track 4 Guide Content Wired
+
+**Problem:** All 8 Track 4 guide files (student + coach = 16 total) still had "Content coming soon" placeholders because Hudson hadn't finished the READMEs when the guide collection was first built.
+
+**Solution:** Once Hudson delivered READMEs at `challenges/track-4-production-patterns/<slug>/Student|Coach/README.md`, replaced placeholder body in each of the 16 Jekyll guide files with the real README content, stripping the leading H1 from each README (it duplicates the Jekyll `title:` front matter field).
+
+**Script pattern:** Python script extracted front matter (everything up to closing `---`), read README body minus H1, wrote `frontmatter + "\n\n" + body`. No front matter fields were touched.
+
+**Build result:** `bundle exec jekyll build` — done in 1.93s, 0 errors (pre-existing Liquid warnings in Track 3 files are unrelated). Commit pending.
+
+---
+
+## Wave E Completion — 2026-05-28
+
+**Delivered:**
+- Jekyll collections infrastructure (`_config.yml` + `_layouts/guide.html`)
+- 48 guide collection files (24 student + 24 coach)
+- Challenge card button updates (all 24 _challenges/*.md)
+- CSS additions (.guide-page, .guide-header, .guide-actions, .badge--guide-*)
+- Track 4 guide content wired (16 files updated from placeholder to real content)
+
+**Build validation:** 118 HTML pages generated, 0 errors, 1.85s build time.
+
+**Key design:** Breadcrumb + badge row + action bars create consistent navigation experience. `.btn` CSS prevents color conflicts. All URLs use `relative_url` filter (respects baseurl).
+
+**Participants experience:** Challenge cards now link to styled site pages instead of raw GitHub markdown. Navigation, branding, and context preserved.
+
+**Cross-team sync:** Hudson built challenge content. Vasquez unified install commands. Hicks updated program docs.
+
+---
