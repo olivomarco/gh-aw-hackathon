@@ -2,16 +2,38 @@
 layout: default
 ---
 
-<div class="container">
+{% assign track_slug = page.track_id | default: page.slug | default: page.name %}
+{% case track_slug %}
+  {% when 'ai-workflows' %}
+    {% assign track_color = '#7c3aed' %}
+    {% assign track_color_var = 'var(--track-1)' %}
+    {% assign track_glow = 'rgba(124,58,237,0.12)' %}
+  {% when 'safe-outputs' %}
+    {% assign track_color = '#2ea043' %}
+    {% assign track_color_var = 'var(--track-2)' %}
+    {% assign track_glow = 'rgba(46,160,67,0.12)' %}
+  {% when 'mcp-integration' %}
+    {% assign track_color = '#1f8ec4' %}
+    {% assign track_color_var = 'var(--track-3)' %}
+    {% assign track_glow = 'rgba(31,142,196,0.12)' %}
+  {% else %}
+    {% assign track_color = '#7c3aed' %}
+    {% assign track_color_var = 'var(--accent)' %}
+    {% assign track_glow = 'rgba(124,58,237,0.12)' %}
+{% endcase %}
+
+<div class="container" style="--timeline-color: {{ track_color }}; --track-hero-glow: {{ track_glow }};">
 
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <a href="{{ '/' | relative_url }}">Home</a>
     <span class="breadcrumb__sep" aria-hidden="true">/</span>
+    <a href="{{ '/challenges' | relative_url }}">Challenges</a>
+    <span class="breadcrumb__sep" aria-hidden="true">/</span>
     <span aria-current="page">{{ page.title }}</span>
   </nav>
 
-  <header class="track-header">
-    <div class="track-header__badge track-header__badge--{{ page.slug | default: page.name }}">{{ page.badge | default: "Track" }}</div>
+  <header class="track-header track-page-hero">
+    <div class="track-header__badge track-header__badge--{{ track_slug }}">{{ page.badge | default: "Track" }}</div>
     <h1 class="track-header__title">{{ page.title }}</h1>
     {% if page.description %}
     <p class="track-header__desc">{{ page.description }}</p>
@@ -34,14 +56,50 @@ layout: default
   {% endif %}
 
   <section class="track-challenges">
-    <h2>Challenges</h2>
     {% assign track_challenges = site.challenges | where: "track", page.track_id | sort: "order" %}
     {% if track_challenges.size > 0 %}
-    <div class="challenge-grid">
+
+    <h2 style="font-size:1.125rem;font-weight:700;color:var(--text);margin-bottom:var(--space-6);">
+      Challenge path
+      <span style="font-size:0.8rem;font-weight:400;color:var(--text-muted);margin-left:0.5rem;">({{ track_challenges.size }} challenges)</span>
+    </h2>
+
+    <div class="track-timeline">
       {% for challenge in track_challenges %}
-        {% include challenge-card.html challenge=challenge %}
+      <div class="timeline-node">
+        <div class="timeline-node__indicator">
+          <div class="timeline-node__dot">{{ forloop.index }}</div>
+        </div>
+        <div class="timeline-node__content">
+          <a href="{{ challenge.url | relative_url }}" class="timeline-node__link">
+            <div class="timeline-node__title">{{ challenge.title }}</div>
+            {% if challenge.description %}
+            <div class="timeline-node__desc">{{ challenge.description | truncate: 120 }}</div>
+            {% endif %}
+            <div class="timeline-node__meta">
+              {% if challenge.difficulty %}
+              <span class="badge badge--difficulty badge--{{ challenge.difficulty | downcase }}">
+                {% case challenge.difficulty %}
+                  {% when 'Beginner' %}🟢 Beginner
+                  {% when 'Intermediate' %}🟡 Intermediate
+                  {% when 'Advanced' %}🔴 Advanced
+                  {% else %}{{ challenge.difficulty }}
+                {% endcase %}
+              </span>
+              {% endif %}
+              {% if challenge.time %}
+              <span class="badge badge--time">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="badge__icon"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                {{ challenge.time }}
+              </span>
+              {% endif %}
+            </div>
+          </a>
+        </div>
+      </div>
       {% endfor %}
     </div>
+
     {% else %}
     <div class="empty-state">
       <p class="empty-state__icon">🚧</p>

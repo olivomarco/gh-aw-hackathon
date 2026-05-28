@@ -55,15 +55,109 @@ layout: default
       {% if page.tags %}
       <div class="tags" aria-label="Tags">
         {% for tag in page.tags %}
-        <span class="tag"><code>{{ tag }}</code></span>
+        <span class="tag" data-tooltip="{{ tag }}"><code>{{ tag }}</code></span>
         {% endfor %}
       </div>
       {% endif %}
     </header>
 
-    <div class="challenge-body prose">
-      {{ content }}
-    </div>
+    <div class="challenge-layout">
+
+      <!-- Main content column -->
+      <div class="challenge-main">
+
+        {% include cta-codespaces.html %}
+
+        <div class="challenge-body prose">
+          {{ content }}
+        </div>
+
+        {% if page.coach_notes %}
+        <details class="coach-notes">
+          <summary class="coach-notes__toggle">
+            <svg class="coach-notes__toggle-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6.75 3.5L11.25 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            View Coach Notes
+            <span style="margin-left:auto;font-size:0.75rem;font-weight:400;color:var(--yellow-text);opacity:0.8;">Coach-only guidance</span>
+          </summary>
+          <div class="coach-notes__content prose">
+            {{ page.coach_notes | markdownify }}
+          </div>
+        </details>
+        {% endif %}
+
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="challenge-sidebar" aria-label="Challenge details">
+
+        {% if page.time %}
+        <div class="sidebar-section">
+          <span class="sidebar-label">⏱ Time estimate</span>
+          <span class="sidebar-value">{{ page.time }}</span>
+        </div>
+        {% endif %}
+
+        {% if page.difficulty %}
+        <div class="sidebar-section">
+          <span class="sidebar-label">Difficulty</span>
+          <span class="sidebar-value">
+            {% case page.difficulty %}
+              {% when 'Beginner' %}<span class="badge badge--difficulty badge--beginner">🟢 Beginner</span>
+              {% when 'Intermediate' %}<span class="badge badge--difficulty badge--intermediate">🟡 Intermediate</span>
+              {% when 'Advanced' %}<span class="badge badge--difficulty badge--advanced">🔴 Advanced</span>
+              {% else %}{{ page.difficulty }}
+            {% endcase %}
+          </span>
+        </div>
+        {% endif %}
+
+        {% if page.prerequisites %}
+        <div class="sidebar-section">
+          <span class="sidebar-label">Prerequisites</span>
+          <ul class="sidebar-list">
+            {% for prereq in page.prerequisites %}
+            <li>{{ prereq }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if page.learning %}
+        <div class="sidebar-section">
+          <span class="sidebar-label">What you'll learn</span>
+          <ul class="sidebar-list">
+            {% for item in page.learning %}
+            <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if page.track %}
+        <div class="sidebar-section">
+          <span class="sidebar-label">Track</span>
+          <a href="{{ '/tracks/' | append: page.track | relative_url }}" class="badge badge--track badge--track-{{ page.track }}" style="text-decoration:none;">
+            {{ page.track_name | default: page.track }}
+          </a>
+        </div>
+        {% endif %}
+
+        {% if page.tags %}
+        <div class="sidebar-section">
+          <span class="sidebar-label">Concepts</span>
+          <div class="tags">
+            {% for tag in page.tags %}
+            <span class="tag" data-tooltip="{{ tag }}"><code>{{ tag }}</code></span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </aside>
+
+    </div><!-- /.challenge-layout -->
 
     <nav class="challenge-nav" aria-label="Challenge navigation">
       {% assign sorted = site.challenges | sort: 'order' %}

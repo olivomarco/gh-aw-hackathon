@@ -1,5 +1,21 @@
 {% assign c = include.challenge %}
-<a href="{{ c.url | relative_url }}" class="challenge-card{% if c.coming_soon %} challenge-card--coming-soon{% endif %}">
+
+{% if c.coming_soon %}
+<div class="challenge-card challenge-card--coming-soon{% if c.track %} challenge-card--track-{{ c.track }}{% endif %}" aria-label="Challenge coming soon — being drafted">
+  <div class="challenge-card__top">
+    <span class="challenge-card__number">--</span>
+    <span class="skeleton-label">Coming soon</span>
+  </div>
+  <span class="skeleton-line skeleton-line--title"></span>
+  <span class="skeleton-line skeleton-line--desc"></span>
+  <span class="skeleton-line skeleton-line--desc-short"></span>
+  <div class="challenge-card__footer">
+    <span class="skeleton-line skeleton-line--meta"></span>
+  </div>
+</div>
+
+{% else %}
+<a href="{{ c.url | relative_url }}" class="challenge-card{% if c.track %} challenge-card--track-{{ c.track }}{% endif %}">
   <div class="challenge-card__top">
     <span class="challenge-card__number">{{ c.number | prepend: '00' | slice: -2, 2 | default: '--' }}</span>
     <span class="challenge-card__badges">
@@ -14,7 +30,6 @@
         {{ c.difficulty }}
       </span>
       {% endif %}
-      {% if c.coming_soon %}<span class="badge badge--coming-soon">Coming soon</span>{% endif %}
     </span>
   </div>
 
@@ -35,9 +50,10 @@
     {% if c.tags %}
     <div class="challenge-card__tags" aria-label="Tags">
       {% for tag in c.tags limit: 3 %}
-      <span class="tag"><code>{{ tag }}</code></span>
+      <span class="tag" data-tooltip="{{ tag }}"><code>{{ tag }}</code></span>
       {% endfor %}
     </div>
     {% endif %}
   </div>
 </a>
+{% endif %}

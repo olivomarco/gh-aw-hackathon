@@ -1,6 +1,6 @@
 /**
  * gh-aw Hackathon — main.js
- * Minimal vanilla JS: theme toggle, mobile nav toggle, smooth scroll anchor offset.
+ * Vanilla JS: theme toggle, mobile nav, smooth scroll, reading progress.
  */
 
 (function () {
@@ -27,7 +27,7 @@
       const sunIcon  = themeToggle.querySelector('.theme-toggle__icon--sun');
       if (moonIcon) moonIcon.style.display = theme === 'dark'  ? '' : 'none';
       if (sunIcon)  sunIcon.style.display  = theme === 'light' ? '' : 'none';
-      themeToggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`);
+      themeToggle.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' theme');
     }
   }
 
@@ -43,7 +43,6 @@
     });
   }
 
-  // Follow OS changes only if user hasn't set a preference
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
     if (!localStorage.getItem(THEME_KEY)) {
       applyTheme(e.matches ? 'light' : 'dark');
@@ -67,7 +66,6 @@
       if (closeIcon) closeIcon.style.display = isOpen ? '' : 'none';
     });
 
-    // Close nav when a link is clicked
     siteNav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         siteNav.classList.remove('is-open');
@@ -79,7 +77,6 @@
       });
     });
 
-    // Close nav on Escape
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && siteNav.classList.contains('is-open')) {
         siteNav.classList.remove('is-open');
@@ -91,7 +88,6 @@
 
   /* -----------------------------------------------------------------------
      Smooth Scroll with Header Offset
-     Ensures anchor links account for the sticky header height.
      ----------------------------------------------------------------------- */
   const HEADER_HEIGHT = 64;
 
@@ -104,11 +100,43 @@
 
       e.preventDefault();
       const top = target.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT - 16;
-      window.scrollTo({ top, behavior: 'smooth' });
-
-      // Update URL without jump
+      window.scrollTo({ top: top, behavior: 'smooth' });
       history.pushState(null, '', '#' + targetId);
     });
   });
 
+  /* -----------------------------------------------------------------------
+     Reading Progress Bar
+     Shows reading progress on challenge pages.
+     ----------------------------------------------------------------------- */
+  const progressBar = document.getElementById('reading-progress');
+
+  if (progressBar) {
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function updateProgress() {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress  = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    if (!reducedMotion) {
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+    }
+  }
+
+  /* -----------------------------------------------------------------------
+     Coach Notes — enhance <details> with smooth animation hint
+     Native <details>/<summary> handles toggle; this just adds keyboard hint.
+     ----------------------------------------------------------------------- */
+  document.querySelectorAll('.coach-notes').forEach(function (el) {
+    var summary = el.querySelector('.coach-notes__toggle');
+    if (summary) {
+      summary.setAttribute('aria-label', 'Toggle coach notes');
+    }
+  });
+
 })();
+

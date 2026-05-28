@@ -48,3 +48,8 @@
 **Key constraint discovered:** Challenge 00 and its Student/Coach READMEs already existed (Hudson's work). Respected existing content.
 
 ## 2026-05-28: Kickoff milestone commit — Program structure + site scaffold + Challenge 00 + participant docs (merged into decisions.md)
+
+---
+
+**2026-05-28 Wave A Content Landed:** 14 challenges authored + 14 sample solutions + polished site. Track leadership on schedule. Ready for event prep (legal, coaching, QA).
+

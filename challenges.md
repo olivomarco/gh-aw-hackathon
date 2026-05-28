@@ -44,7 +44,7 @@ permalink: /challenges/
   {% endfor %}
 
   {% comment %}Show challenges not assigned to a track{% endcomment %}
-  {% assign untracked = site.challenges | where_exp: "c", "c.track == nil or c.track == ''" | sort: "order" %}
+  {% assign untracked = site.challenges | where_exp: "c", "c.track == blank" | sort: "order" %}
   {% if untracked.size > 0 %}
   <section class="track-section" id="getting-started">
     <div class="track-section__header">

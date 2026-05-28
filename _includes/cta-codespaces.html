@@ -1,0 +1,13 @@
+{% assign cs_url = site.codespaces_url | default: "https://github.com/codespaces/new" %}
+<div class="cta-codespaces">
+  <div class="cta-codespaces__text">
+    <div class="cta-codespaces__heading">Ready to code?</div>
+    <div class="cta-codespaces__sub">Launch a pre-configured environment with everything installed.</div>
+  </div>
+  <a href="{{ cs_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+    <svg class="btn__icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M2.5 0a2 2 0 00-2 2v10a2 2 0 002 2H6v1.5a.5.5 0 00.854.354L8.207 14.5H11a2 2 0 002-2V4.5a2 2 0 00-2-2H9V2a2 2 0 00-2-2h-4.5zM7 2a.5.5 0 01.5-.5H11a.5.5 0 01.5.5v10a.5.5 0 01-.5.5H8l-1.5 1.5V12H2.5A.5.5 0 012 11.5V2a.5.5 0 01.5-.5H7z"/>
+    </svg>
+    Open in Codespaces
+  </a>
+</div>

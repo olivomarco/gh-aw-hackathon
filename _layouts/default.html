@@ -25,6 +25,14 @@
   {% seo %}
 </head>
 <body>
+  <!-- Skip navigation -->
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Reading progress bar (shown on challenge pages) -->
+  {% if page.layout == 'challenge' or page.collection == 'challenges' %}
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  {% endif %}
+
   {% include header.html %}
 
   <main id="main-content">

@@ -3,28 +3,7 @@ layout: default
 title: Home
 ---
 
-<section class="hero">
-  <div class="container">
-    <div class="hero__badge">What The Hack</div>
-    <h1 class="hero__title">
-      Build AI workflows<br>
-      <span class="hero__title--accent">that move at the speed of thought.</span>
-    </h1>
-    <p class="hero__subtitle">
-      A hands-on hackathon exploring GitHub Actions Workflows with AI (<code>gh-aw</code>). 
-      Three tracks. Progressive challenges. Real-world patterns.
-    </p>
-    <div class="hero__cta">
-      <a href="{{ '/docs/getting-started/devcontainer-setup' | relative_url }}" class="btn btn--primary btn--lg">
-        Get Started
-        <svg class="btn__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6.75 3.5L11.25 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="{{ '/challenges' | relative_url }}" class="btn btn--secondary btn--lg">
-        Browse Challenges
-      </a>
-    </div>
-  </div>
-</section>
+{% include hero.html %}
 
 <section class="section" id="tracks">
   <div class="container">

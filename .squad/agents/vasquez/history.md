@@ -54,3 +54,45 @@ Coach/                 # Coach solution guides (not on Pages)
 **Artifacts filed:**
 - Decision: `.squad/decisions/inbox/vasquez-devcontainer.md`
 - Skill: `.squad/skills/devcontainer-gh-aw/SKILL.md`
+
+### 2026-05-28 — Sample Solutions (all 14 challenges)
+
+**What was built:**
+- 14 gh-aw workflow `.md` reference solutions under `coaches/sample-solutions/`
+- `coaches/sample-solutions/README.md` — coaches-only index with compile/run instructions
+- `.squad/decisions/inbox/vasquez-sample-solutions.md` — architectural decisions
+
+**Engine defaults adopted:**
+- Track 1 + 2: `engine: copilot` — lowest cost, lowest latency, included in Copilot subscription
+- Track 3 challenges with complex multi-step reasoning (3-04 Overseer): `engine: claude`
+- 3-03 Engine Swap: all three engines (`copilot`, `claude`, `codex`) for direct comparison
+
+**Key patterns used across all 14 solutions:**
+- `{{#runtime-import shared/noop-reminder.md}}` at the bottom of every workflow body (dossier pitfall #1)
+- `safe-outputs: noop:` always declared in frontmatter alongside every other safe-output
+- `checkout: false` on all event-driven workflows that only read GitHub API data (2-02, 2-05)
+- `lock-for-agent: true` on all event-triggered write workflows (1-04, 2-01, 2-03)
+- `min-integrity: collaborator` on all slash-command workflows (2-03, 3-05)
+- `file-glob` always specified in `tools: repo-memory` blocks (dossier pitfall #3)
+
+**Multi-file challenges:**
+- 3-01 The Relay: two workflows (producer + consumer) in one `.md` file, separated by dividers
+- 3-03 Engine Swap: three engine variants (copilot/claude/codex) of the same workflow in one file
+- 3-05 Ship It: three workflows (watcher + auditor + commander) in one `.md` file
+
+**Compile validation status:**
+- `gh aw` extension is NOT installed in this environment (only `gh` CLI is present)
+- All frontmatter is syntactically valid YAML verified manually
+- All `safe-outputs` keys use canonical names from the dossier
+- Marco should run `gh aw compile` on each file to generate `.lock.yml`
+
+**Reusable patterns for participants:**
+- The "warn then close" two-phase stale pattern (2-04)
+- The producer-consumer repo-memory chain (3-01)
+- The slash-command dispatch table (2-03)
+- The `assign-to-agent` bridge (3-05 Commander)
+
+---
+
+**2026-05-28 Wave A Complete:** 14 production-quality sample workflows delivered (Track 1-3). Pending: gh aw compile validation before event.
+

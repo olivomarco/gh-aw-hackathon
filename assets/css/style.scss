@@ -1283,3 +1283,642 @@ ul, ol { list-style-position: inside; }
 [data-theme="light"] .highlight .nf { color: #6639ba; }
 [data-theme="light"] .highlight .nt { color: #116329; }
 [data-theme="light"] .highlight .mi { color: #0550ae; }
+
+/* ==========================================================================
+   POLISH PASS — 2026-05-28
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   A. Skip-to-content
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 9999;
+  padding: var(--space-3) var(--space-5);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius) var(--radius);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   B. Hero — override/enhance for polish pass
+   -------------------------------------------------------------------------- */
+/* Neutralise old ::before glow — hero__glow div handles it now */
+.hero::before { background: none; }
+
+.hero {
+  padding: calc(var(--space-24) + var(--space-8)) 0 0;
+}
+
+.hero__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -5%,  rgba(124, 58, 237, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 20%,  rgba(31, 142, 196, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 30%,  rgba(46, 160, 67, 0.08)  0%, transparent 60%);
+}
+.hero__glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--border-muted) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, black 0%, transparent 100%);
+}
+
+.hero__content {
+  position: relative;
+  text-align: center;
+  padding-bottom: var(--space-10);
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+.hero__badge-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  animation: badge-blink 2.4s ease-in-out infinite;
+}
+@keyframes badge-blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46, 160, 67, 0.5); }
+  50%       { opacity: 0.8; box-shadow: 0 0 0 5px rgba(46, 160, 67, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .hero__badge-dot { animation: none; } }
+
+/* Bigger headline */
+.hero__title {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: var(--space-6);
+}
+.hero__title--accent {
+  /* override existing gradient with richer multi-stop */
+  background: linear-gradient(135deg, #a78bfa 0%, #c084fc 45%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --------------------------------------------------------------------------
+   C. Hero workflow animation diagram
+   -------------------------------------------------------------------------- */
+.hero__diagram {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-16);
+  position: relative;
+}
+.workflow-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.wf-static-line {
+  stroke: var(--border);
+  stroke-width: 2;
+}
+.wf-return-line {
+  stroke: var(--border-muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+/* Pulse rings */
+.wf-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes ring-pulse {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  65%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+.wf-node--1 .wf-ring { animation: ring-pulse 3.2s ease-out infinite 0s; }
+.wf-node--2 .wf-ring { animation: ring-pulse 3.2s ease-out infinite 0.8s; }
+.wf-node--3 .wf-ring { animation: ring-pulse 3.2s ease-out infinite 1.6s; }
+.wf-node--4 .wf-ring { animation: ring-pulse 3.2s ease-out infinite 2.4s; }
+
+/* Node group glow on active */
+@keyframes node-glow {
+  0%, 100% { filter: none; }
+  15%, 35%  { filter: drop-shadow(0 0 7px rgba(124, 58, 237, 0.7)); }
+}
+.wf-node--1 { animation: node-glow 3.2s ease-in-out infinite 0s; }
+.wf-node--2 { animation: node-glow 3.2s ease-in-out infinite 0.8s; }
+.wf-node--3 { animation: node-glow 3.2s ease-in-out infinite 1.6s; }
+.wf-node--4 { animation: node-glow 3.2s ease-in-out infinite 2.4s; }
+
+/* Traveling dots */
+.wf-dot { transform-box: fill-box; transform-origin: center; }
+@keyframes dot-travel {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+.wf-dot--1 {
+  offset-path: path("M 122 100 L 198 100");
+  animation: dot-travel 3.2s cubic-bezier(0.4, 0, 0.6, 1) infinite 0.15s;
+}
+.wf-dot--2 {
+  offset-path: path("M 282 100 L 358 100");
+  animation: dot-travel 3.2s cubic-bezier(0.4, 0, 0.6, 1) infinite 0.95s;
+}
+.wf-dot--3 {
+  offset-path: path("M 442 100 L 518 100");
+  animation: dot-travel 3.2s cubic-bezier(0.4, 0, 0.6, 1) infinite 1.75s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wf-ring, .wf-dot,
+  .wf-node--1, .wf-node--2, .wf-node--3, .wf-node--4 { animation: none !important; }
+}
+@media (max-width: 540px) { .hero__diagram { display: none; } }
+
+/* --------------------------------------------------------------------------
+   D. Hero stats (mobile fallback shown when diagram is hidden)
+   -------------------------------------------------------------------------- */
+.hero__stats {
+  display: none;
+  justify-content: center;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  padding: var(--space-8) 0 var(--space-16);
+}
+@media (max-width: 540px) {
+  .hero__stats { display: flex; }
+}
+.hero__stat { text-align: center; }
+.hero__stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--accent-text);
+  line-height: 1;
+}
+.hero__stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-top: var(--space-1);
+}
+
+/* --------------------------------------------------------------------------
+   E. Challenge cards — track color strip & hover glow
+   -------------------------------------------------------------------------- */
+/* Left strip: increase left border to 3px */
+.challenge-card {
+  border-left-width: 3px;
+}
+/* Track-specific left strip + hover glow */
+.challenge-card--track-ai-workflows  { border-left-color: var(--track-1); }
+.challenge-card--track-safe-outputs  { border-left-color: var(--track-2); }
+.challenge-card--track-mcp-integration { border-left-color: var(--track-3); }
+
+.challenge-card--track-ai-workflows:hover {
+  border-color: var(--track-1);
+  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.28);
+}
+.challenge-card--track-safe-outputs:hover {
+  border-color: var(--track-2);
+  box-shadow: 0 8px 28px rgba(46, 160, 67, 0.28);
+}
+.challenge-card--track-mcp-integration:hover {
+  border-color: var(--track-3);
+  box-shadow: 0 8px 28px rgba(31, 142, 196, 0.28);
+}
+/* More lift on hover */
+.challenge-card:hover { transform: translateY(-4px); }
+
+/* --------------------------------------------------------------------------
+   F. Tag tooltips (CSS-only)
+   -------------------------------------------------------------------------- */
+.tag { position: relative; }
+.tag[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition);
+  z-index: 20;
+  box-shadow: var(--shadow-sm);
+}
+.tag[data-tooltip]::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--border);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition);
+  z-index: 20;
+}
+.tag[data-tooltip]:hover::after,
+.tag[data-tooltip]:hover::before { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   G. Skeleton / coming-soon card
+   -------------------------------------------------------------------------- */
+.challenge-card--coming-soon {
+  opacity: 1 !important;
+  cursor: default;
+  pointer-events: none;
+}
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+.skeleton-line {
+  display: block;
+  background: var(--border-muted);
+  border-radius: var(--radius-sm);
+  animation: skeleton-pulse 2s ease-in-out infinite;
+}
+.skeleton-line--title { height: 18px; width: 70%; margin-bottom: var(--space-3); animation-delay: 0s; }
+.skeleton-line--desc  { height: 13px; width: 100%; margin-bottom: var(--space-2); animation-delay: 0.1s; }
+.skeleton-line--desc-short { height: 13px; width: 55%; margin-bottom: var(--space-4); animation-delay: 0.2s; }
+.skeleton-line--meta  { height: 20px; width: 38%; animation-delay: 0.3s; }
+.skeleton-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+@media (prefers-reduced-motion: reduce) { .skeleton-line { animation: none; } }
+
+/* --------------------------------------------------------------------------
+   H. Track timeline
+   -------------------------------------------------------------------------- */
+.track-timeline {
+  position: relative;
+  padding: var(--space-2) 0 var(--space-10);
+}
+.track-timeline::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: var(--space-6);
+  bottom: var(--space-12);
+  width: 2px;
+  background: linear-gradient(to bottom, var(--timeline-color, var(--accent)), transparent);
+}
+.timeline-node {
+  display: flex;
+  gap: var(--space-5);
+  padding-bottom: var(--space-6);
+  position: relative;
+}
+.timeline-node__indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 40px;
+}
+.timeline-node__dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid var(--timeline-color, var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--timeline-color, var(--accent-text));
+  z-index: 1;
+  transition: background var(--transition-md), color var(--transition-md), transform var(--transition-md);
+  flex-shrink: 0;
+}
+.timeline-node:hover .timeline-node__dot {
+  background: var(--timeline-color, var(--accent));
+  color: #fff;
+  transform: scale(1.1);
+}
+.timeline-node__content { flex: 1; padding-top: var(--space-2); }
+.timeline-node__link {
+  display: block;
+  padding: var(--space-4) var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color var(--transition-md), box-shadow var(--transition-md), transform var(--transition-md);
+}
+.timeline-node__link:hover {
+  border-color: var(--timeline-color, var(--accent));
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: var(--text);
+  transform: translateX(3px);
+}
+.timeline-node__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+  transition: color var(--transition);
+}
+.timeline-node__link:hover .timeline-node__title {
+  color: var(--timeline-color, var(--accent-text));
+}
+.timeline-node__desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: var(--space-3);
+}
+.timeline-node__meta {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   I. Challenge sidebar layout
+   -------------------------------------------------------------------------- */
+.challenge-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: var(--space-10);
+  align-items: start;
+  padding-bottom: var(--space-20);
+}
+@media (max-width: 960px) {
+  .challenge-layout { grid-template-columns: 1fr; }
+  .challenge-sidebar { order: -1; }
+}
+.challenge-sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-6));
+  background: var(--bg-surface);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.sidebar-section {
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-muted);
+}
+.sidebar-section:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: none; }
+.sidebar-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-subtle);
+  margin-bottom: var(--space-2);
+  display: block;
+}
+.sidebar-value {
+  font-size: 0.9375rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar-list li {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding: var(--space-1) 0;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+.sidebar-list li::before {
+  content: "→";
+  color: var(--text-subtle);
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   J. Codespaces CTA banner
+   -------------------------------------------------------------------------- */
+.cta-codespaces {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--accent-muted) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+.cta-codespaces__text { flex: 1; min-width: 180px; }
+.cta-codespaces__heading {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.cta-codespaces__sub {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   K. Coach notes disclosure
+   -------------------------------------------------------------------------- */
+.coach-notes {
+  margin: var(--space-8) 0;
+  border: 1px solid rgba(210, 153, 34, 0.5);
+  border-radius: var(--radius-lg);
+  background: var(--yellow-muted);
+  overflow: hidden;
+}
+.coach-notes__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--yellow-text);
+  list-style: none;
+  user-select: none;
+  transition: background var(--transition);
+}
+.coach-notes__toggle::-webkit-details-marker { display: none; }
+.coach-notes__toggle:hover { background: rgba(210, 153, 34, 0.12); }
+.coach-notes__toggle-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform var(--transition-md);
+}
+details[open] .coach-notes__toggle-icon { transform: rotate(90deg); }
+.coach-notes__content {
+  padding: var(--space-5);
+  border-top: 1px solid rgba(210, 153, 34, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   L. Link underline draw-in animation
+   -------------------------------------------------------------------------- */
+.prose a,
+.site-footer__nav a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size var(--transition-md), color var(--transition), opacity var(--transition);
+  text-decoration: none;
+}
+.prose a:hover,
+.site-footer__nav a:hover {
+  background-size: 100% 1px;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   M. Button micro-interactions
+   -------------------------------------------------------------------------- */
+.btn { transition: all 200ms ease; }
+.btn:active { transform: translateY(1px) scale(0.98); }
+.btn--primary:active { box-shadow: 0 2px 6px rgba(124, 58, 237, 0.3); }
+.btn--primary:hover { transform: translateY(-2px); }
+
+/* --------------------------------------------------------------------------
+   N. Footer polish — team credit & badge
+   -------------------------------------------------------------------------- */
+.site-footer__squad-credit {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
+.footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  background: var(--accent-muted);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 100px;
+  color: var(--accent-text);
+  text-decoration: none;
+  margin-top: var(--space-3);
+  vertical-align: middle;
+}
+.footer-badge:hover { opacity: 0.8; text-decoration: none; color: var(--accent-text); }
+.footer-badge svg { width: 12px; height: 12px; }
+
+/* --------------------------------------------------------------------------
+   O. Nav active indicator micro-detail
+   -------------------------------------------------------------------------- */
+.site-nav__link--active {
+  position: relative;
+  color: var(--text) !important;
+}
+.site-nav__link--active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: var(--space-2);
+  right: var(--space-2);
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   P. Track page — hero glow
+   -------------------------------------------------------------------------- */
+.track-page-hero {
+  padding: var(--space-8) 0 var(--space-10);
+  border-bottom: 1px solid var(--border-muted);
+  margin-bottom: var(--space-8);
+  position: relative;
+  overflow: hidden;
+}
+.track-page-hero::before {
+  content: "";
+  position: absolute;
+  right: -5%;
+  top: -50%;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, var(--track-hero-glow, rgba(124,58,237,0.12)) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Q. Reading progress bar (challenge pages)
+   -------------------------------------------------------------------------- */
+.reading-progress {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent), #c084fc, var(--blue-text));
+  z-index: 98;
+  width: 0%;
+  transition: width 80ms linear;
+}
+

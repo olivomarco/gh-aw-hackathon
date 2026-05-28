@@ -558,3 +558,730 @@ Decision needed on:
 - All meaningful changes require team consensus
 - Document architectural decisions here
 - Keep history focused on work, decisions focused on direction
+
+---
+
+## Bishop — Polish Pass (2026-05-28)
+
+# Bishop Polish Pass — Design Decisions
+
+**Author:** Bishop (Web & Design)
+**Date:** 2026-05-28
+**Status:** Implemented — pending team review
+
+---
+
+## Context
+
+Marco requested a marketing-grade polish pass on the scaffold site. Goal: first-time visitors say "wow, this hackathon looks legit." Constraints: no JS frameworks, no external fonts, no npm tooling — pure Jekyll SCSS + vanilla JS.
+
+---
+
+## Decisions
+
+### 1. Color palette — no changes to tokens
+
+Existing tokens are solid (GitHub-dark base + `#7c3aed` accent). Added only two dynamic tokens injected at layout-level via inline `style` attributes:
+- `--timeline-color`: the track's accent color (purple/green/blue) for the timeline vertical line and node dots
+- `--track-hero-glow`: radial background glow on track page hero
+
+**Rationale:** Per-track color injection without creating new SCSS classes for every track variant. Keeps CSS clean; `--timeline-color` falls back to `var(--accent)` if not set.
+
+### 2. Hero animation — CSS Motion Path + keyframes
+
+Used `offset-path` / `offset-distance` CSS Motion Path for traveling dots along connector lines. Pulse rings use `transform: scale()` with `transform-box: fill-box`. Node group glow uses `filter: drop-shadow()` on keyframe.
+
+**Why not SMIL/SVG animations?** SMIL is deprecated in Chrome. CSS animations are the modern approach.
+
+**`prefers-reduced-motion` handling:** All animations have `animation: none !important` under the reduced motion media query. Diagram hidden on mobile (<540px) and replaced with static stat numbers (3 Tracks / 12+ Challenges / 1 Day).
+
+### 3. Hero headline copy change
+
+Changed "Build AI workflows that move at the speed of thought" to **"Build an Army of Agents in a Day"** — more punchy, more hackathon-energy, directly states the time constraint.
+
+**Note for Hudson:** If you want different hero copy, edit `_includes/hero.html`. The `hero__title--accent` span gets the gradient treatment.
+
+### 4. Challenge layout — sidebar grid
+
+Challenge pages now use a two-column grid: `1fr 260px` (main content + sticky sidebar). Sidebar shows: time estimate, difficulty badge, prerequisites (if in frontmatter), what you'll learn (if in frontmatter), track link, concept tags.
+
+**Frontmatter fields Hudson can add to unlock sidebar sections:**
+```yaml
+prerequisites:
+  - "Completed Challenge 00"
+  - "Basic YAML knowledge"
+learning:
+  - "How cron triggers work in gh-aw"
+  - "Safe output validation patterns"
+```
+
+### 5. Coach notes — native `<details>` + CSS
+
+Used HTML5 `<details>/<summary>` for coach notes disclosure. No JS required. CSS animates the toggle icon rotation on `details[open]`. The coach notes block only renders if the challenge has `coach_notes:` in its frontmatter.
+
+**Yellow warning styling** intentional: coaches shouldn't accidentally reveal these to participants. The visually distinct treatment makes it clear this is "eyes-only" content.
+
+### 6. Track page — timeline replaces card grid
+
+Track pages now show a vertical timeline (numbered nodes + challenge card) instead of the flat card grid. The timeline vertical line uses the track's color and fades out at the bottom.
+
+**Why timeline over grid?** The challenge sequence matters — it's a progression. The timeline communicates "do these in order" vs. the grid's "browse freely" implication.
+
+### 7. Tag tooltips — CSS-only
+
+Tags on challenge cards and challenge pages have `data-tooltip` attributes and show the tag text on hover via CSS `::after` pseudo-element. No JS needed.
+
+### 8. Skeleton cards for coming-soon
+
+`coming_soon: true` in frontmatter renders a skeleton card (animated pulse shimmer) instead of a greyed-out real card. Looks intentional rather than broken.
+
+### 9. OG image redesign
+
+New OG image (1200×630) uses:
+- Multi-stop purple→blue gradient headline
+- Workflow node decorations on the right side (same 4-node Trigger/Agent/Safe Output/Deploy)
+- Stats row (3 Tracks / 12+ Challenges / 1 Day)
+- Dot-grid background overlay
+- Top border accent line (gradient strip)
+
+### 10. Codespaces URL config
+
+Added `codespaces_url` and `github_repo` to `_config.yml`. Default: `https://codespaces.new/github/gh-aw-hackathon`. **Ripley should update these** once the actual org/repo is confirmed.
+
+### 11. Link underline draw-in animation
+
+Prose links and footer nav links use `background-image` gradient trick for draw-in underline animation on hover. This replaces the default browser underline with a custom animated one. Works across all browsers without JS.
+
+### 12. Reading progress bar
+
+Challenge pages get a fixed 2px progress bar at the top (below header) that fills as you scroll. Purple→pink→blue gradient. `prefers-reduced-motion` guarded.
+
+---
+
+## Not implemented (and why)
+
+| Item | Reason skipped |
+|------|---------------|
+| Codespaces deep-link with branch/commit | Repo URL TBD (Ripley to confirm) |
+| Gallery page (`/gallery/`) | Post-event feature, no content yet |
+| Submission guide page | Hudson's domain |
+| Coach portal gating | Out of scope for this pass |
+| Dark grid lines in header on scroll | Would require IntersectionObserver JS — deferred |
+
+---
+
+## Hudson — Track 1 Design (2026-05-28)
+
+# Track 1 Design Decisions (Hudson — DevRel)
+
+**Date:** 2026-05-28  
+**Author:** Hudson  
+**Status:** Final
+
+---
+
+## Decision 1: Standardize Engine to `copilot` for Track 1
+
+**Context:** Track 1 challenges need a reliable, low-friction engine choice. Squads have varying API key setups (Claude, Codex, Gemini).
+
+**Decision:** Default to `engine: copilot` for all Track 1 sample solutions.
+
+**Rationale:**
+- Copilot is free and included with GitHub accounts (no extra API keys)
+- Reliable for beginner-level tasks (classification, summarization, comment writing)
+- Matches Challenge 00 pattern (already established as default)
+
+**Implications:**
+- Sample solutions use `engines: [copilot]`
+- Coach docs mention "Copilot (default)" in the philosophy section
+- Squads *can* override with Claude or Codex; coaching notes don't forbid it
+- Track 2/3 can explore engine selection as an advanced concept
+
+**Not a constraint:** If a squad wants to use Claude, they should. Coaching philosophy is "ask, don't tell."
+
+---
+
+## Decision 2: Safe-Outputs Allowlist Pattern for All Label/Action Outputs
+
+**Context:** Challenge 1-04 introduced labels; Challenge 1-02 taught noop. Squads need to understand bounded writes.
+
+**Decision:** Every safe-output that creates/modifies data (labels, issues, PRs, discussions) must include an explicit constraint (allowlist, max-count, or similar).
+
+**Rationale:**
+- Builds confidence in the safety model
+- Prevents hallucination/runaway agents
+- Makes logs auditable ("agent could only pick from these 5 labels")
+
+**Examples:**
+- `add-labels: labels: [bug, feature, question, ...]` — allowlist
+- `create-issue: max: 1, close-older-issues: true` — lifecycle management
+- `create-pr: expires: 2d` — time-bound
+- Explicitly include `noop:` for "do nothing" escape hatch
+
+**Tracking:** Coach guides enforce this pattern; if a squad forgets, coaching response is "Let's add an allowlist to your safe-outputs."
+
+---
+
+## Decision 3: Progressive Trigger Complexity (Schedule → Event)
+
+**Context:** Trigger types are foundational. Squads need cognitive space to learn each one deeply.
+
+**Decision:** Track 1 progression:
+1. Challenge 1-01: `schedule` (deterministic, simplest)
+2. Challenge 1-02: Conditional (same trigger, emphasize logic + noop)
+3. Challenge 1-03: `push` (event-driven, file-filtered)
+4. Challenge 1-04: `issues` (event-driven, GitHub event)
+
+**Rationale:**
+- Time-based triggers are easier to understand (cron is familiar)
+- By 1-02, introducing conditionals doesn't add new trigger complexity
+- Event-driven is harder but more powerful; delay until 1-03
+- By 1-04, multi-trigger workflows feel natural
+
+**Not included in Track 1:** `issue_comment` (slash commands), `pull_request`, `workflow_dispatch` (as primary trigger). These are Track 2+.
+
+---
+
+## Decision 4: Paired Student + Coach Structure (Challenge 00 Pattern)
+
+**Context:** What The Hack format requires Student and Coach docs. Challenge 00 set a precedent.
+
+**Decision:** Every Track 1 challenge has:
+- **Student/README.md** (~130 lines): Challenge description, goals, success criteria, hints, references, escalation
+- **Coach/README.md** (~250 lines): Philosophy, 4-6 pitfalls with Socratic responses, sample solution, debugging checklist, extensions
+
+**Rationale:**
+- Continuity with Challenge 00 (squads recognize the format)
+- Coach docs enable squads to self-help (read the pitfalls section)
+- Sample solutions are in Coach docs, not Student (no spoilers)
+- Extensions keep fast squads engaged without requiring coach intervention
+
+**Not included:** Separate PowerPoint presentations per challenge (Ripley + Bishop decide lecture strategy separately).
+
+---
+
+## Decision 5: Dossier Citations for Authority
+
+**Context:** Squads are learning cutting-edge tech. They need to trust the challenges are grounded.
+
+**Decision:** Every Coach guide cites specific workflows from the challenge-research-dossier.md, e.g.:
+- "See Category A (Issue & PR Management) → issue-triage-agent.md"
+- "Similar to auto-triage-issues.md pattern"
+- Links to `https://github.com/github/gh-aw/blob/main/.github/workflows/...`
+
+**Rationale:**
+- Signals "This is a real production pattern, not a toy exercise"
+- Gives squads a path to deeper learning
+- Shows coaching is grounded in evidence, not opinion
+
+**Tracking:** Every dossier citation is a GitHub link or dossier section number (e.g., "Section 6, Pitfall #1").
+
+---
+
+## Decision 6: 15-Minute Rule for Escalation
+
+**Context:** Coaching efficacy depends on unblocking squads quickly without enabling learned helplessness.
+
+**Decision:** Student docs include: "Stuck for more than 15 minutes? Ask your coach."
+
+**Rationale:**
+- 15 minutes is enough time to try troubleshooting (check syntax, read logs, test a theory)
+- Longer blocks erode momentum and confidence
+- Coach docs prepare coaches with Socratic questions to guide without solving
+
+**Coaching philosophy:** Coaches are not here to write code; they're here to remove blockers and ask clarifying questions.
+
+---
+
+## Decision 7: Sample Solutions in Frontmatter + Body Format
+
+**Context:** Squads need to see real working code, but not as a copy-paste solution.
+
+**Decision:** Every Coach sample solution is:
+1. Markdown code block with full frontmatter + body (20-30 lines)
+2. Followed by "Why this works" explanation (bullet list)
+3. Followed by reference to `coaches/sample-solutions/track-1/{NN-slug}.md` as the "production-ready version"
+
+**Rationale:**
+- Squads see a complete, valid example
+- "Why this works" teaches principles (not just syntax)
+- Production-ready reference acknowledges that samples are simplified
+- Coaches can share the Vasquez-maintained solution only if truly stuck (>25 min)
+
+**Tracking:** Vasquez will write polished solutions to `coaches/sample-solutions/track-1/{01-morning-briefing.md, ...}` and Hudson references them.
+
+---
+
+## Decision 8: No Step-by-Step Instructions in Student Docs
+
+**Context:** WTH format requires "challenge, not tutorial." But beginners need guidance.
+
+**Decision:** Student docs have "Tips & Hints" (nudges) but NOT numbered step-by-step instructions.
+
+**Rationale:**
+- Respects WTH format (challenge, not tutorial)
+- Builds problem-solving skills (try, fail, debug, succeed)
+- Coaches provide step-by-step if needed (1-on-1 guidance)
+- Reduces cognitive load in the doc itself
+
+**Example of what we DO include:**
+- "Your frontmatter must include `permissions` and `safe-outputs`"
+- "Use `crontab.guru` to verify your cron syntax"
+
+**Example of what we DON'T include:**
+- "Step 1: Create a file called .github/workflows/morning-briefing.md"
+- "Step 2: Type the following into the file..."
+
+---
+
+## Decision 9: Permissions Scoping as a First-Class Concept
+
+**Context:** Challenge 1-02 is "Safe & Sound" — squads must deeply understand permissions + safe-outputs.
+
+**Decision:** Every challenge emphasizes:
+- Read-only by default (`contents: read`)
+- Safe-outputs declares intent (not a loophole for overpermissioning)
+- Explicit constraint (allowlist, max-count)
+
+**Rationale:**
+- Builds trust in the safety model early
+- Prevents squads from copying `write-all` from other examples
+- By Track 2, permission scoping is habit
+
+---
+
+## Decision 10: "Engine Default = Copilot" as Explicit Constraint
+
+**Context:** Sample solutions vary in engine choice; participants get confused.
+
+**Decision:** All Track 1 sample solutions use `engines: [copilot]` unless coaching a specific engine swap (Claude A/B test, etc.).
+
+**Rationale:**
+- Reduces decision fatigue for participants
+- Copilot is free and reliable
+- Easier for coaches to debug (everyone running the same engine)
+- Track 2+ can explore engine selection
+
+---
+
+## Summary of Track 1 Design
+
+| Aspect | Decision |
+|--------|----------|
+| **Engine** | Copilot (default) |
+| **Safe-Outputs** | Explicit constraints (allowlist, max, noop) |
+| **Trigger Progression** | Schedule → Conditional → Push → Issues |
+| **Doc Structure** | Paired Student + Coach (Challenge 00 pattern) |
+| **Authority** | Dossier citations + GitHub links |
+| **Escalation** | 15-minute rule → ask coach |
+| **Sample Solutions** | Inline markdown + why + production-ready ref |
+| **Student Guidance** | Tips & hints, NO step-by-step |
+| **Permissions** | Read-only by default + safe-outputs safety |
+
+---
+
+**Status:** Decisions locked. Ready for hackathon implementation.
+
+---
+
+## Hudson — Track 3 Design (2026-05-28)
+
+# Track 3 Design Decisions (2026-05-28)
+
+**Author:** Hudson (DevRel)  
+**Date:** 2026-05-28
+
+---
+
+## Decision: Challenge Naming and Positioning
+
+**Question:** Should Track 3 challenges be renamed from Ripley's definitions, or stick to his names?
+
+**Decision:** **Stick to Ripley's names** (The Relay, Context Engine, Engine Swap, The Overseer, Ship It).
+- Ripley owns track-level decisions; Hudson owns content
+- Names are memorable and carry semantic weight
+- Participants see naming as part of the "brand"
+
+**Rationale:** Ripley's names were chosen deliberately for narrative flow. Changing them would fragment the team's messaging.
+
+---
+
+## Decision: Difficulty Calibration for "Advanced"
+
+**Question:** How much harder should Track 3 be than Track 2?
+
+**Decision:** **Significantly harder—conceptual leap, not just more of the same.**
+- Track 2: "Your repo has a brain" (single workflows responding to events)
+- Track 3: "Agents watching agents" (multi-workflow orchestration, meta-thinking)
+- Assumption: squads are self-selecting (only 3+ Track 2 completions can enter)
+
+**Rationale:** 
+- The jump from "one workflow" to "ecosystem of workflows" is profound
+- Requires internalizing: decoupling, state persistence, concurrency, observability
+- Time-box (30 min each) forces focus on patterns, not sophistication
+
+**Risk:** Some squads may not finish 3-05. That's OK—2-3 challenges is "excellent" for this track.
+
+---
+
+## Decision: Optional vs Mandatory Challenges
+
+**Question:** Should all 5 be required, or are some optional?
+
+**Decision:** **All 5 are designed as a pathway, but 3-05 (Ship It) is explicitly the capstone.**
+- Squads are encouraged to complete 2–3 for a solid win
+- Completing all 5 + capstone = "mastery"
+- Coaches guide scope: "If you're short on time, focus on 3-01 + 3-05. Skip 3-02 and 3-03 if needed."
+
+**Rationale:** Advanced track is ambitious. Better to ship fewer, deep challenges than rush through all five shallowly.
+
+---
+
+## Decision: MCP Tools Introduction Strategy
+
+**Question:** When should squads first encounter MCP tools (agentic-workflows, repo-memory)?
+
+**Decision:** **Introduce them incrementally:**
+- 3-01: `repo-memory` as a persistence mechanism (accessible, practical)
+- 3-02: `tools: github: toolsets: [...]` as scoped API access (familiar concept)
+- 3-04: `agentic-workflows` MCP as meta-introspection (advanced, requires foundation)
+
+**Rationale:** 
+- repo-memory is easier to understand ("files in a branch")
+- GitHub toolsets build on Track 2 API knowledge
+- agentic-workflows is the "capstone tool" that requires systems thinking
+
+**Alternative considered:** Introduce all three at once. **Rejected** — too much cognitive load.
+
+---
+
+## Decision: Engine Diversity in 3-03
+
+**Question:** Should all three engines (Copilot, Claude, Codex) be required, or can squads pick two?
+
+**Decision:** **Three is the target, but two is acceptable if time is pressed.**
+- Challenge is named "Engine Swap" (plural engines)
+- Three gives comparison depth
+- Coaches can say: "If you're running late, test Copilot + Claude, skip Codex" (Codex is less common anyway)
+
+**Rationale:** 
+- Rigidity (must do 3) can frustrate time-boxed squads
+- Flexibility (2 or 3) allows for time-pressure decisions
+- The insight ("engines have tradeoffs") works with 2 or 3 data points
+
+---
+
+## Decision: repo-memory Gotcha Highlight
+
+**Question:** Should the "silent file filtering" gotcha be explicitly called out, or let squads discover it?
+
+**Decision:** **Call it out explicitly in coaching guides, but let students discover it first.**
+- Student guide: tips mention "file-glob is critical" but doesn't spoil the issue
+- Coach guide: Pitfall #2 makes it the primary debugging topic
+- History doc: "Gotcha highlighted" notation
+
+**Rationale:** 
+- Squads need to *experience* the silent failure to internalize it
+- Coaches armed with this knowledge can unblock quickly
+- The dossier (Section 6, Pitfall #3) validates this as a real production issue
+
+---
+
+## Decision: Sample Solutions as Code Blocks
+
+**Question:** Should sample solutions be in separate files (coaches/sample-solutions/3-01.md) or inline in Coach guides?
+
+**Decision:** **Inline in Coach guides as `.md` code blocks.**
+- Coaches see solutions immediately without file navigation
+- Students can't accidentally find the files and copy-paste
+- Format is compact but complete (full frontmatter included)
+
+**Rationale:**
+- Minimizes distraction (not a separate artifact to maintain)
+- Mirrors Challenge 00 pattern (sample in Coach README)
+- Faster for coaches to reference during live event
+
+**Note:** If Vasquez wants to build coaches/sample-solutions/ directory later for documentation, he can extract these code blocks.
+
+---
+
+## Decision: Track 3 Capstone as Orchestration, Not Coding
+
+**Question:** Is 3-05 about "fix code with Copilot" or "orchestrate multiple workflows"?
+
+**Decision:** **Orchestration is primary. Copilot coding is secondary.**
+- 3-05 is not "write a killer PR fix"—it's "prove workflows can chain together"
+- Success = Observer → Triage → ChatOps trigger works end-to-end
+- If Copilot's PR is imperfect, that's fine; the *pattern* is proven
+
+**Rationale:**
+- Avoids dependency on Copilot's capabilities (which vary by scenario)
+- Focuses on the **system thinking**, not the coding skill
+- Makes the challenge achievable and predictable
+
+---
+
+## Decision: Track 3 Time-Box and Scope
+
+**Question:** Is 30 minutes per challenge realistic for Advanced?
+
+**Decision:** **Yes, with caveats:**
+- Squads that have done Track 2 (3+ challenges) have the foundation
+- 30 min targets the "happy path" (no major blockers)
+- Blockers (repo-memory glob issues, etc.) can overrun, but coaches unblock quickly
+- Expected: ~50% of squads complete 3-05; ~90% complete 3-01 + 3-02
+
+**Rationale:**
+- WTH format is about time-boxed learning, not perfection
+- Overages are handled by coaches (Ripley expects this)
+- Real end-to-end value from a squad doing 2-3 challenges deeply
+
+**Coach guidance:** "If a squad completes 3-01 and 3-05, celebrate. That's mastery of producer-consumer + orchestration. The full five is a stretch goal."
+
+---
+
+## Decision: Engine Selection Criteria in 3-03
+
+**Question:** Should the "pick a task" option (A, B, C) be guided, or let squads choose freely?
+
+**Decision:** **Guided recommendation, but choice is free.**
+- Default recommendation: Option A (Issue Categorizer) — simplest to implement, clearest engine differences
+- Alternative: Option B (PR Size Classifier) — slightly harder, still fair comparison
+- Advanced: Option C (Code Review Generator) — requires `workflow_dispatch` setup, more complex
+
+**Rationale:**
+- Option A has clearest output differences between engines
+- Option B/C are valid but have confounding factors (e.g., Codex might be naturally better at code)
+- Coaches can guide to Option A: "Let's start simple so we can see the engine differences clearly"
+
+---
+
+## Decision: Interdependency of Challenges
+
+**Question:** Can squads do 3-03 before 3-01, or do they need sequential order?
+
+**Decision:** **Challenges are mostly independent; some recommendations:**
+- **Do in order:** 3-01 → 3-02 → 3-03 (foundation before systems thinking)
+- **Can skip around:** 3-03 (Engine Swap) can be done standalone; it's self-contained
+- **Must do last:** 3-05 (Ship It) requires concepts from 3-01, 3-02, 3-04
+
+**Rationale:**
+- 3-01 (repo-memory) is foundational for 3-05
+- 3-02 (toolsets) and 3-03 (engines) are orthogonal
+- 3-04 (meta-workflows) is useful but not strictly required for 3-05
+- Flexibility maximizes participation (squads can find their own paths)
+
+---
+
+## Decision: Mention of Advanced Tools
+
+**Question:** Should 3-01–3-04 preview concepts from 3-05, or keep challenges isolated?
+
+**Decision:** **Minimal preview; let 3-05 be the "synthesis moment."**
+- 3-01–3-04 each stand alone as meaningful learning
+- 3-05 Coach guide explicitly states: "You've learned 1, 2, 3, 4. Now combine them here."
+- No forward-pointers in Student guides (avoid spoilers)
+
+**Rationale:**
+- Keeps each challenge focused and achievable
+- The "capstone moment" is more powerful if it feels like a new synthesis
+- Avoids cognitive overload ("here are 5 patterns I need to internalize")
+
+---
+
+## Decision: Failure Modes and Escalation
+
+**Question:** How much should Student guides vs Coach guides overlap on "what goes wrong"?
+
+**Decision:** **Student guide: tips + escalation path. Coach guide: deep pitfalls.**
+- Student README has `## Help` section with 4–5 common blockers (high-level)
+- Coach README has `## Common Pitfalls` with 7–9 detailed scenarios + Socratic responses
+- Clear escalation: "Stuck after 20 min? Raise your hand for your coach."
+
+**Rationale:**
+- Squads shouldn't get stuck reading docs; coaches have the expertise
+- Coach guides prepare coaches for the blockers they'll see
+- WTH format relies on coach-squad interaction, not self-service tutorials
+
+---
+
+## Cross-Team Coordination Notes
+
+**For Vasquez (Workflow Engineer):**
+- If building coaches/sample-solutions/ directory, extract code blocks from Coach guides
+- Consider pre-building a dummy producer workflow for 3-04 testing (Overseer challenge)
+- Verify agentic-workflows MCP tool is available in test environment
+
+**For Ripley (Lead):**
+- Track 3 is ambitious; expect attrition (some squads won't finish all 5)
+- 2–3 challenges is "good"; all 5 is "excellent"
+- Consider whether to offer "stretch goals" for fast squads (extensions in Coach guides provide these)
+
+**For Hicks (Events & QA):**
+- QA focus: Verify 3-01 repo-memory file path matching, 3-04 agentic-workflows MCP access, 3-05 end-to-end trigger chain
+- Suggested participant skill check: "Have you completed Track 2 challenges 2-01, 2-02, 2-03?" before allowing Track 3 signup
+
+**For Bishop (Web & Design):**
+- Track 3 challenge cards should emphasize "advanced systems thinking," not just "harder"
+- Color-code by theme: red badges for "meta-thinking," "data coordination," "orchestration"
+
+---
+
+## Open Questions (For Future Iteration)
+
+1. **Should there be a Track 4?** (Beyond 3-05, topics: org-wide automation, ML integration, cost optimization)
+2. **Is the "30 min" time estimate for all squad types, or does it vary by skill?** (Faster devs might do 3-01 in 12 min, struggling squads might need 45 min)
+3. **Should 3-05 auto-merge PRs, or stop at "PR created for review"?** (Current design: stops at PR; auto-merge is extension)
+4. **Is there a "Track 3.5" for ML-powered agents?** (Blog auditor, prompt clustering, etc. — too advanced for now?)
+
+---
+
+## Summary
+
+Track 3 challenges are designed to teach **systems thinking and orchestration** through a narrative arc:
+- 3-01: Data persistence (repo-memory)
+- 3-02: Context injection (toolsets)
+- 3-03: Engine tradeoffs (portability)
+- 3-04: Observability (meta-thinking)
+- 3-05: Synthesis (orchestration)
+
+**Quality bar:** Matches Challenge 00; strict WTH format; realistic 30 min time-box for target audience (Track 2 graduates).
+
+**Coach preparation:** Understand the gotchas, prepare Socratic responses, be ready to unblock quickly. This is Advanced; squads are motivated but may encounter novel issues.
+
+**Celebration:** When a squad completes 3-05, they've internalized production-grade agentic automation. That's the victory. 🚀
+
+---
+
+## Vasquez — Sample Solutions (2026-05-28)
+
+# Decision: Sample Solution Architectural Choices
+
+**Author:** Vasquez (Workflow Engineer)
+**Date:** 2026-05-28
+**Status:** Accepted
+
+---
+
+## Context
+
+14 reference sample solutions were written for all hackathon challenges. Architectural decisions
+were made about engine selection, frontmatter defaults, safety patterns, and file organisation.
+
+---
+
+## Decisions
+
+### 1. Default engine: `copilot` for Track 1 + 2, `claude` for complex Track 3
+
+**Decision:** All Track 1 and Track 2 reference solutions use `engine: copilot`.
+Track 3 challenge 3-04 (The Overseer) uses `engine: claude`. Challenge 3-03 (Engine Swap)
+explicitly shows all three (`copilot`, `claude`, `codex`) for direct comparison.
+
+**Rationale:**
+- `copilot` is included in most GitHub subscriptions — zero incremental cost for participants
+- Track 1–2 tasks (triage, labelling, simple reporting) are well within Copilot's capability
+- Track 3's Overseer requires multi-workflow correlation reasoning where Claude's advantage is measurable
+- Engine Swap is the teaching vehicle for engine comparison — it must show all three
+
+**Trade-off accepted:** Some Track 2 workflows might produce richer output with Claude, but
+cost predictability for participants outweighs the quality delta at this skill level.
+
+---
+
+### 2. `noop` safe-output pattern is universal and mandatory
+
+**Decision:** Every reference solution includes:
+1. `safe-outputs: noop: reason: "..."` in the frontmatter
+2. `{{#runtime-import shared/noop-reminder.md}}` at the end of the workflow body
+
+**Rationale:** Dossier pitfall #1 — workflows that produce no output and call no safe-output
+are marked as failed. The noop pattern is the safe exit for the "nothing to do" path.
+Teaching this universally from Challenge 1-01 builds the correct muscle memory.
+
+---
+
+### 3. Minimal permissions as the canonical default
+
+**Decision:** All reference solutions start with `contents: read` and add only the specific
+write permissions required by their safe-outputs (e.g., `issues: write` when using
+`create-issue` or `add-labels`).
+
+**Rationale:** Matches the teaching in Challenge 1-02 (Safe & Sound) and the pitfall observed
+in Challenge 00's coach README (overpermissioning is the most common mistake).
+
+**Specific permissions used:**
+- `contents: read` — universal baseline
+- `issues: write` — for create-issue, add-labels, add-comment on issues
+- `pull-requests: write` — for add-comment on PRs (2-02)
+- `discussions: write` — for create-discussion (3-01 consumer, 3-02)
+- `actions: read` — for agentic-workflows MCP access (3-04)
+
+---
+
+### 4. `checkout: false` default for API-only workflows
+
+**Decision:** Workflows that read only GitHub API data (not repo files) explicitly set
+`checkout: false`. Applied to: 2-02 Review Buddy, 2-05 Welcome Wagon.
+
+**Rationale:** Dossier pitfall #9 — saves 30–60 s of startup time per run. For event-driven
+workflows that fire on every issue open or PR open, this is a meaningful cost reduction.
+
+---
+
+### 5. Multi-file challenges packaged in single `.md` files
+
+**Decision:** Challenges that require multiple workflow files (3-01 The Relay: producer + consumer;
+3-03 Engine Swap: three engine variants; 3-05 Ship It: three-workflow factory) are delivered
+as a single `.md` file with clear dividers and per-section headers.
+
+**Rationale:**
+- Coaches receive one file per challenge (simpler navigation)
+- Clear section headers explain which file each section should become
+- Participants are instructed to copy sections into separate `.md` files before compiling
+
+---
+
+### 6. `lock-for-agent` on all event-triggered write workflows
+
+**Decision:** All workflows triggered by `issues:` or `issue_comment:` events that also
+perform writes use `lock-for-agent: true`.
+
+**Rationale:** Dossier pitfall #5 — without this, concurrent runs on high-traffic repos
+produce duplicate comments and conflicting labels. Teaching it early prevents the pattern
+from becoming a problem in participants' own production workflows.
+
+---
+
+### 7. Compile validation deferred — gh aw not available in build environment
+
+**Decision:** `gh aw compile` validation was not run. The `gh aw` extension is not installed
+in the current environment. Manual YAML validation was performed; all frontmatter uses
+canonical safe-outputs key names from the dossier.
+
+**Action required:** Marco or a coach should run `gh aw compile` on each file before the event:
+```bash
+cd coaches/sample-solutions/track-1 && for f in *.md; do gh aw compile "$f"; done
+cd coaches/sample-solutions/track-2 && for f in *.md; do gh aw compile "$f"; done
+cd coaches/sample-solutions/track-3 && for f in *.md; do gh aw compile "$f"; done
+```
+
+---
+
+## Files Created
+
+- `coaches/sample-solutions/README.md`
+- `coaches/sample-solutions/track-1/1-01-morning-briefing.md`
+- `coaches/sample-solutions/track-1/1-02-safe-and-sound.md`
+- `coaches/sample-solutions/track-1/1-03-the-watcher.md`
+- `coaches/sample-solutions/track-1/1-04-label-maker.md`
+- `coaches/sample-solutions/track-2/2-01-triage-bot.md`
+- `coaches/sample-solutions/track-2/2-02-review-buddy.md`
+- `coaches/sample-solutions/track-2/2-03-slash-and-burn.md`
+- `coaches/sample-solutions/track-2/2-04-stale-patrol.md`
+- `coaches/sample-solutions/track-2/2-05-welcome-wagon.md`
+- `coaches/sample-solutions/track-3/3-01-the-relay.md`
+- `coaches/sample-solutions/track-3/3-02-context-engine.md`
+- `coaches/sample-solutions/track-3/3-03-engine-swap.md`
+- `coaches/sample-solutions/track-3/3-04-the-overseer.md`
+- `coaches/sample-solutions/track-3/3-05-ship-it.md`

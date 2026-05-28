@@ -88,6 +88,10 @@ twitter:
   username: ""
 logo: "/assets/favicon.svg"
 
+# Hackathon-specific
+github_repo: "https://github.com/github/gh-aw-hackathon"
+codespaces_url: "https://codespaces.new/github/gh-aw-hackathon"
+
 # Sass
 sass:
   style: compressed

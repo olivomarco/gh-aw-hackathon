@@ -1,46 +1,84 @@
 # Hudson — History
 
-## Project Context
-- **Project:** gh-aw-hackathon
-- **Owner:** Marco Olivo
-- **Format:** What The Hack (WTH) — challenge-based learning, squads of 3-5, no step-by-step
-- **WTH Structure:**
-  - `Student/` folder: challenge files (`ChallengeXX.md`) with description, goals, success criteria, tips
-  - `Coach/` folder: solution guides (`SolutionXX.md`) with answers, hints to give (not full solutions)
-  - `README.md`: hack overview, prerequisites, learning objectives, participant guide
-  - Presentations/lectures per challenge group
-- **Tech:** gh-aw — markdown frontmatter + natural language body → compiled `.lock.yml` GitHub Action
-- **Key gh-aw concepts:**
-  - Frontmatter: `on` (triggers), `permissions`, `safe-outputs`, `max-effective-tokens`, `engines`
-  - Safe output types: `create-issue`, `create-pr`, `create-comment`, `update-file`
-  - Triggers: `schedule`, `issue_comment` (slash commands), `push`, `pull_request`, manual
-  - Supported engines: `copilot`, `claude`, `codex`, `gemini`
-- **Site:** GitHub Pages — challenge content becomes a navigable visual site (Bishop handles the site, Hudson owns the content)
+**Project:** gh-aw-hackathon | **Role:** DevRel | **Lead:** Ripley
 
-## Team
-- Ripley — Lead
-- Hudson (me) — DevRel
-- Vasquez — Workflow Engineer
-- Hicks — Events & QA
-- Bishop — Web & Design
-- Scribe — Session logger
-- Ralph — Work monitor
+## Historical Context
 
-## Learnings
+Archived in `history-archive.md`:
+- Project kickoff and team structure
+- Early decisions (Challenge 00 format, WTH principles)
+- DevContainer setup guide
 
-### DevContainer Setup Guide (2026-05-28)
-- Created `docs/getting-started/devcontainer-setup.md` — participant-facing guide for environment setup
-- Two-path approach: GitHub Codespaces (recommended) and VS Code + Docker local
-- Included: rationale, step-by-step paths, pre-installed tools table, first steps (gh auth, verify gh-aw, clone repo, smoke test), 4 common troubleshooting issues, help channels
-- Tone: friendly, concise, no condescension. Code blocks for every command. Targets beginners to intermediate GitHub Actions users
-- Scope decision: Kept troubleshooting minimal (4 issues) vs. exhaustive; focused on unblocking participants quickly rather than deep diagnostics
+## Learnings — Wave A (2026-05-28)
 
-### Challenge 00: Setup & Hello, Agent (2026-05-28)
-- Created `challenges/00-setup/Student/README.md` and `challenges/00-setup/Coach/README.md` — WTH format entry-point challenge
-- Student file: warm, goal-oriented language; emphasizes the write → compile → run → observe loop; success criteria include compiled `.lock.yml` and verified issue creation
-- Coach file: confidence-building focus; 6 common pitfalls with coaching responses; sample solution uses `engine: copilot` (free, default); time breakdown and extension ideas for fast squads
-- Key format decisions: Frontmatter only includes essential keys (on, permissions, safe-outputs, engines); body is natural language instructions, no special syntax; success criteria are verifiable (issue exists, title has prefix, lock.yml generated)
-- Tone: Student file is encouraging ("You've got this"); Coach file is matter-of-fact and practical ("Do not let squads get stuck >20 min")
-- Sample solution: 20-line workflow demonstrating minimal viable frontmatter, read-only permissions + safe-outputs pattern, Copilot engine
+Wave A authoring complete: 28 challenge docs (14 challenges × Student+Coach) across Tracks 1-3.
 
-## 2026-05-28: Kickoff milestone commit — Challenge 00 (WTH format, Student + Coach docs) complete (merged into decisions.md); next: Challenges 1-14 authoring
+### Track 1 Content
+
+Authored 8 docs (Student + Coach) for Track 1 challenges (1-01 through 1-04):
+- **1-01 Morning Briefing:** schedule-triggered standup
+- **1-02 Safe & Sound:** permissions + safe-outputs deep dive, noop mandatory pattern
+- **1-03 The Watcher:** push event observability
+- **1-04 Label Maker:** issues event + allowlisted labels
+
+**Key patterns:**
+- Safe-outputs model: declare intent, implement, provide noop escape
+- Progressive trigger complexity: schedule → conditional → push → issues
+- Dossier citations ground patterns in production examples
+- workflow_dispatch enables fast iteration
+- Socratic coaching (hint more, show less)
+
+**Document structure:** Student 80-150 lines, Coach 150-300 lines. Matches Challenge 00 format. WTH strict (no step-by-step, challenge-based).
+
+### Track 2 Content
+
+Authored 10 docs (Student + Coach) for Track 2 challenges (2-01 through 2-05):
+- **2-01 Triage Bot:** issues event classification via AI
+- **2-02 Review Buddy:** pull_request event + metadata analysis
+- **2-03 Slash & Burn:** issue_comment slash-command pattern (/summarize)
+- **2-04 Stale Patrol:** schedule maintenance with warn-then-close
+- **2-05 Welcome Wagon:** first-time contributor detection
+
+**Patterns adapted:**
+- Category A (Issue & PR Management): event-driven + allowlisted outputs
+- Category C (Continuous Improvement): scheduled maintenance
+- Category H (ChatOps): slash-command pattern with lock-for-agent
+- Dossier pitfalls #1, #5, #6 incorporated
+
+**Sample solutions:** Inline in coach guides (~20-30 lines), with "why this works" context. Production-ready refs in coaches/sample-solutions/.
+
+### Track 3 Content
+
+Authored 10 docs (Student + Coach) for Track 3 challenges (3-01 through 3-05 capstone):
+- **3-01 The Relay:** producer-consumer via repo-memory persistence
+- **3-02 Context Engine:** MCP toolsets for external data injection
+- **3-03 Engine Swap:** multi-engine comparison (copilot, claude, codex)
+- **3-04 The Overseer:** meta-workflows with agentic-workflows MCP
+- **3-05 Ship It:** end-to-end orchestration factory (capstone)
+
+**Design decisions:**
+- Significantly harder than Track 2 (conceptual leap, not just more of same)
+- All 5 are pathway; 3-05 is explicit capstone
+- MCP tools introduced incrementally (repo-memory → toolsets → agentic-workflows)
+- Engine diversity: 3 engines for comparison, 2 acceptable if time-pressed
+- Sample solutions as inline code blocks in coach guides
+- Challenges mostly independent; do in order recommended but skip-around allowed
+
+**Key concepts:**
+- Producer-consumer decoupling via data
+- Context injection for specificity
+- Engine tradeoffs (speed, reasoning, code)
+- Observability layers (meta-thinking)
+- Orchestration & composition (system thinking)
+
+**Advanced coaching:**
+- 7-9 pitfalls per challenge (more depth than Tracks 1-2)
+- Repo-memory gotcha highlighted early (silent file filtering)
+- Token budgets explained (5M+ for 3-04 meta-analysis)
+- Incrementalism emphasized for capstone (build one piece, test, add next)
+
+**Status:** All 10 files written. Quality matches Challenge 00. WTH format strict.
+
+---
+
+**2026-05-28 Wave A Complete:** All 28 challenge docs authored. Complementary sample solutions delivered by Vasquez (14 workflows). Site polished by Bishop (hero animation, timelines, sidebars, OG image). Ready for event coaching.

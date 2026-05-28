@@ -72,4 +72,52 @@
 
 **Accessibility:** WCAG AA contrast verified for all text/background pairs. Semantic HTML throughout (`<header>`, `<main>`, `<nav>`, `<article>`, `<footer>`, ARIA labels on interactive elements).
 
+### 2026-05-28 — Polish Pass
+
+**Animation philosophy:** CSS-only, keyframe-based animations. Used `offset-path` (CSS Motion Path) for traveling dots on the hero workflow diagram — nodes at x=80/240/400/560 in a 640-wide SVG. Pulse rings use `transform: scale()` with `transform-box: fill-box` to ensure correct SVG transform-origin. All animations guarded by `@media (prefers-reduced-motion: reduce)`. Hero diagram hidden on mobile <540px; replaced by stat numbers.
+
+**New files created:**
+- `_includes/hero.html` — animated hero section (extracted from index.md); contains SVG workflow loop (Trigger→Agent→Safe Output→Deploy)
+- `_includes/cta-codespaces.html` — "Open in Codespaces" CTA banner for challenge pages
+- `.squad/decisions/inbox/bishop-polish-pass.md` — design decisions record
+
+**Files substantially modified:**
+- `_layouts/challenge.html` — sidebar (time/difficulty/prereqs/learning/track/tags), Codespaces CTA, coach notes `<details>` disclosure, challenge-layout grid
+- `_layouts/track.html` — replaced card grid with visual timeline (`track-timeline`); CSS custom property `--timeline-color` set per-track; glow decoration on track hero header
+- `_includes/challenge-card.html` — track color left strip (`border-left: 3px`), skeleton pulse for `coming_soon`, tag `data-tooltip` attributes
+- `_includes/footer.html` — team credit, "Made with gh-aw" badge, GitHub repo link
+- `_layouts/default.html` — skip-to-content link, reading progress bar for challenge pages
+- `assets/css/style.scss` — 370+ lines appended (sections A–Q)
+- `assets/js/main.js` — reading progress bar, `prefers-reduced-motion` guard
+- `assets/og-image.svg` — redesigned with workflow nodes decoration, multi-stop gradient headline, stats row
+- `_config.yml` — `github_repo` + `codespaces_url` config values
+- `challenges.md` — fixed `where_exp` Liquid bug (replaced `nil or c.track == ''` with `blank`)
+- `index.md` — uses `{% include hero.html %}`
+
+**Color tokens added (no changes to existing tokens):**
+- `--timeline-color`: per-track CSS custom property injected via inline style in track layout
+- `--track-hero-glow`: per-track radial glow color for track page hero
+
+**Typography decisions:**
+- Hero headline: `clamp(2.5rem, 7vw, 4.5rem)`, weight 900, letter-spacing -0.03em
+- Gradient headline: `#a78bfa → #c084fc → #60a5fa` (purple-to-blue sweep)
+- Body: unchanged (16px / 1.6 line-height)
+- Sidebar labels: 0.6875rem, uppercase, letter-spacing 0.08em — creates visual hierarchy without extra weight
+
+**Key CSS patterns used:**
+- `offset-path` + `offset-distance` for dot travel animation (CSS Motion Path)
+- `mask-image` for dot-grid fading in hero glow overlay
+- `backdrop-filter: blur(12px)` on sticky header (existing, verified)
+- `transform-box: fill-box; transform-origin: center` for SVG scale animations
+- CSS `details`/`summary` for coach notes toggle (no JS needed for basic function)
+- `background-image: linear-gradient` + `background-size: 0% 1px → 100% 1px` for link draw-in underline
+
+**Jekyll build:** ✅ Succeeded (1.309s, 37KB compiled CSS)
+
+
 ## 2026-05-28: Kickoff milestone commit — Site scaffold + Jekyll custom theme complete (merged into decisions.md); next: visual polish pass
+
+---
+
+**2026-05-28 Wave A Complete:** Visual polish milestone — hero animation, timelines, sidebars, OG image. Jekyll build verified (47 pages, 1.38s).
+

@@ -45,3 +45,8 @@
 - **Tone & Accessibility:** Practical + warm throughout. Accessibility section covers screen readers, captions, quiet spaces, mixed experience levels valued. FAQ anticipates 12 common questions (from team formation to AI disclosure to submission details).
 
 ## 2026-05-28: Kickoff milestone commit — Participant handbook + submission guide + coach handbook + issue templates complete (merged into decisions.md)
+
+---
+
+**2026-05-28 Wave A Content Landed:** 28 challenge docs + polished site ready for QA. Next: verify sample solution compilation, challenge sidebar frontmatter parsing, coach portal access.
+

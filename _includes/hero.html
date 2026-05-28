@@ -1,0 +1,106 @@
+<section class="hero" aria-labelledby="hero-headline">
+  <div class="hero__glow" aria-hidden="true"></div>
+
+  <div class="container hero__content">
+    <div class="hero__badge">
+      <span class="hero__badge-dot" aria-hidden="true"></span>
+      <span class="hero__badge-text" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--font-mono);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent-text);background:var(--accent-muted);border:1px solid rgba(124,58,237,0.3);border-radius:100px;padding:0.25rem 0.75rem;">What The Hack · gh-aw Edition</span>
+    </div>
+
+    <h1 class="hero__title" id="hero-headline">
+      Build an Army of<br>
+      <span class="hero__title--accent">Agents in a Day</span>
+    </h1>
+
+    <p class="hero__subtitle">
+      Three tracks. Twelve challenges. One agentic workflow extension.
+      Write, run, and ship AI-powered GitHub workflows from scratch.
+    </p>
+
+    <div class="hero__cta">
+      <a href="{{ '/docs/getting-started/devcontainer-setup' | relative_url }}" class="btn btn--primary btn--lg">
+        Start Building
+        <svg class="btn__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M6.75 3.5L11.25 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="{{ '/challenges' | relative_url }}" class="btn btn--ghost btn--lg">
+        Browse Challenges
+      </a>
+    </div>
+  </div>
+
+  <!-- Animated agentic workflow loop diagram -->
+  <div class="hero__diagram" aria-hidden="true">
+    <svg class="workflow-svg" viewBox="0 0 640 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="wf-arrow" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+          <path d="M0 0 L8 3 L0 6 Z" fill="#30363d"/>
+        </marker>
+      </defs>
+
+      <!-- Static connector lines with arrowheads -->
+      <path class="wf-static-line" d="M 122 100 L 198 100" marker-end="url(#wf-arrow)"/>
+      <path class="wf-static-line" d="M 282 100 L 358 100" marker-end="url(#wf-arrow)"/>
+      <path class="wf-static-line" d="M 442 100 L 518 100" marker-end="url(#wf-arrow)"/>
+
+      <!-- Return arc (dashed, smaller) -->
+      <path class="wf-return-line" d="M 556 100 Q 556 168 320 168 Q 84 168 84 100"/>
+
+      <!-- Traveling dots (CSS animated) -->
+      <circle class="wf-dot wf-dot--1" r="5" fill="#a78bfa"/>
+      <circle class="wf-dot wf-dot--2" r="5" fill="#a78bfa"/>
+      <circle class="wf-dot wf-dot--3" r="5" fill="#56d364"/>
+
+      <!-- Node 1: Trigger (x=80, y=100) -->
+      <g class="wf-node wf-node--1" transform="translate(80, 100)">
+        <circle class="wf-ring" r="50" stroke="#7c3aed" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <circle r="38" fill="#161b22" stroke="#7c3aed" stroke-width="2"/>
+        <text y="1" text-anchor="middle" dominant-baseline="middle" font-size="22">⚡</text>
+        <text y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" fill="#8b949e">Trigger</text>
+      </g>
+
+      <!-- Node 2: Agent (x=240, y=100) -->
+      <g class="wf-node wf-node--2" transform="translate(240, 100)">
+        <circle class="wf-ring" r="50" stroke="#7c3aed" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <circle r="38" fill="#161b22" stroke="#7c3aed" stroke-width="2"/>
+        <text y="1" text-anchor="middle" dominant-baseline="middle" font-size="22">🤖</text>
+        <text y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" fill="#8b949e">gh-aw Agent</text>
+      </g>
+
+      <!-- Node 3: Safe Output (x=400, y=100) -->
+      <g class="wf-node wf-node--3" transform="translate(400, 100)">
+        <circle class="wf-ring" r="50" stroke="#2ea043" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <circle r="38" fill="#161b22" stroke="#2ea043" stroke-width="2"/>
+        <text y="1" text-anchor="middle" dominant-baseline="middle" font-size="22">✅</text>
+        <text y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" fill="#8b949e">Safe Output</text>
+      </g>
+
+      <!-- Node 4: Deploy (x=560, y=100) -->
+      <g class="wf-node wf-node--4" transform="translate(560, 100)">
+        <circle class="wf-ring" r="50" stroke="#1f8ec4" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <circle r="38" fill="#161b22" stroke="#1f8ec4" stroke-width="2"/>
+        <text y="1" text-anchor="middle" dominant-baseline="middle" font-size="22">🚀</text>
+        <text y="56" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" fill="#8b949e">Deploy</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Stats fallback shown on mobile where diagram is hidden -->
+  <div class="container">
+    <div class="hero__stats" aria-hidden="true">
+      <div class="hero__stat">
+        <span class="hero__stat-number">3</span>
+        <span class="hero__stat-label">Tracks</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-number">12+</span>
+        <span class="hero__stat-label">Challenges</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-number">1</span>
+        <span class="hero__stat-label">Day</span>
+      </div>
+    </div>
+  </div>
+</section>

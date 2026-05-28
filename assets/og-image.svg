@@ -1,48 +1,108 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <!-- Background -->
-  <rect width="1200" height="630" fill="#0d1117"/>
-
-  <!-- Subtle grid pattern -->
   <defs>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#21262d" stroke-width="1"/>
+    <!-- Dot grid pattern -->
+    <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#21262d"/>
     </pattern>
-    <radialGradient id="glow" cx="50%" cy="45%" r="50%">
-      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.15"/>
+    <!-- Radial glow gradients -->
+    <radialGradient id="glow-center" cx="50%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#7c3aed" stop-opacity="0.18"/>
       <stop offset="100%" stop-color="#0d1117" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="glow-tl" cx="10%" cy="10%" r="40%">
+      <stop offset="0%"   stop-color="#2ea043" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#0d1117" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-br" cx="90%" cy="90%" r="40%">
+      <stop offset="0%"   stop-color="#1f8ec4" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#0d1117" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Text gradient -->
+    <linearGradient id="headline-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#a78bfa"/>
+      <stop offset="55%"  stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#grid)"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Background layers -->
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#glow-center)"/>
+  <rect width="1200" height="630" fill="url(#glow-tl)"/>
+  <rect width="1200" height="630" fill="url(#glow-br)"/>
+
+  <!-- Top border accent line -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#headline-grad)"/>
 
   <!-- Logo mark -->
-  <rect x="80" y="80" width="64" height="64" rx="12" fill="#7c3aed"/>
-  <text x="91" y="129" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="32" font-weight="700" fill="white">aw</text>
-  <circle cx="134" cy="90" r="7" fill="#a78bfa" opacity="0.9"/>
-  <path d="M132 88 L134 83 L136 88" stroke="#e9d5ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <rect x="72" y="72" width="56" height="56" rx="10" fill="#7c3aed"/>
+  <text x="82" y="116" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="28" font-weight="700" fill="white">aw</text>
 
-  <!-- Site title -->
-  <text x="160" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="700" fill="#e6edf3">gh-aw Hackathon</text>
+  <!-- Brand name -->
+  <text x="144" y="110" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="22" font-weight="600" fill="#e6edf3" letter-spacing="-0.5">gh-aw Hackathon</text>
+
+  <!-- Event badge -->
+  <rect x="72" y="155" width="170" height="28" rx="14" fill="rgba(124,58,237,0.15)" stroke="rgba(124,58,237,0.4)" stroke-width="1"/>
+  <text x="157" y="174" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,monospace" font-size="12" font-weight="600" fill="#a78bfa" letter-spacing="0.5">WHAT THE HACK</text>
 
   <!-- Main headline -->
-  <text x="80" y="310" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="72" font-weight="800" fill="#e6edf3" letter-spacing="-2">Build AI workflows</text>
-  <text x="80" y="400" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2">
-    <tspan fill="#a78bfa">that move at the speed</tspan>
-  </text>
-  <text x="80" y="490" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2">
-    <tspan fill="#a78bfa">of thought.</tspan>
-  </text>
+  <text x="72" y="305" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="76" font-weight="900" fill="#e6edf3" letter-spacing="-2.5">Build an Army of</text>
+  <text x="72" y="398" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="76" font-weight="900" letter-spacing="-2.5" fill="url(#headline-grad)">Agents in a Day</text>
 
   <!-- Subtitle -->
-  <text x="80" y="560" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="24" fill="#8b949e">A What The Hack event · Three tracks · Hands-on challenges</text>
+  <text x="72" y="460" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="22" fill="#8b949e" letter-spacing="-0.3">Three tracks · Twelve challenges · One agentic workflow extension</text>
 
-  <!-- Decorative track pills -->
-  <rect x="910" y="280" width="200" height="36" rx="18" fill="rgba(124,58,237,0.2)" stroke="#7c3aed" stroke-width="1"/>
-  <text x="1010" y="303" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14" font-weight="600" fill="#a78bfa">AI Workflows</text>
+  <!-- Divider -->
+  <line x1="72" y1="493" x2="600" y2="493" stroke="#30363d" stroke-width="1"/>
 
-  <rect x="910" y="328" width="200" height="36" rx="18" fill="rgba(46,160,67,0.2)" stroke="#2ea043" stroke-width="1"/>
-  <text x="1010" y="351" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14" font-weight="600" fill="#56d364">Safe Outputs</text>
+  <!-- Stats row -->
+  <text x="72"  y="533" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="28" font-weight="700" fill="#a78bfa">3</text>
+  <text x="72"  y="558" font-family="-apple-system,sans-serif" font-size="13" fill="#6e7681" font-weight="600" letter-spacing="0.5">TRACKS</text>
 
-  <rect x="910" y="376" width="200" height="36" rx="18" fill="rgba(31,142,196,0.2)" stroke="#1f8ec4" stroke-width="1"/>
-  <text x="1010" y="399" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14" font-weight="600" fill="#58a6ff">MCP Integration</text>
+  <text x="160" y="533" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="28" font-weight="700" fill="#56d364">12+</text>
+  <text x="160" y="558" font-family="-apple-system,sans-serif" font-size="13" fill="#6e7681" font-weight="600" letter-spacing="0.5">CHALLENGES</text>
+
+  <text x="270" y="533" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="28" font-weight="700" fill="#58a6ff">1</text>
+  <text x="270" y="558" font-family="-apple-system,sans-serif" font-size="13" fill="#6e7681" font-weight="600" letter-spacing="0.5">DAY</text>
+
+  <!-- Right-side: workflow nodes decoration -->
+  <!-- Node 1 -->
+  <circle cx="850" cy="200" r="52" fill="rgba(124,58,237,0.08)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="850" cy="200" r="36" fill="#161b22" stroke="#7c3aed" stroke-width="2"/>
+  <text x="850" y="208" text-anchor="middle" dominant-baseline="middle" font-size="24">⚡</text>
+  <text x="850" y="262" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="13" font-weight="600" fill="#6e7681">Trigger</text>
+
+  <!-- Line 1→2 -->
+  <line x1="902" y1="200" x2="978" y2="200" stroke="#30363d" stroke-width="2"/>
+  <polygon points="974,196 984,200 974,204" fill="#30363d"/>
+
+  <!-- Node 2 -->
+  <circle cx="1030" cy="200" r="52" fill="rgba(124,58,237,0.08)" stroke="#7c3aed" stroke-width="1.5"/>
+  <circle cx="1030" cy="200" r="36" fill="#161b22" stroke="#7c3aed" stroke-width="2"/>
+  <text x="1030" y="208" text-anchor="middle" dominant-baseline="middle" font-size="24">🤖</text>
+  <text x="1030" y="262" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="13" font-weight="600" fill="#6e7681">Agent</text>
+
+  <!-- Line down from node 2 -->
+  <line x1="1030" y1="252" x2="1030" y2="330" stroke="#30363d" stroke-width="2"/>
+  <polygon points="1026,326 1030,336 1034,326" fill="#30363d"/>
+
+  <!-- Node 3 -->
+  <circle cx="1030" cy="388" r="52" fill="rgba(46,160,67,0.08)" stroke="#2ea043" stroke-width="1.5"/>
+  <circle cx="1030" cy="388" r="36" fill="#161b22" stroke="#2ea043" stroke-width="2"/>
+  <text x="1030" y="396" text-anchor="middle" dominant-baseline="middle" font-size="24">✅</text>
+  <text x="1030" y="450" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="13" font-weight="600" fill="#6e7681">Safe Output</text>
+
+  <!-- Line 3→4 -->
+  <line x1="978" y1="388" x2="902" y2="388" stroke="#30363d" stroke-width="2"/>
+  <polygon points="906,384 896,388 906,392" fill="#30363d"/>
+
+  <!-- Node 4 -->
+  <circle cx="850" cy="388" r="52" fill="rgba(31,142,196,0.08)" stroke="#1f8ec4" stroke-width="1.5"/>
+  <circle cx="850" cy="388" r="36" fill="#161b22" stroke="#1f8ec4" stroke-width="2"/>
+  <text x="850" y="396" text-anchor="middle" dominant-baseline="middle" font-size="24">🚀</text>
+  <text x="850" y="450" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="13" font-weight="600" fill="#6e7681">Deploy</text>
+
+  <!-- Return arc (dashed) -->
+  <path d="M 850 252 Q 850 320 940 320 Q 1030 320 1030 340" stroke="#21262d" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>
 </svg>
