@@ -1,10 +1,8 @@
 title: "gh-aw Hackathon"
 description: "Build AI workflows that move at the speed of thought. A What The Hack event for developers exploring GitHub Actions Workflows with AI."
-# Update these for your Pages deployment:
-#   url: "https://<org-or-user>.github.io"
-#   baseurl: "/<repo-name>"   (empty string if repo name == username.github.io)
-url: ""
-baseurl: ""
+# GitHub Pages deployment settings for olivomarco/gh-aw-hackathon:
+url: "https://olivomarco.github.io"
+baseurl: "/gh-aw-hackathon"
 author: "gh-aw Hackathon Team"
 email: ""
 
@@ -89,8 +87,8 @@ twitter:
 logo: "/assets/favicon.svg"
 
 # Hackathon-specific
-github_repo: "https://github.com/github/gh-aw-hackathon"
-codespaces_url: "https://codespaces.new/github/gh-aw-hackathon"
+github_repo: "https://github.com/olivomarco/gh-aw-hackathon"
+codespaces_url: "https://codespaces.new/olivomarco/gh-aw-hackathon"
 
 # Sass
 sass:
