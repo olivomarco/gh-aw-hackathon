@@ -108,3 +108,41 @@ Authored 10 docs (Student + Coach) for Track 3 challenges (3-01 through 3-05 cap
 
 **2026-05-28 Team Update (Audit Wave 2):** All agents completed curriculum + content + ops gap audits. 5 inbox decisions merged into `.squad/decisions.md`; gap report delivered to Marco. 26 items catalogued across 4 severity tiers (critical blockers, production patterns, catalog gaps, journey edge cases). Inbox now empty.
 
+---
+
+## Learnings — Sprint 3 (2026-05-28)
+
+Created 2 new bonus challenges (6 files total) covering production-grade concepts absent from the existing curriculum.
+
+### Challenge 2-06 "Mix & Match" (Track 2 / Repo Concierge)
+
+- **Concepts taught:** `imports:` workflow composition, `create-discussion` safe-output
+- **Pattern:** Weekly-scheduled workflow imports a shared helper snippet, posts a repo health digest as a GitHub Discussion
+- **Key coaching surfaces:** import paths are relative to repo root (not workflow file); Discussion category must exist in repo settings before the workflow runs; `permissions: discussions: write` is separate from issues/PR permissions and easy to miss
+- **Design decision:** Helper file is plain Markdown with no frontmatter — squads sometimes add `---` delimiters and cause parse errors; flagged in Coach guide
+
+### Challenge 3-06 "Ground Truth" (Track 3 / Continuous Intelligence)
+
+- **Concepts taught:** `pre-agent-steps:` deterministic pre-fetch, `create-pr` safe-output
+- **Pattern:** Shell steps fetch real repo metrics before AI runs → agent grounds its output in those values → changes proposed via PR, not direct commit
+- **Key coaching surfaces:** need both `contents: write` AND `pull-requests: write` for `create-pr`; `/tmp/` files are ephemeral (run-scoped only); agent body must explicitly reference `/tmp/` file paths — agents don't discover them
+- **Design decision:** Framed `pre-agent-steps:` as "deterministic layer / reasoning layer" separation — clearer than just "steps before the agent"
+- **"propose, don't impose"** coined as the `create-pr` mental model; useful for coaching squads who want to auto-merge
+
+### Track counts updated
+- `_tracks/safe-outputs.md`: `challenges_count` 5 → 6
+- `_tracks/mcp-integration.md`: `challenges_count` 5 → 6
+
+## 2026-05-28 Sprint 2–3 Housekeeping (Scribe)
+
+**Session:** Merged 5 agent inbox decisions into decisions.md, archived old entries, created orchestration logs.
+
+**Agents completed:**
+- ripley-3 (Sprint 2): Time-budget reconciliation
+- hicks-3 (Sprint 2): MC kickoff script, completion awards, submission evidence fields
+- vasquez-4 (Sprint 2): validate-submission workflow, coaches demo section
+- hudson-4 (Sprint 3): Challenges 2-06, 3-06 with Student/Coach READMEs
+- vasquez-6 (Sprint 3): Sample solutions 2-06, 3-06, 3-05 multi-repo extension
+
+**Action:** 5 commits staged for Sprint 2 + 3 curriculum + housekeeping.
+

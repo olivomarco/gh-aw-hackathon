@@ -138,3 +138,16 @@
 - Both fields positioned to make judging verification instant — judges can click links and see working workflows.
 
 **Status:** All three Sprint-2 HIGH items fixed and ready for launch. Participant submission and judging process now has full evidence trail.
+
+## 2026-05-28 Sprint 2–3 Housekeeping (Scribe)
+
+**Session:** Merged 5 agent inbox decisions into decisions.md, archived old entries, created orchestration logs.
+
+**Agents completed:**
+- ripley-3 (Sprint 2): Time-budget reconciliation
+- hicks-3 (Sprint 2): MC kickoff script, completion awards, submission evidence fields
+- vasquez-4 (Sprint 2): validate-submission workflow, coaches demo section
+- hudson-4 (Sprint 3): Challenges 2-06, 3-06 with Student/Coach READMEs
+- vasquez-6 (Sprint 3): Sample solutions 2-06, 3-06, 3-05 multi-repo extension
+
+**Action:** 5 commits staged for Sprint 2 + 3 curriculum + housekeeping.

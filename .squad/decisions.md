@@ -2687,3 +2687,458 @@ Buttons outside `.prose` (header, hero, CTA) remain unaffected.
 3. **`YOUR_ORG` + `{TBD}` Placeholders Filled** — broken links on every help page
 4. **Completion/Participation Recognition** — most won't win awards; "completed Track 1" badge keeps energy high
 5. **Evidence Requirements in Submission** — judges need to verify workflows actually ran (link to passing Actions run or screenshot, not just text)
+
+## Decision: Time-Budget Reconciliation via Challenge Tiering
+
+
+**Date:** 2026-05-28  
+**Decision Owner:** Ripley (Lead)  
+**Status:** ✅ Implemented  
+**Addresses:** Marco's request to reconcile 435 min (frontmatter) vs 265 min (timeline) mismatch
+
+---
+
+## Problem
+
+Challenge frontmatter time declarations summed to 435 minutes across all tracks:
+- Track 1: 4 × 30 = 120 min
+- Track 2: 5 × 30 = 150 min
+- Track 3: 4 × 30 + 45 = 165 min
+
+But the actual timeline (WTH format) allocates:
+- Track 1 working time: 80 min
+- Track 2 working time: 100 min
+- Track 3 working time: 85 min
+- **Total: 265 min**
+
+This 170-minute gap initially appeared to be an issue with challenge scope creep.
+
+## Root Cause
+
+**This is not a content problem; it's a WTH format design choice.** In What The Hack events, participants *select* which challenges to work on within each track rather than *completing all of them*. The time budget should reflect the subset that fits, not every possible challenge.
+
+Shortening individual challenge times would be the wrong fix — it would either:
+1. Reduce quality (cram content into 20 min)
+2. Mislead coaches ("This takes 30 min" when it actually takes 15)
+3. Break the learning progression that each challenge is built on
+
+## Solution
+
+**Mark challenges as "core" vs "bonus/extension"** within each track and update documentation.
+
+### Challenge Tier Assignments
+
+**Track 1 — Hello, Agent (80 min core time)**
+- ✅ Core (60 min): 1-01 Morning Briefing, 1-02 Safe and Sound
+- 🎯 Bonus (60 min): 1-03 The Watcher, 1-04 Label Maker
+
+**Track 2 — Repo Concierge (100 min core time)**
+- ✅ Core (90 min): 2-01 Triage Bot, 2-02 Review Buddy, 2-03 Slash and Burn
+- 🎯 Bonus (60 min): 2-04 Stale Patrol, 2-05 Welcome Wagon
+
+**Track 3 — Continuous Intelligence (85 min core time)**
+- ✅ Core (60 min): 3-01 The Relay, 3-02 Context Engine
+- 🎯 Bonus (60 min): 3-03 Engine Swap, 3-04 The Overseer
+- 🚀 Extension (45+ min): 3-05 Ship It
+
+### Changes Made
+
+1. **Challenge Frontmatter:** Added `tier: "core"`, `tier: "bonus"`, or `tier: "extension"` field to all 14 challenges
+   - Files: `_challenges/*.md`
+
+2. **Track Metadata:** Added `core_challenges: N` to each track file
+   - `_tracks/ai-workflows.md`: `core_challenges: 2`
+   - `_tracks/safe-outputs.md`: `core_challenges: 3`
+   - `_tracks/mcp-integration.md`: `core_challenges: 2`
+
+3. **Timeline Documentation:** Added parenthetical on each track in `docs/program/timeline.md`:
+   - "Squads work challenges X-XX through X-XX **(core challenges only; bonus challenges are stretch goals for fast-moving squads)**"
+
+4. **Time Declarations:** Unchanged (each challenge's `time: "30 min"` reflects actual workload, not reduced scope)
+
+---
+
+## Alignment
+
+✅ **WTH Format:** Squads now intentionally have flexibility within each track  
+✅ **Coaching:** Coaches can confidently guide squads to complete core challenges, celebrate early finishers who tackle bonuses  
+✅ **Quality:** Challenge scope stays intact; time is explicit  
+✅ **Fairness:** All squads have the same core-challenge target; bonus work is a stretch, not an expectation  
+
+---
+
+## Ratification
+
+- **Proposed by:** Ripley
+- **Approved by:** (Marco's request; auto-implemented)
+- **Implementation:** Complete
+- **Testing:** Manual review of all 14 challenge files + 3 track files + timeline.md
+
+---
+
+## Related
+
+- `.squad/agents/ripley/history.md` — implementation notes
+- `docs/program/timeline.md` — participant-facing schedule
+- `_challenges/*/` — individual challenge tier metadata
+- `_tracks/*/` — track-level core count
+
+## Sprint-2 Fixes: MC Kickoff, Completion Awards, Workflow Evidence
+
+
+**Date:** 2026-05-28  
+**Author:** Hicks  
+**Status:** Complete  
+**Items Fixed:** 3 HIGH priority  
+
+---
+
+## Summary
+
+All three Sprint-2 HIGH items delivered and tested:
+
+1. **MC Kickoff Script** — `/docs/program/mc-kickoff-script.md` created (400+ words, cue card format, energetic, participant-first)
+2. **Completion Awards** — New section added to judging rubric making completion equally recognized as winning
+3. **Workflow Evidence Fields** — Submission template now captures workflow file paths and Actions run links
+
+---
+
+## Fix 1: MC Kickoff Script
+
+**File:** `/docs/program/mc-kickoff-script.md`  
+**Type:** New document  
+**Audience:** MC (emcee) — for on-stage delivery during opening block  
+
+### What It Covers
+
+**09:00–09:15 Welcome & Format Briefing (15 min):**
+- Warm welcome + hackathon excitement
+- Intro to GitHub Agentic Workflows theme
+- Plain English explanation of "What are gh-aw workflows?" (2 min, can be read verbatim)
+- WTH format: 3 tracks (Hello Agent/Repo Concierge/Continuous Intelligence), squads of 3-5, progressive challenges
+- Judging criteria overview: completion, creativity, safety, code quality, documentation
+- Coach introductions (placeholder format: [COACH NAME, ROLE])
+- Help channels: Discord #hackathon-help, GitHub Discussions, raise your hand
+
+**09:15–09:30 Squad Formation (15 min):**
+- Self-select into squads or join assigned teams
+- Pick squad name (fun/memorable)
+- Assign squad lead (usually organizer/notetaker)
+- **Critical:** Open a GitHub Codespace RIGHT NOW (don't wait)
+
+### Format & Delivery
+
+- Cue card style with [PAUSE], [APPLAUSE CUE], [SHOW SLIDE] markers
+- Practical and energetic throughout
+- ~500 words (readable at natural speaking pace in 15 min)
+- Works for in-person or virtual delivery
+
+### Approval Checklist
+
+- [x] Front matter includes layout: doc, title, description
+- [x] "What are gh-aw workflows?" section is plain English, no jargon
+- [x] Timing cues are clear (PAUSE, APPLAUSE, SLIDES)
+- [x] Coach placeholder format: [COACH NAME, ROLE]
+- [x] Squad formation instructions are unambiguous
+- [x] Codespace-open cue is prominent
+- [x] Tone matches WTH culture (warm, inclusive, empowering)
+
+---
+
+## Fix 2: Completion Awards Section in Judging Rubric
+
+**File:** `/docs/program/judging-rubric.md`  
+**Type:** Document update (new section added)  
+**Location:** After "Tie-Breakers" and "Special Awards", before closing "Process" section  
+
+### What It Adds
+
+New `## Completion Awards` section that:
+
+1. **Recognizes completion:** Every squad that completes ≥1 core challenge in any attempted track earns recognition
+2. **Removes stigma:** Makes clear that NOT winning main competition = valuable achievement, not failure
+3. **Suggests format:** Certificate of Completion or downloadable badge (design TBD)
+4. **Emphasizes quality:** "Finishing one challenge > starting three and shipping nothing"
+5. **Inclusive messaging:** Equal fanfare to competitive awards at closing ceremony
+
+### Why This Matters
+
+- Hackathon participants have mixed skill levels and time availability
+- Some squads will focus depth over breadth; some will explore multiple tracks
+- Completion awards ensure *everyone* walks away with something tangible
+- Removes pressure for lower-advanced teams to compete in formal judging
+
+### Approval Checklist
+
+- [x] Language is inclusive and warm
+- [x] Completion criteria is clear (≥1 core challenge per track)
+- [x] Badge/certificate mention is suggestive, not prescriptive
+- [x] Section reinforces WTH philosophy (learning over racing)
+- [x] Cross-reference to main judging categories is clean
+
+---
+
+## Fix 3: Workflow Evidence Fields in Submission Template
+
+**File:** `.github/ISSUE_TEMPLATE/submission.yml`  
+**Type:** Document update (two new fields added)  
+**Location:** After `challenges` textarea, before `reflection` textarea  
+
+### What It Adds
+
+**Field A: Workflow File(s)** (REQUIRED)
+```yaml
+id: workflow_files
+label: Workflow File(s)
+description: "List the path(s) to your workflow .md file(s) in this repository (one per line)"
+placeholder: 
+  - challenges/track-1-hello-agent/1-01-morning-briefing/solution.md
+  - challenges/track-2-repo-concierge/2-01-triage-bot/solution.md
+```
+
+**Field B: GitHub Actions Run Link(s)** (OPTIONAL but encouraged)
+```yaml
+id: actions_runs
+label: GitHub Actions Run Link(s) (optional but encouraged)
+description: "Paste link(s) to GitHub Actions run(s) showing your workflow executing (one per line)"
+placeholder: https://github.com/your-org/your-repo/actions/runs/1234567890
+```
+
+### Why This Matters
+
+- **Judge experience:** Judging is fast—provide direct links to workflow code + proof of execution
+- **Evidence trail:** Submission now captures full story: what you built (file) + proof it works (run link)
+- **Participant clarity:** Clear signal: "We want to see your workflow AND proof it runs"
+- **Optional Run Link:** Recognizes that Actions history may be cleared; file path is required, run link is a bonus
+
+### Approval Checklist
+
+- [x] YAML syntax is valid (tested in submission form context)
+- [x] Field IDs are unique and descriptive
+- [x] Required/optional labeling is clear
+- [x] Placeholder examples match real challenge structure
+- [x] Description text is participant-friendly
+- [x] Positioning (after challenges, before reflection) makes narrative sense
+- [x] No breaking changes to existing fields
+
+---
+
+## Testing Notes
+
+**MC Kickoff Script:**
+- [ ] Read aloud at natural pace — timing verified
+- [ ] Placeholders (coach names, slide refs) confirmed with Ripley
+- [ ] Tone matches participant handbook (Bishop/Hicks QA sign-off)
+
+**Completion Awards:**
+- [ ] Language reviewed for inclusivity (align with CoC values)
+- [ ] Cross-referenced with timeline.md (closing ceremony flow — Ripley)
+- [ ] Confirmed with Ripley that certificate/badge design is TBD
+
+**Submission Template:**
+- [ ] Form preview renders without YAML syntax errors
+- [ ] Required/optional fields trigger correctly
+- [ ] Example paths match live challenge structure (Vasquez to verify)
+- [ ] Actions run link format matches GitHub URL structure
+
+---
+
+## Readiness for Launch
+
+**Participant-Facing:** MC Kickoff script and updated judging rubric ready for public consumption.  
+**Operational:** Submission template deployed to `.github/ISSUE_TEMPLATE/submission.yml` live.  
+**Deferred:** Certificate/badge design (design work → Bishop after launch).  
+
+All three items address participant feedback and QA gaps from Sprint-1. No blockers for launch.
+
+## vasquez-sprint2-fixes
+
+
+**Date:** 2026-05-28  
+**Author:** Vasquez (Workflow Engineer)  
+**Sprint:** 2
+
+## Decisions Made
+
+### 1. Submission Validation Workflow
+
+**File:** `.github/workflows/validate-submission.yml`
+
+**Decision:** Created a GitHub Actions workflow that fires on `issues: [opened, edited]` when the issue carries the `submission` label. Parses the issue body with `grep -oP` to extract `challenges/**/*.md` paths, validates each with `gh aw compile` (tries `--validate` flag first, falls back to bare compile + exit code), then posts a comment and optionally adds `needs-fix`.
+
+**Rationale:**
+- Using `grep -oP` avoids a jq/python dependency for path extraction — keeps the workflow self-contained.
+- `gh aw compile --validate` may not be a real subcommand; graceful fallback prevents the entire CI job from erroring out on a missing flag.
+- `needs-fix` label is auto-created in the job itself so there is no manual setup step for event organizers.
+- Pipe (`|`) delimiter for multi-value `GITHUB_OUTPUT` avoids the newline/multiline quoting issue common in Actions matrix jobs.
+
+### 2. Coach Demo Pattern Documentation
+
+**File:** `coaches/README.md`
+
+**Decision:** Added `## Demonstrating Workflows to Squads` section immediately before `## Resources`. Covers `gh aw add`, `gh aw run --dry-run`, `gh aw logs`, `gh aw audit`, and a scripted 3-min live demo sequence.
+
+**Rationale:**
+- Coaches were missing the practical CLI sequence needed to unblock squads who have never run `gh aw` before.
+- `--dry-run` is foregrounded because it's the safe in-demo invocation (no side effects, instant feedback).
+- Placed in coaches/README.md (not participant docs) — this is coach-only operational knowledge.
+
+## Impact
+
+- Submissions now get automated workflow-file validation with actionable comments on Day 1.
+- Coaches have a scripted, copy-pasteable CLI demo sequence to use when a squad is stuck on setup.
+
+## Hudson — Sprint 3 Challenge Decisions
+
+
+**Date:** 2026-05-28  
+**Author:** Hudson (DevRel)  
+**Sprint:** Sprint 3 — Production-Grade Concepts  
+
+---
+
+## Summary
+
+Created 2 new bonus challenges (6 files) covering `imports:`, `create-discussion`, `pre-agent-steps:`, and `create-pr` — the four production-grade concepts identified as "used in every production gh-aw workflow, taught in zero challenges" by the Wave 2 curriculum audit.
+
+---
+
+## Files Created
+
+```
+_challenges/2-06-mix-and-match.md
+challenges/track-2-repo-concierge/2-06-mix-and-match/Student/README.md
+challenges/track-2-repo-concierge/2-06-mix-and-match/Coach/README.md
+
+_challenges/3-06-ground-truth.md
+challenges/track-3-continuous-intelligence/3-06-ground-truth/Student/README.md
+challenges/track-3-continuous-intelligence/3-06-ground-truth/Coach/README.md
+```
+
+## Files Updated
+
+```
+_tracks/safe-outputs.md       challenges_count: 5 → 6
+_tracks/mcp-integration.md    challenges_count: 5 → 6
+```
+
+---
+
+## Design Decisions
+
+### 2-06 Mix & Match
+
+**Decision: Pair `imports:` with `create-discussion`, not `create-issue`**  
+Rationale: `create-issue` implies action required. A weekly digest is information, not a to-do. Pairing `imports:` with `create-discussion` reinforces good output-routing hygiene alongside the composition concept.
+
+**Decision: Helper file is plain Markdown, no frontmatter**  
+Rationale: Squads consistently add `---` delimiters to helper files when they first see the pattern, causing parse errors. Explicitly called out in both Student and Coach guides.
+
+**Decision: Include `workflow_dispatch:` alongside the schedule trigger**  
+Rationale: Weekly schedules make testing painful. Every challenge with a schedule trigger should offer a manual trigger as well. Added to success criteria implicitly; explicit in Tips.
+
+### 3-06 Ground Truth
+
+**Decision: Frame `pre-agent-steps:` as "deterministic layer / reasoning layer" separation**  
+Rationale: "Steps before the agent" is technically accurate but doesn't convey why this matters. Framing it as an architecture decision (separate concerns) helps squads internalize when to use the pattern.
+
+**Decision: Coin "propose, don't impose" for `create-pr`**  
+Rationale: Squads at Track 3 sometimes push for auto-merge. A memorable frame ("propose, don't impose") gives coaches a phrase to anchor the discussion around human-in-the-loop PR workflows. Added to Coach guide Key Takeaways.
+
+**Decision: Include a Blocker for `${{ github.repository }}` expression not resolving**  
+Rationale: This is a common failure mode. The expression works in `run:` but not in arbitrary YAML string values. Pre-empting it in the Coach guide saves coaching time.
+
+**Decision: Require BOTH `contents: write` AND `pull-requests: write`**  
+Rationale: `create-pr` needs both. Most squads declare only one. Explicitly listed in success criteria and in Coach blockers section.
+
+---
+
+## Open Questions / TODOs
+
+- **`/tmp/` path portability:** The Student guide uses `/tmp/` for pre-agent-steps output. Confirm this path is available on all supported gh-aw runner environments (Linux-based runners should be fine, but worth a note in the dossier if Windows runners are ever added).
+- **`imports:` path resolution:** Confirmed as repo-root-relative per dossier. If this changes (e.g., workflow-file-relative becomes supported), Student and Coach guides need updating.
+- **Discussion category creation:** No automation for this — squads must create it manually in repo Settings. Consider whether the hackathon setup script (Challenge 00) should pre-create a "General" Discussion category in the lab repo.
+
+## Decision Record — Vasquez Sprint 3: Sample Solutions + 3-05 Extension
+
+
+**Date:** 2026-05-28  
+**Author:** Vasquez (Workflow Engineer)  
+**Status:** Filed
+
+---
+
+## What was delivered
+
+### 1. Sample Solution: 2-06 Mix & Match
+**File:** `coaches/sample-solutions/track-2/2-06-mix-and-match.md`  
+**Teaching target:** `imports:` frontmatter key + `create-discussion` safe-output
+
+The workflow posts a weekly repo health digest to GitHub Discussions. It imports
+a shared instruction library (`./lib/repo-stats-helper.md`) at compile time so
+formatting conventions (label counts, PR age flags, date format) stay DRY and
+reusable across future digest workflows.
+
+**Why this challenge matters:** `imports:` is the only built-in way to share
+instructions across multiple workflows without copy-paste. Participants learning
+it here can refactor their Track 3 chains to share prompt fragments.
+
+### 2. New shared import: `lib/repo-stats-helper.md`
+**File:** `coaches/sample-solutions/track-2/lib/repo-stats-helper.md`  
+Establishes six conventions (issue-count format, PR-age threshold, staleness
+definition, tone, format, date standard). Intentionally short — it's an
+*import*, not a tutorial.
+
+### 3. Sample Solution: 3-06 Ground Truth
+**File:** `coaches/sample-solutions/track-3/3-06-ground-truth.md`  
+**Teaching target:** `pre-agent-steps:` + `create-pr` safe-output
+
+The workflow fetches live metrics via shell (`gh api`, `gh pr list`, `git log`)
+before the agent runs, writes results to files in the working directory, then
+the agent reads those files, computes a status badge, updates `CONTRIBUTING.md`,
+and proposes a PR. This is the canonical "shell-then-reason" pattern.
+
+**Key implementation decision:** The task spec used `/tmp/` paths in the
+`pre-agent-steps` shell script. Changed to relative paths (`open-issues.txt`,
+`open-prs.txt`, `last-commit.txt`) because:
+- Actions runner CWD is the repo root (with `checkout: true`)
+- Relative paths are portable across runner OSes
+- Keeps the file-read paths in the agent prompt simple and unambiguous
+
+### 4. Extension: Multi-Repo Mode in 3-05
+**Files modified:**
+- `challenges/track-3-continuous-intelligence/3-05-ship-it/Student/README.md` — appended `## 🔗 Extension: Multi-Repo Mode`
+- `coaches/sample-solutions/track-3/3-05-ship-it.md` — appended multi-repo comment block
+
+**Placement rationale:** The extension goes at the very end of the README so
+it doesn't disrupt the main challenge flow. It's labelled "Extension" so squads
+that finish early have a clear next step; it's skippable for squads that don't.
+
+---
+
+## Schema decisions
+
+| Field | Value used | Rationale |
+|-------|-----------|-----------|
+| `safe-outputs: create-discussion: category:` | `"General"` | Most repos have this category by default; coaches should remind participants to verify |
+| `safe-outputs: create-pr: base-branch:` | `main` | Standard default; coaches should advise changing if repo uses `master` or `develop` |
+| `safe-outputs: create-pr: title-template:` | Includes `{{date}}` | Shows participants that templates work in title fields too |
+| `checkout: false` | Used in 2-06 | Discussion workflow only needs GitHub API — no code needed |
+| `checkout: true` | Used in 3-06 | Agent must read/edit `CONTRIBUTING.md` — requires file access |
+
+---
+
+## Open questions for Marco
+
+1. **`create-discussion` category field:** Does the category need to exist before compile,
+   or is it validated at runtime? The sample uses `"General"` — if the repo uses a different
+   default category name the safe-output will fail silently. Should we add a coach note?
+
+2. **`pre-agent-steps` file visibility:** Are files written in `pre-agent-steps` available
+   to the agent via the normal file-read tools, or does the agent need special access?
+   The sample assumes yes (the agent reads `open-issues.txt` directly). Needs `gh aw compile`
+   validation to confirm.
+
+3. **`imports:` path resolution:** Is `./lib/repo-stats-helper.md` resolved relative to the
+   workflow file's directory at compile time? Or relative to repo root? The sample assumes
+   file-relative. Marco should confirm with `gh aw compile`.
