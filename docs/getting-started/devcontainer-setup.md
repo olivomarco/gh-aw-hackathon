@@ -1,3 +1,9 @@
+---
+layout: doc
+title: "Getting Started: Your DevContainer"
+description: "Set up your hackathon environment using GitHub Codespaces or a local devcontainer."
+---
+
 # Getting Started: Your DevContainer
 
 Welcome! This guide walks you through setting up your development environment for the gh-aw hackathon.

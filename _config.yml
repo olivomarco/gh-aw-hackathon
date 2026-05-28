@@ -55,6 +55,10 @@ defaults:
       type: "pages"
     values:
       layout: "default"
+  - scope:
+      path: "docs"
+    values:
+      layout: "doc"
 
 # Theme: none (we use custom layouts in _layouts/)
 theme: ~
