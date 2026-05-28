@@ -184,3 +184,6 @@ Repository owner/slug in _config.yml: `github/gh-aw-hackathon` — Marco to conf
 
 **2026-05-28 — prose-a vs btn-variant CSS specificity gotcha:**
 In Jekyll/SCSS sites, `.prose a` (specificity 0,1,1) will silently defeat `.btn--primary { color: white }` (0,1,0) for any `<a class="btn btn--primary">` nested inside a `.prose` wrapper — resulting in invisible text (e.g. purple-on-purple). Fix: add `.prose a.btn--variant` overrides (0,2,1) placed *after* both the prose-link rule and any link-animation blocks. Always use `background-image: none` (not `background: none`) on these overrides so the button's solid `background-color` is preserved.
+
+**2026-05-28 Team Update (Audit Wave 2):** All agents completed curriculum + content + ops gap audits. 5 inbox decisions merged into `.squad/decisions.md`; gap report delivered to Marco. 26 items catalogued across 4 severity tiers (critical blockers, production patterns, catalog gaps, journey edge cases). Inbox now empty.
+

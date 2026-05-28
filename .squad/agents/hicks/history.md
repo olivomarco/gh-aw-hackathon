@@ -65,3 +65,6 @@
 
 
 **2026-05-28:** QA pass landed — track names corrected; smarmy closings removed; broken bug-report reference fixed
+
+**2026-05-28 Team Update (Audit Wave 2):** All agents completed curriculum + content + ops gap audits. 5 inbox decisions merged into `.squad/decisions.md`; gap report delivered to Marco. 26 items catalogued across 4 severity tiers (critical blockers, production patterns, catalog gaps, journey edge cases). Inbox now empty.
+

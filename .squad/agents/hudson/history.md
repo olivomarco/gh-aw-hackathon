@@ -105,3 +105,6 @@ Authored 10 docs (Student + Coach) for Track 3 challenges (3-01 through 3-05 cap
 - `add-labels: allowlist:` vs `labels:` inconsistency — Student docs may mislead, should standardize
 
 **2026-05-28:** QA pass landed — 30 challenge docs humanized; 4 broken sample paths + 1 hallucinated safe-output fixed
+
+**2026-05-28 Team Update (Audit Wave 2):** All agents completed curriculum + content + ops gap audits. 5 inbox decisions merged into `.squad/decisions.md`; gap report delivered to Marco. 26 items catalogued across 4 severity tiers (critical blockers, production patterns, catalog gaps, journey edge cases). Inbox now empty.
+

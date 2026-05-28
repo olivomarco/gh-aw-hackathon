@@ -2179,3 +2179,265 @@ READY FOR:
 - Event execution
 
 No outstanding issues.
+
+---
+
+## Audit Wave: 2026-05-28 Curriculum & Content Gap Report
+
+### 2026-05-28: Button Text Color Fix (Challenge Pages)
+
+**Author:** Bishop (Lead Architect)  
+**Date:** 2026-05-28  
+**Commit:** `c33287d`  
+**Status:** Delivered
+
+#### Summary
+On challenge pages (e.g. `/challenges/1-01-morning-briefing/`), the **Student Guide** button (`.btn--primary`) rendered with nearly-invisible purple text on a purple background. Root cause: `.prose a` CSS rule (specificity 0,1,1) overrode `.btn--primary { color: white }` (specificity 0,1,0). The prose link underline gradient was also incorrectly applied to buttons.
+
+#### Solution
+Added `.prose a.btn` override block in `assets/css/style.scss` (specificity 0,2,1) after both the `.prose a` rule and link animation block:
+- `background-image: none` on `.prose a.btn` and `:hover` — kills underline gradient
+- `text-decoration: none` on `.prose a.btn`
+- Explicit color restores per variant: `--primary` → `#fff`, `--secondary` → `var(--text)`, `--ghost` → `var(--text-muted)` / `var(--text)` on hover
+
+Buttons outside `.prose` (header, hero, CTA) remain unaffected.
+
+---
+
+### 2026-05-28: Curriculum & Infrastructure Gap Audit
+
+**Author:** Ripley (Lead)  
+**Date:** 2026-05-28  
+**For:** Marco  
+**Status:** Audit Complete — 5 Critical Gaps
+
+#### Critical Findings
+
+**1. Time Budget Mismatch (170-minute gap)**
+- Challenge frontmatter totals: Track 1 = 120 min, Track 2 = 150 min, Track 3 = 165 min (total 435 min)
+- Timeline slots for working time: Track 1 = 80 min, Track 2 = 100 min, Track 3 = 85 min (total 265 min)
+- **Gap:** 170 min of content has no time slot. Participants cannot complete all challenges within the event.
+- **Status:** Unresolved; either estimates or timeline must shift
+
+**2. Missing Prerequisite Chain Documentation**
+- No `prereqs:` field in challenge frontmatter (grep returns empty)
+- Prereqs documented only in prose (e.g., "Complete at least 2 from Track 1"); not machine-readable
+- Track metadata declares wrong challenge counts (e.g., `challenges_count: 4` but track has 5)
+
+**3. WTH Format Gaps**
+- All challenges use "References" instead of WTH-canonical "Learning Resources"
+- No challenge has formal "Introduction" heading separate from body
+- Challenge 3-04 missing dedicated "Prerequisites" section
+- `_challenges/00-setup.md` is a stub ("This is a placeholder"); full setup lives in `challenges/00-setup/Student/README.md`
+
+**4. Non-Copilot API Key Credentials Undocumented**
+- Claude, Codex, Gemini engines mentioned but no guidance on credential setup
+- `devcontainer.json` has no `secrets` block
+- `postCreate.sh` checks GitHub auth only; silent failure for non-GitHub engine users
+
+**5. Smoke Test References Non-Existent File**
+- `docs/getting-started/devcontainer-setup.md` step 4 references `examples/hello-world.md` → **does not exist**
+- Smoke test will fail on fresh clone
+- Also: `postCreate.sh` prints `ls Student/` but `Student/` doesn't exist at repo root
+
+#### Secondary Gaps
+- Codespaces path unverified (references `github.com/your-org/gh-aw-challenges.git` — different repo)
+- No kickoff run-of-show script (timeline table only)
+- No day-0 organizer morning checklist
+- `participant-handbook.md` has unresolved `{TBD}` template variables (submission deadline, Discord link)
+- Coach handbook references per-track `Coach/` folder that doesn't exist (guides are nested per-challenge)
+
+#### Concepts Present but Not Taught
+- `noop` mandatory exit protocol (flagged as #1 gotcha in dossier)
+- `assign-to-agent` (Copilot coding agent bridge)
+- `checkout: false` (30–60 s startup optimization)
+- `experiments:` A/B frontmatter block
+
+---
+
+### 2026-05-28: Challenge Content & Concept Coverage Audit
+
+**Author:** Hudson (DevRel)  
+**Date:** 2026-05-28  
+**For:** Marco  
+**Status:** Audit Complete — 8 Gaps in Production Patterns
+
+#### Concepts Taught (Deduped)
+- **Triggers:** `schedule` (cron/named), `push`, `issues`, `pull_request`, `issue_comment` (slash-command)
+- **Safe-outputs:** `create-issue`, `add-labels`, `add-comment`, `update-issue`, `noop`, `assign-to-agent` (3-05 only)
+- **Features:** `permissions` scoping, `lock-for-agent` (concurrency), `user-rate-limit` (2-03), `checkout: false`, `repo-memory` (3-01), `agentic-workflows` MCP tool (3-04), engine selection (3-03), `tracker-id` (3-04)
+
+#### Critical Gaps (Production Patterns Absent)
+
+1. **`imports:` / Shared Workflow Composition** — **missing entirely**
+   - Used in virtually every dossier example (issue-triage-agent, breaking-change-checker, audit-workflows all rely on `shared/noop-reminder.md` and `shared/skip-if-issue-open.md`)
+   - Zero challenges teach it
+   - **Placement:** Track 2, challenge 2-06 (or augment 2-01/2-02)
+
+2. **`create-discussion` Safe-Output** — **missing entirely**
+   - Most common reporting output in dossier (8+ examples: org-health-report, audit-workflows, docs-noob-tester, schema-consistency-checker)
+   - Zero challenges demonstrate it
+   - **Placement:** Track 2, challenge 2-02 (Weekly Reporter pattern already in dossier mapping)
+
+3. **`pre-agent-steps:` (Deterministic Pre-Steps)** — **missing entirely**
+   - schema-consistency-checker and aw-failure-investigator show why pre-steps matter: deterministic data collection before AI reduces hallucination and token spend
+   - **Placement:** Track 3, challenge 3-01 or standalone 3-06
+
+4. **Multi-Repo / `gh-proxy` Mode** — **missing**
+   - dossier Category G; only a commented-out line in 3-05 sample solution
+   - org-health-report.md is the canonical teachable example
+   - **Placement:** Track 3, challenge 3-03
+
+5. **`on: reaction:` Trigger + `cache-memory`** — **missing**
+   - grumpy-reviewer (dossier H) is the most memorable entry point
+   - Reaction trigger + stateful cache-memory is entirely absent from curriculum
+   - **Placement:** Track 2, challenge 2-06 or Track 3 intro
+
+#### Other Absent Concepts
+- `cache-memory` (burst detection, strategy evolution)
+- `upload-asset` (image/chart uploads in issues/discussions)
+- `if:` conditional jobs
+- `missing-tool` safe-output (graceful degradation)
+- `hide-comment` safe-output (moderation/spam suppression)
+- `link-sub-issue` safe-output (hierarchical tracking)
+- Sub-agent pattern (`## agent:` blocks with `model: small`)
+- `max-effective-tokens` (cost-normalized budget for large codebases)
+- `tools: bash` with explicit allow-list
+- `tools: playwright` (docs/UI testing)
+- `tools: web-fetch` / `tools: web-search`
+- Gemini engine demonstration
+
+#### Safe-Output Type Coverage
+- **Used:** `create-issue`, `add-labels`, `add-comment`, `update-issue`, `noop`, `assign-to-agent`
+- **Available but unused:** `create-discussion`, `create-pr`, `push-to-pr-branch`, `upload-asset`, `upload-artifact`, `hide-comment`, `missing-tool`, `link-sub-issue`
+
+---
+
+### 2026-05-28: Sample Solutions & gh-aw Feature Catalog Audit
+
+**Author:** Vasquez (Workflow Engineer)  
+**Date:** 2026-05-28  
+**For:** Marco  
+**Status:** Audit Complete — 5 Technical Gaps; 1 Bug Fixed In-Flight
+
+#### Sample Solution Inventory
+- **Count:** 14/14 (Track 1: 4, Track 2: 5, Track 3: 5) ✓
+- **Runnability:** 13/14 PASS; 1 flagged for fix
+
+#### Critical Issues Found
+
+**1. 1-03 (The Watcher) Missing `engine:` Field** — **FIXED IN-FLIGHT**
+- Frontmatter lines 8–43 had no `engine:` key
+- All other 13 workflows declare an explicit engine
+- **Fix applied:** Added `engine: copilot` after `safe-outputs`
+- **Impact:** Prevents compiler error on participant submission
+
+**2. No `gh aw compile` PR Validation Workflow**
+- Participants submit `.md` files that may not compile
+- No smoke-test GHA job validates frontmatter on PR
+- **Need:** `.github/workflows/` job runs `gh aw compile --validate` on all PR changes to `.solutions/` or `challenges/*/Coach/`
+
+**3. `gh aw add` Import Pattern Absent from Coach README**
+- README covers `compile`/`run`/`logs` but no `gh aw add <url>` participant import example
+- Participants need to know how to install workflows into test repos during the event
+
+**4. Zero Coverage of `create-pr` Safe-Output**
+- Most continuous-improvement real workflows use it (Avenger, code-quality bots)
+- Participants will reach for it and have no reference
+- **Need:** Add to a Track 3 solution or bonus example
+
+**5. No PR Template**
+- Submission PRs have no structure; judging will be inconsistent
+- **Need:** `.github/PULL_REQUEST_TEMPLATE.md` (coordinate with Hicks on judging fields needed)
+
+#### Feature Coverage in Samples
+
+| Category | Coverage | Gaps |
+|----------|----------|------|
+| **Triggers** | schedule, issues, issue_comment, pull_request, push, workflow_dispatch ✓ | command, reaction, workflow_run ✗ |
+| **Safe-outputs** | create-issue, create-discussion, add-comment, add-labels, update-issue ✓ | create-pr, push-to-pr-branch, missing-tool, create-code-scanning-alert ✗ |
+| **Tools** | github, cache-memory, bash, custom-MCP ✓ | playwright, web-fetch, web-search, edit ✗ |
+| **Engines** | copilot, claude, codex ✓ | gemini ✗ |
+| **Other** | imports, lock-for-agent ✓ | network.allowed, roles, timeout_minutes, max-turns, concurrency, env, secrets ✗ |
+
+#### Sample Solution Stats
+- 15 solutions use `engine: copilot`
+- 2 solutions use `engine: claude`
+- 1 solution use `engine: codex`
+- **No Gemini demonstrated** (even though it's listed as available engine in docs)
+
+---
+
+### 2026-05-28: Participant Journey & Event Operations Audit
+
+**Author:** Hicks (Events & QA)  
+**Date:** 2026-05-28  
+**For:** Marco  
+**Status:** Audit Complete — 5 Critical Operational Gaps
+
+#### Pre-Event Onboarding
+- **Landing page broken:** `index.md` is Jekyll template markup; raw GitHub view shows Liquid tags. Readable only after site deploy. `README.md` is the actual onboarding document.
+- **Pre-arrival checklist missing:** `devcontainer-setup.md` covers on-day setup but no "T-7 days" checklist exists (timeline references it; email template doesn't)
+- **Registration:** Not required by design; handbook contradicts itself ("link shared at registration" but no registration gate)
+
+#### Day-of Run-of-Show
+- **Kickoff script (minute-by-minute): MISSING**
+  - `timeline.md` has schedule table; zero spoken-word MC script exists
+  - Organizer has timing but no welcome words, format intro, or squad formation instructions
+- **Team formation:** Present in handbook + timeline (self-selection, 30-min window, 3–5 per squad)
+- **Mid-event checkpoints:** Present (five coach touchpoints in `timeline.md`)
+- **Closing/wrap script: MISSING** — closing block in timeline but no script for awards, retro, or "what next"
+
+#### Submission Flow
+- **Artifact clearly defined:** Yes (PR recommended, Issue fallback)
+- **Self-validating checklist:** Yes (`submission.yml` has 4 required checkboxes)
+- **Evidence requirements:** **UNDERSPECIFIED** — template asks for text description; no requirement for actual workflow file, run screenshot, or passing Actions link
+- **Deadlines:** **MISSING** — `submission-guide.md` reads `{TBD: see timeline.md}`; `timeline.md` says "16:00 pencils down" but timezone unspecified; `{TBD}` placeholders unfilled
+
+#### Judging
+- **Rubric scale & weights:** Numeric + weighted (5-point per category, 40/20/20/10/10% weights) ✓
+- **Tie-breakers:** Defined (Safety → Creativity → fastest time) ✓
+- **Per-track vs universal:** **Universal rubric only** — Track 3 MCP work judged same as Track 1 cron
+- **Completion tier: MISSING** — high impact for non-competitors; rubric covers awards only; participants who complete challenges but don't place get no documented recognition
+- **Judge prep 1-pager: MISSING** — rubric is thorough but no condensed one-pager with process steps, CoI rules, or score-sheet
+
+#### Coach Support
+- **Ratio guidance: MISSING** — neither `coaches/README.md` nor `docs/program/coach-handbook.md` states squad-to-coach ratio
+- **Escalation path:** Documented (distress, CoC, technical, off-scope) ✓
+- **Channel structure: MISSING** — handbook says "join Discord" but no recommended channel structure (#general, #track-help, #coaches-only, etc.)
+
+#### Critical Edge Cases Participants Will Hit
+
+1. **AI Engine API Keys Undocumented**
+   - README lists Copilot, Claude, Codex, Gemini; nowhere documents whether participants must bring own keys
+   - Which engines require paid accounts? What's the cost exposure for a day?
+   - Coach hint says "Verify API key is set in repo secrets" — so keys ARE required but process undocumented
+
+2. **`YOUR_ORG` Placeholder Breaks Every Link**
+   - GitHub Discussions URLs, participant handbook, submission guide all contain `https://github.com/YOUR_ORG/gh-aw-hackathon`
+   - Every link is broken until this is filled
+
+3. **Personal vs Org Repo Undocumented**
+   - Org SSO, Actions disabled by default on forks, billing owner for Actions minutes
+   - First-timer hitting an org with Actions disabled stalls silently
+
+4. **First-Time GitHub Auth Not Covered**
+   - `devcontainer-setup.md` assumes `gh auth login` is done
+   - Participant opening Codespaces fresh hits wall before `postCreate.sh` completes
+
+5. **Time Zone for Remote/Hybrid Unspecified**
+   - Submission deadline says "same for everyone, no exceptions"
+   - Actual time + timezone is a placeholder; remote participants have no anchor
+
+#### Post-Event
+- **Survey/retro:** Missing (timeline mentions "feedback form link" at 17:00; no form created or linked)
+- **"Take This Further" Guide:** Missing
+- **Certificates/Badges:** Missing (no completion certificate or badge mechanism documented)
+
+#### Top 5 Must-Fix Gaps
+
+1. **MC Kickoff Script** — organizer has schedule but no words; 10-min opening chaos is a real risk
+2. **AI Engine API Keys Documented** — participants will hit auth errors on first run
+3. **`YOUR_ORG` + `{TBD}` Placeholders Filled** — broken links on every help page
+4. **Completion/Participation Recognition** — most won't win awards; "completed Track 1" badge keeps energy high
+5. **Evidence Requirements in Submission** — judges need to verify workflows actually ran (link to passing Actions run or screenshot, not just text)
